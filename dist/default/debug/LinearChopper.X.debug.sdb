@@ -1,0 +1,1088 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F1705 ]
+[d frameptr 6 ]
+"93 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/adc.c
+[e E4137 . `uc
+V_BUSDC 7
+channel_FVRBuffer2 28
+channel_Temp 29
+channel_DAC 30
+channel_FVRBuffer1 31
+]
+"16 C:\Users\Damian\MPLABXProjects\LinearChopper.X/VComShell.h
+[e E2 . `uc
+SET_LOW_VOLTAGE 76
+SET_HIGH_VOLTAGE 72
+SET_DELTA_T 84
+GET_INFO 73
+GET_HELP 63
+]
+"63 C:\Users\Damian\MPLABXProjects\LinearChopper.X\VComShell.c
+[e E4329 . `uc
+VCS_SHUTDOWN 0
+VCS_INIT 1
+VCS_SEND_PROMPT 2
+VCS_READ_COM 3
+VCS_PARSE_COM 4
+VCS_PARSE_ARG 5
+VCS_SEND_INFO 6
+VCS_SEND_INFO_1 7
+VCS_SEND_INFO_2 8
+VCS_SEND_INFO_3 9
+VCS_SEND_INFO_4 10
+VCS_SEND_INFO_5 11
+VCS_SEND_INFO_6 12
+VCS_SEND_INFO_7 13
+VCS_SEND_INFO_8 14
+VCS_SEND_INFO_9 15
+VCS_SEND_ERROR 16
+VCS_SEND_OK 17
+VCS_SEND_HELP 18
+VCS_SEND_HELP_1 19
+VCS_SEND_HELP_2 20
+VCS_SEND_HELP_3 21
+VCS_SEND_HELP_4 22
+VCS_SEND_HELP_5 23
+VCS_SEND_HELP_6 24
+VCS_SEND_HELP_7 25
+VCS_SEND_HELP_8 26
+VCS_SEND_HELP_9 27
+VCS_SEND_HELP_10 28
+VCS_SEND_HELP_11 29
+]
+"71
+[e E4361 . `uc
+VCS_SUB_SHUTDOWN 0
+VCS_SUB_SEND_CHAR 1
+VCS_SUB_WAIT_TX_TO_END 2
+]
+"185 C:\Users\Damian\MPLABXProjects\LinearChopper.X\vcontrol.c
+[e E4314 . `uc
+SHUTDOWN 0
+ACTIVE 1
+]
+"211
+[e E4229 . `uc
+V_BUSDC 7
+channel_FVRBuffer2 28
+channel_Temp 29
+channel_DAC 30
+channel_FVRBuffer1 31
+]
+"32 C:\Users\Damian\MPLABXProjects\LinearChopper.X\UartParser.c
+[e E4307 . `uc
+SHUTDOWN 0
+INIT 1
+WAIT_IDLE 2
+READ_FRAME 3
+PARSE_FRAME 4
+SEND_RESPONSE 5
+]
+"92
+[e E4316 Commands `uc
+SET_PARAMS 170
+GET_PARAMS 85
+GET_VDC 165
+]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"5 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"14 C:\Users\Damian\MPLABXProjects\LinearChopper.X\GlobalParameters.c
+[v _getDeltaT getDeltaT `(us  1 e 2 0 ]
+"20
+[v _setDeltaT setDeltaT `(v  1 e 1 0 ]
+"26
+[v _getVoltageHigh getVoltageHigh `(us  1 e 2 0 ]
+"32
+[v _setVoltageHigh setVoltageHigh `(v  1 e 1 0 ]
+"38
+[v _getVoltageLow getVoltageLow `(us  1 e 2 0 ]
+"44
+[v _setVoltageLow setVoltageLow `(v  1 e 1 0 ]
+"52 C:\Users\Damian\MPLABXProjects\LinearChopper.X\main.c
+[v _main main `(v  1 e 1 0 ]
+"67 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/adc.c
+[v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
+"93
+[v _ADC_SelectChannel ADC_SelectChannel `(v  1 e 1 0 ]
+"101
+[v _ADC_StartConversion ADC_StartConversion `(v  1 e 1 0 ]
+"114
+[v _ADC_GetConversionResult ADC_GetConversionResult `(us  1 e 2 0 ]
+"149
+[v _ADC_ISR ADC_ISR `(v  1 e 1 0 ]
+"160
+[v _ADC_SetInterruptHandler ADC_SetInterruptHandler `(v  1 e 1 0 ]
+"164
+[v _ADC_DefaultInterruptHandler ADC_DefaultInterruptHandler `(v  1 e 1 0 ]
+"83 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/eusart.c
+[v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
+"175
+[v _EUSART_Receive_ISR EUSART_Receive_ISR `(v  1 e 1 0 ]
+"199
+[v _EUSART_RxDataHandler EUSART_RxDataHandler `(v  1 e 1 0 ]
+"209
+[v _EUSART_DefaultFramingErrorHandler EUSART_DefaultFramingErrorHandler `(v  1 e 1 0 ]
+"211
+[v _EUSART_DefaultOverrunErrorHandler EUSART_DefaultOverrunErrorHandler `(v  1 e 1 0 ]
+"219
+[v _EUSART_DefaultErrorHandler EUSART_DefaultErrorHandler `(v  1 e 1 0 ]
+"223
+[v _EUSART_SetFramingErrorHandler EUSART_SetFramingErrorHandler `(v  1 e 1 0 ]
+"227
+[v _EUSART_SetOverrunErrorHandler EUSART_SetOverrunErrorHandler `(v  1 e 1 0 ]
+"231
+[v _EUSART_SetErrorHandler EUSART_SetErrorHandler `(v  1 e 1 0 ]
+"236
+[v _EUSART_SetRxInterruptHandler EUSART_SetRxInterruptHandler `(v  1 e 1 0 ]
+"52 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
+"50 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+"64
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+"76
+[v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
+"58 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/memory.c
+[v _FLASH_ReadWord FLASH_ReadWord `(us  1 e 2 0 ]
+"95
+[v _FLASH_WriteBlock FLASH_WriteBlock `(c  1 e 1 0 ]
+"150
+[v _FLASH_EraseBlock FLASH_EraseBlock `(v  1 e 1 0 ]
+"55 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"58 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/pwm3.c
+[v _PWM3_Initialize PWM3_Initialize `(v  1 e 1 0 ]
+"74
+[v _PWM3_LoadDutyValue PWM3_LoadDutyValue `(v  1 e 1 0 ]
+"64 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr1.c
+[v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
+"120
+[v _TMR1_WriteTimer TMR1_WriteTimer `(v  1 e 1 0 ]
+"157
+[v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
+"169
+[v _TMR1_CallBack TMR1_CallBack `(v  1 e 1 0 ]
+"178
+[v _TMR1_SetInterruptHandler TMR1_SetInterruptHandler `(v  1 e 1 0 ]
+"182
+[v _TMR1_DefaultInterruptHandler TMR1_DefaultInterruptHandler `(v  1 e 1 0 ]
+"64 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr2.c
+[v _TMR2_Initialize TMR2_Initialize `(v  1 e 1 0 ]
+"87
+[v _TMR2_StartTimer TMR2_StartTimer `(v  1 e 1 0 ]
+"119
+[v _TMR2_ISR TMR2_ISR `(v  1 e 1 0 ]
+"130
+[v _TMR2_CallBack TMR2_CallBack `(v  1 e 1 0 ]
+"140
+[v _TMR2_SetInterruptHandler TMR2_SetInterruptHandler `(v  1 e 1 0 ]
+"144
+[v _TMR2_DefaultInterruptHandler TMR2_DefaultInterruptHandler `(v  1 e 1 0 ]
+"62 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr4.c
+[v _TMR4_Initialize TMR4_Initialize `(v  1 e 1 0 ]
+"5 C:\Users\Damian\MPLABXProjects\LinearChopper.X\SystemTimer.c
+[v _TMR1_SystemTimer_ISR TMR1_SystemTimer_ISR `(v  1 e 1 0 ]
+"13 C:\Users\Damian\MPLABXProjects\LinearChopper.X\UartParser.c
+[v _EUSART_CommandHandler_ISR EUSART_CommandHandler_ISR `(v  1 e 1 0 ]
+"43
+[v _uart_start uart_start `(v  1 e 1 0 ]
+"60
+[v _uart_task uart_task `(v  1 e 1 0 ]
+"411 C:\Users\Damian\MPLABXProjects\LinearChopper.X\VComShell.c
+[v _send_task_busy send_task_busy `(a  1 s 1 send_task_busy ]
+"416
+[v _send_string send_string `(v  1 s 1 send_string ]
+"431
+[v _vcs_send_task vcs_send_task `(v  1 s 1 vcs_send_task ]
+"451
+[v _num2string num2string `(uc  1 s 1 num2string ]
+"187 C:\Users\Damian\MPLABXProjects\LinearChopper.X\vcontrol.c
+[v _set_vdc_threshold set_vdc_threshold `(v  1 s 1 set_vdc_threshold ]
+"197
+[v _LoadDutyValue LoadDutyValue `(v  1 e 1 0 ]
+"202
+[v _start_chopper start_chopper `(v  1 e 1 0 ]
+"221
+[v _stop_chopper stop_chopper `(v  1 e 1 0 ]
+"233
+[v _is_chopper_active is_chopper_active `(a  1 e 1 0 ]
+"238
+[v _set_vdc_min set_vdc_min `(v  1 e 1 0 ]
+"243
+[v _set_vdc_max set_vdc_max `(v  1 e 1 0 ]
+"248
+[v _set_vdc_critic set_vdc_critic `(v  1 e 1 0 ]
+"253
+[v _set_vdc_speed set_vdc_speed `(v  1 e 1 0 ]
+"263
+[v _save_to_flash save_to_flash `(v  1 e 1 0 ]
+"277
+[v _get_vdc_min get_vdc_min `(us  1 e 2 0 ]
+"282
+[v _get_vdc_max get_vdc_max `(us  1 e 2 0 ]
+"287
+[v _get_vdc_critic get_vdc_critic `(us  1 e 2 0 ]
+"292
+[v _get_vdc_speed get_vdc_speed `(us  1 e 2 0 ]
+"297
+[v _get_vdc get_vdc `(us  1 e 2 0 ]
+"302
+[v _ADC_VoltageControlHandler_ISR ADC_VoltageControlHandler_ISR `(v  1 e 1 0 ]
+"388
+[v _TMR2_DutyControlHandler_ISR TMR2_DutyControlHandler_ISR `(v  1 e 1 0 ]
+[s S311 . 1 `uc 1 IOCIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 IOCIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"374 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
+[s S320 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 T0IE 1 0 :1:5 
+]
+[u S325 . 1 `S311 1 . 1 0 `S320 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES325  1 e 1 @11 ]
+[s S149 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSP1IF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 TMR1GIF 1 0 :1:7 
+]
+"550
+[s S158 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 CCPIF 1 0 :1:2 
+]
+[u S161 . 1 `S149 1 . 1 0 `S158 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES161  1 e 1 @17 ]
+[s S799 . 1 `uc 1 CCP2IF 1 0 :1:0 
+`uc 1 TMR4IF 1 0 :1:1 
+`uc 1 TMR6IF 1 0 :1:2 
+`uc 1 BCL1IF 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 C1IF 1 0 :1:5 
+`uc 1 C2IF 1 0 :1:6 
+`uc 1 OSFIF 1 0 :1:7 
+]
+"617
+[u S808 . 1 `S799 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES808  1 e 1 @18 ]
+"729
+[v _TMR1L TMR1L `VEuc  1 e 1 @22 ]
+"749
+[v _TMR1H TMR1H `VEuc  1 e 1 @23 ]
+"769
+[v _T1CON T1CON `VEuc  1 e 1 @24 ]
+[s S1346 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 . 1 0 :1:1 
+`uc 1 nT1SYNC 1 0 :1:2 
+`uc 1 T1OSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 TMR1CS 1 0 :2:6 
+]
+"791
+[s S1353 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+`uc 1 TMR1CS0 1 0 :1:6 
+`uc 1 TMR1CS1 1 0 :1:7 
+]
+[u S1359 . 1 `S1346 1 . 1 0 `S1353 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES1359  1 e 1 @24 ]
+"841
+[v _T1GCON T1GCON `VEuc  1 e 1 @25 ]
+[s S1376 . 1 `uc 1 T1GSS 1 0 :2:0 
+`uc 1 T1GVAL 1 0 :1:2 
+`uc 1 T1GGO_nDONE 1 0 :1:3 
+`uc 1 T1GSPM 1 0 :1:4 
+`uc 1 T1GTM 1 0 :1:5 
+`uc 1 T1GPOL 1 0 :1:6 
+`uc 1 TMR1GE 1 0 :1:7 
+]
+"861
+[s S1384 . 1 `uc 1 T1GSS0 1 0 :1:0 
+`uc 1 T1GSS1 1 0 :1:1 
+]
+[u S1387 . 1 `S1376 1 . 1 0 `S1384 1 . 1 0 ]
+[v _T1GCONbits T1GCONbits `VES1387  1 e 1 @25 ]
+"911
+[v _TMR2 TMR2 `VEuc  1 e 1 @26 ]
+"931
+[v _PR2 PR2 `VEuc  1 e 1 @27 ]
+"951
+[v _T2CON T2CON `VEuc  1 e 1 @28 ]
+[s S463 . 1 `uc 1 T2CKPS 1 0 :2:0 
+`uc 1 TMR2ON 1 0 :1:2 
+`uc 1 T2OUTPS 1 0 :4:3 
+]
+"972
+[s S467 . 1 `uc 1 T2CKPS0 1 0 :1:0 
+`uc 1 T2CKPS1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 T2OUTPS0 1 0 :1:3 
+`uc 1 T2OUTPS1 1 0 :1:4 
+`uc 1 T2OUTPS2 1 0 :1:5 
+`uc 1 T2OUTPS3 1 0 :1:6 
+]
+[u S475 . 1 `S463 1 . 1 0 `S467 1 . 1 0 ]
+[v _T2CONbits T2CONbits `VES475  1 e 1 @28 ]
+"1022
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+[s S1150 . 1 `uc 1 TRISA0 1 0 :1:0 
+`uc 1 TRISA1 1 0 :1:1 
+`uc 1 TRISA2 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 TRISA4 1 0 :1:4 
+`uc 1 TRISA5 1 0 :1:5 
+]
+"1037
+[u S1157 . 1 `S1150 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES1157  1 e 1 @140 ]
+"1067
+[v _TRISC TRISC `VEuc  1 e 1 @142 ]
+[s S76 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSP1IE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+`uc 1 TMR1GIE 1 0 :1:7 
+]
+"1138
+[s S85 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 CCPIE 1 0 :1:2 
+]
+[u S88 . 1 `S76 1 . 1 0 `S85 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES88  1 e 1 @145 ]
+[s S681 . 1 `uc 1 PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 TMR0SE 1 0 :1:4 
+`uc 1 TMR0CS 1 0 :1:5 
+`uc 1 INTEDG 1 0 :1:6 
+`uc 1 nWPUEN 1 0 :1:7 
+]
+"1313
+[s S688 . 1 `uc 1 PS0 1 0 :1:0 
+`uc 1 PS1 1 0 :1:1 
+`uc 1 PS2 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+]
+[u S695 . 1 `S681 1 . 1 0 `S688 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES695  1 e 1 @149 ]
+"1430
+[v _WDTCON WDTCON `VEuc  1 e 1 @151 ]
+"1489
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @152 ]
+"1547
+[v _OSCCON OSCCON `VEuc  1 e 1 @153 ]
+"1619
+[v _OSCSTAT OSCSTAT `VEuc  1 e 1 @154 ]
+"1688
+[v _ADRESL ADRESL `VEuc  1 e 1 @155 ]
+"1708
+[v _ADRESH ADRESH `VEuc  1 e 1 @156 ]
+"1728
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @157 ]
+[s S559 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :5:2 
+]
+"1753
+[s S563 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 ADGO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+`uc 1 CHS4 1 0 :1:6 
+]
+[s S571 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+]
+[u S574 . 1 `S559 1 . 1 0 `S563 1 . 1 0 `S571 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES574  1 e 1 @157 ]
+"1808
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @158 ]
+"1861
+[v _ADCON2 ADCON2 `VEuc  1 e 1 @159 ]
+"1909
+[v _LATA LATA `VEuc  1 e 1 @268 ]
+[s S1193 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
+]
+"1924
+[u S1200 . 1 `S1193 1 . 1 0 ]
+[v _LATAbits LATAbits `VES1200  1 e 1 @268 ]
+"1954
+[v _LATC LATC `VEuc  1 e 1 @270 ]
+[s S1210 . 1 `uc 1 LATC0 1 0 :1:0 
+`uc 1 LATC1 1 0 :1:1 
+`uc 1 LATC2 1 0 :1:2 
+`uc 1 LATC3 1 0 :1:3 
+`uc 1 LATC4 1 0 :1:4 
+`uc 1 LATC5 1 0 :1:5 
+]
+"1969
+[u S1217 . 1 `S1210 1 . 1 0 ]
+[v _LATCbits LATCbits `VES1217  1 e 1 @270 ]
+"2296
+[v _BORCON BORCON `VEuc  1 e 1 @278 ]
+"2681
+[v _ANSELA ANSELA `VEuc  1 e 1 @396 ]
+"2726
+[v _ANSELC ANSELC `VEuc  1 e 1 @398 ]
+"2783
+[v _PMADRL PMADRL `VEuc  1 e 1 @401 ]
+"2803
+[v _PMADRH PMADRH `VEuc  1 e 1 @402 ]
+"2830
+[v _PMDATL PMDATL `VEuc  1 e 1 @403 ]
+"2850
+[v _PMDATH PMDATH `VEuc  1 e 1 @404 ]
+[s S345 . 1 `uc 1 RD 1 0 :1:0 
+`uc 1 WR 1 0 :1:1 
+`uc 1 WREN 1 0 :1:2 
+`uc 1 WRERR 1 0 :1:3 
+`uc 1 FREE 1 0 :1:4 
+`uc 1 LWLO 1 0 :1:5 
+`uc 1 CFGS 1 0 :1:6 
+]
+"2886
+[u S353 . 1 `S345 1 . 1 0 ]
+[v _PMCON1bits PMCON1bits `VES353  1 e 1 @405 ]
+"2926
+[v _PMCON2 PMCON2 `VEuc  1 e 1 @406 ]
+"2967
+[v _RC1REG RC1REG `VEuc  1 e 1 @409 ]
+"3021
+[v _TX1REG TX1REG `VEuc  1 e 1 @410 ]
+"3082
+[v _SP1BRGL SP1BRGL `VEuc  1 e 1 @411 ]
+"3152
+[v _SP1BRGH SP1BRGH `VEuc  1 e 1 @412 ]
+"3206
+[v _RC1STA RC1STA `VEuc  1 e 1 @413 ]
+[s S199 . 1 `uc 1 RX9D 1 0 :1:0 
+`uc 1 OERR 1 0 :1:1 
+`uc 1 FERR 1 0 :1:2 
+`uc 1 ADDEN 1 0 :1:3 
+`uc 1 CREN 1 0 :1:4 
+`uc 1 SREN 1 0 :1:5 
+`uc 1 RX9 1 0 :1:6 
+`uc 1 SPEN 1 0 :1:7 
+]
+"3232
+[u S208 . 1 `S199 1 . 1 0 ]
+[v _RC1STAbits RC1STAbits `VES208  1 e 1 @413 ]
+"3386
+[v _TX1STA TX1STA `VEuc  1 e 1 @414 ]
+[s S177 . 1 `uc 1 TX9D 1 0 :1:0 
+`uc 1 TRMT 1 0 :1:1 
+`uc 1 BRGH 1 0 :1:2 
+`uc 1 SENDB 1 0 :1:3 
+`uc 1 SYNC 1 0 :1:4 
+`uc 1 TXEN 1 0 :1:5 
+`uc 1 TX9 1 0 :1:6 
+`uc 1 CSRC 1 0 :1:7 
+]
+"3412
+[u S186 . 1 `S177 1 . 1 0 ]
+[v _TX1STAbits TX1STAbits `VES186  1 e 1 @414 ]
+"3566
+[v _BAUD1CON BAUD1CON `VEuc  1 e 1 @415 ]
+"3812
+[v _WPUA WPUA `VEuc  1 e 1 @524 ]
+"3862
+[v _WPUC WPUC `VEuc  1 e 1 @526 ]
+"5310
+[v _ODCONA ODCONA `VEuc  1 e 1 @652 ]
+"5355
+[v _ODCONC ODCONC `VEuc  1 e 1 @654 ]
+[s S25 . 1 `uc 1 C1TSEL 1 0 :2:0 
+`uc 1 C2TSEL 1 0 :2:2 
+`uc 1 P3TSEL 1 0 :2:4 
+`uc 1 P4TSEL 1 0 :2:6 
+]
+"5834
+[s S30 . 1 `uc 1 C1TSEL0 1 0 :1:0 
+`uc 1 C1TSEL1 1 0 :1:1 
+`uc 1 C2TSEL0 1 0 :1:2 
+`uc 1 C2TSEL1 1 0 :1:3 
+`uc 1 P3TSEL0 1 0 :1:4 
+`uc 1 P3TSEL1 1 0 :1:5 
+`uc 1 P4TSEL0 1 0 :1:6 
+`uc 1 P4TSEL1 1 0 :1:7 
+]
+[u S39 . 1 `S25 1 . 1 0 `S30 1 . 1 0 ]
+[v _CCPTMRSbits CCPTMRSbits `VES39  1 e 1 @670 ]
+"5899
+[v _SLRCONA SLRCONA `VEuc  1 e 1 @780 ]
+"5944
+[v _SLRCONC SLRCONC `VEuc  1 e 1 @782 ]
+"5994
+[v _INLVLA INLVLA `VEuc  1 e 1 @908 ]
+"6044
+[v _INLVLC INLVLC `VEuc  1 e 1 @910 ]
+"6394
+[v _TMR4 TMR4 `VEuc  1 e 1 @1045 ]
+"6414
+[v _PR4 PR4 `VEuc  1 e 1 @1046 ]
+"6434
+[v _T4CON T4CON `VEuc  1 e 1 @1047 ]
+[s S821 . 1 `uc 1 T4CKPS 1 0 :2:0 
+`uc 1 TMR4ON 1 0 :1:2 
+`uc 1 T4OUTPS 1 0 :4:3 
+]
+"6455
+[s S825 . 1 `uc 1 T4CKPS0 1 0 :1:0 
+`uc 1 T4CKPS1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 T4OUTPS0 1 0 :1:3 
+`uc 1 T4OUTPS1 1 0 :1:4 
+`uc 1 T4OUTPS2 1 0 :1:5 
+`uc 1 T4OUTPS3 1 0 :1:6 
+]
+[u S833 . 1 `S821 1 . 1 0 `S825 1 . 1 0 ]
+[v _T4CONbits T4CONbits `VES833  1 e 1 @1047 ]
+"6724
+[v _PWM3DCL PWM3DCL `VEuc  1 e 1 @1559 ]
+"6760
+[v _PWM3DCH PWM3DCH `VEuc  1 e 1 @1560 ]
+"6830
+[v _PWM3CON PWM3CON `VEuc  1 e 1 @1561 ]
+"8148
+[v _RXPPS RXPPS `VEuc  1 e 1 @3620 ]
+"8368
+[v _RC0PPS RC0PPS `VEuc  1 e 1 @3744 ]
+"8388
+[v _RC1PPS RC1PPS `VEuc  1 e 1 @3745 ]
+"8408
+[v _RC2PPS RC2PPS `VEuc  1 e 1 @3746 ]
+"10 C:\Users\Damian\MPLABXProjects\LinearChopper.X\GlobalParameters.c
+[v _DeltaT DeltaT `us  1 s 2 DeltaT ]
+"11
+[v _VoltageHigh VoltageHigh `us  1 s 2 VoltageHigh ]
+"12
+[v _VoltageLow VoltageLow `us  1 s 2 VoltageLow ]
+"61 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/adc.c
+[v _ADC_InterruptHandler ADC_InterruptHandler `*.37(v  1 e 2 0 ]
+"63 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/eusart.c
+[v _eusartRxHead eusartRxHead `VEuc  1 e 1 0 ]
+"64
+[v _eusartRxTail eusartRxTail `VEuc  1 e 1 0 ]
+"65
+[v _eusartRxBuffer eusartRxBuffer `VE[8]uc  1 e 8 0 ]
+[s S64 . 1 `uc 1 perr 1 0 :1:0 
+`uc 1 ferr 1 0 :1:1 
+`uc 1 oerr 1 0 :1:2 
+`uc 1 reserved 1 0 :5:3 
+]
+"66
+[u S69 . 1 `S64 1 . 1 0 `uc 1 status 1 0 ]
+[v _eusartRxStatusBuffer eusartRxStatusBuffer `VE[8]S69  1 e 8 0 ]
+"67
+[v _eusartRxCount eusartRxCount `VEuc  1 e 1 0 ]
+"68
+[v _eusartRxLastError eusartRxLastError `VES69  1 e 1 0 ]
+"73
+[v _EUSART_RxDefaultInterruptHandler EUSART_RxDefaultInterruptHandler `*.37(v  1 e 2 0 ]
+"75
+[v _EUSART_FramingErrorHandler EUSART_FramingErrorHandler `*.37(v  1 e 2 0 ]
+"76
+[v _EUSART_OverrunErrorHandler EUSART_OverrunErrorHandler `*.37(v  1 e 2 0 ]
+"77
+[v _EUSART_ErrorHandler EUSART_ErrorHandler `*.37(v  1 e 2 0 ]
+"57 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr1.c
+[v _timer1ReloadVal timer1ReloadVal `VEus  1 e 2 0 ]
+"58
+[v _TMR1_InterruptHandler TMR1_InterruptHandler `*.37(v  1 e 2 0 ]
+"58 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr2.c
+[v _TMR2_InterruptHandler TMR2_InterruptHandler `*.37(v  1 e 2 0 ]
+"3 C:\Users\Damian\MPLABXProjects\LinearChopper.X\SystemTimer.c
+[v _system_counter system_counter `uc  1 e 1 0 ]
+"8 C:\Users\Damian\MPLABXProjects\LinearChopper.X\UartParser.c
+[v UartParser@rx_buffer rx_buffer `[32]uc  1 s 32 rx_buffer ]
+"9
+[v UartParser@rx_idx rx_idx `uc  1 s 1 rx_idx ]
+"11
+[v _isr_timer isr_timer `uc  1 s 1 isr_timer ]
+"12
+[v _lock_isr lock_isr `a  1 s 1 lock_isr ]
+"32
+[v UartParser@st st `E4307  1 s 1 st ]
+"34
+[v UartParser@tx_idx tx_idx `uc  1 s 1 tx_idx ]
+"16 C:\Users\Damian\MPLABXProjects\LinearChopper.X\VComShell.c
+[v _rx_buffer rx_buffer `[16]uc  1 s 16 rx_buffer ]
+"17
+[v _rx_idx rx_idx `uc  1 s 1 rx_idx ]
+"19
+[v _command_pending command_pending `a  1 s 1 command_pending ]
+"20
+[v _command_error command_error `a  1 s 1 command_error ]
+"25
+[v _tx_string tx_string `*.26DCuc  1 s 2 tx_string ]
+"26
+[v _tx_idx tx_idx `uc  1 s 1 tx_idx ]
+"27
+[v _tx_len tx_len `uc  1 s 1 tx_len ]
+"28
+[v _num_buffer num_buffer `[5]uc  1 s 5 num_buffer ]
+"63
+[v _vcs_st vcs_st `E4329  1 s 1 vcs_st ]
+"71
+[v _vcs_sub_st vcs_sub_st `E4361  1 s 1 vcs_sub_st ]
+"9 C:\Users\Damian\MPLABXProjects\LinearChopper.X\vcontrol.c
+[v _vdc_min vdc_min `us  1 s 2 vdc_min ]
+"10
+[v _vdc_max vdc_max `us  1 s 2 vdc_max ]
+"11
+[v _vdc_critic vdc_critic `us  1 s 2 vdc_critic ]
+"13
+[v _diff_vdc diff_vdc `us  1 s 2 diff_vdc ]
+"14
+[v _vdc_prev vdc_prev `us  1 s 2 vdc_prev ]
+"15
+[v _vdc vdc `us  1 s 2 vdc ]
+"16
+[v _pwm_duty pwm_duty `us  1 s 2 pwm_duty ]
+"18
+[v _diff_positive diff_positive `a  1 s 1 diff_positive ]
+"19
+[v _target_duty target_duty `us  1 s 2 target_duty ]
+"20
+[v _current_duty current_duty `us  1 s 2 current_duty ]
+"22
+[v _duty_pwm_inc duty_pwm_inc `us  1 s 2 duty_pwm_inc ]
+"23
+[v _duty_count_up duty_count_up `us  1 s 2 duty_count_up ]
+"24
+[v _duty_count_up_max duty_count_up_max `us  1 s 2 duty_count_up_max ]
+"25
+[v _duty_pwm_dec duty_pwm_dec `us  1 s 2 duty_pwm_dec ]
+"26
+[v _duty_count_down duty_count_down `us  1 s 2 duty_count_down ]
+"27
+[v _duty_count_down_max duty_count_down_max `us  1 s 2 duty_count_down_max ]
+"28
+[v _chopper_active chopper_active `a  1 s 1 chopper_active ]
+"30
+[v _v_table v_table `DC[1024]s  1 s 2048 v_table ]
+"386
+[v _duty_inc duty_inc `us  1 s 2 duty_inc ]
+"52 C:\Users\Damian\MPLABXProjects\LinearChopper.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"61
+[v main@val val `us  1 a 2 26 ]
+"115
+} 0
+"60 C:\Users\Damian\MPLABXProjects\LinearChopper.X\UartParser.c
+[v _uart_task uart_task `(v  1 e 1 0 ]
+{
+"159
+[v uart_task@val_1516 val `us  1 a 2 2 ]
+"132
+[v uart_task@val_1508 val `us  1 a 2 6 ]
+"146
+[v uart_task@i_1514 i `uc  1 a 1 5 ]
+"147
+[v uart_task@xor_1515 xor `uc  1 a 1 1 ]
+"107
+[v uart_task@val val `us  1 a 2 8 ]
+"88
+[v uart_task@i i `uc  1 a 1 4 ]
+"89
+[v uart_task@xor xor `uc  1 a 1 0 ]
+"185
+} 0
+"221 C:\Users\Damian\MPLABXProjects\LinearChopper.X\vcontrol.c
+[v _stop_chopper stop_chopper `(v  1 e 1 0 ]
+{
+"231
+} 0
+"202
+[v _start_chopper start_chopper `(v  1 e 1 0 ]
+{
+"219
+} 0
+"87 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr2.c
+[v _TMR2_StartTimer TMR2_StartTimer `(v  1 e 1 0 ]
+{
+"91
+} 0
+"101 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/adc.c
+[v _ADC_StartConversion ADC_StartConversion `(v  1 e 1 0 ]
+{
+"105
+} 0
+"93
+[v _ADC_SelectChannel ADC_SelectChannel `(v  1 e 1 0 ]
+{
+[v ADC_SelectChannel@channel channel `E4137  1 a 1 wreg ]
+[v ADC_SelectChannel@channel channel `E4137  1 a 1 wreg ]
+"96
+[v ADC_SelectChannel@channel channel `E4137  1 a 1 9 ]
+"99
+} 0
+"253 C:\Users\Damian\MPLABXProjects\LinearChopper.X\vcontrol.c
+[v _set_vdc_speed set_vdc_speed `(v  1 e 1 0 ]
+{
+[v set_vdc_speed@msDelay msDelay `us  1 p 2 8 ]
+"261
+} 0
+"238
+[v _set_vdc_min set_vdc_min `(v  1 e 1 0 ]
+{
+[v set_vdc_min@vmin vmin `us  1 p 2 11 ]
+"241
+} 0
+"243
+[v _set_vdc_max set_vdc_max `(v  1 e 1 0 ]
+{
+[v set_vdc_max@vmax vmax `us  1 p 2 11 ]
+"246
+} 0
+"248
+[v _set_vdc_critic set_vdc_critic `(v  1 e 1 0 ]
+{
+[v set_vdc_critic@vc vc `us  1 p 2 11 ]
+"251
+} 0
+"187
+[v _set_vdc_threshold set_vdc_threshold `(v  1 s 1 set_vdc_threshold ]
+{
+[v set_vdc_threshold@v_val v_val `us  1 p 2 8 ]
+[v set_vdc_threshold@v_target v_target `*.4us  1 p 1 10 ]
+"195
+} 0
+"263
+[v _save_to_flash save_to_flash `(v  1 e 1 0 ]
+{
+"265
+[v save_to_flash@buff buff `[32]us  1 a 64 0 ]
+"275
+} 0
+"95 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/memory.c
+[v _FLASH_WriteBlock FLASH_WriteBlock `(c  1 e 1 0 ]
+{
+"97
+[v FLASH_WriteBlock@blockStartAddr blockStartAddr `us  1 a 2 17 ]
+"99
+[v FLASH_WriteBlock@i i `uc  1 a 1 20 ]
+"98
+[v FLASH_WriteBlock@GIEBitValue GIEBitValue `uc  1 a 1 19 ]
+"95
+[v FLASH_WriteBlock@writeAddr writeAddr `us  1 p 2 11 ]
+[v FLASH_WriteBlock@flashWordArray flashWordArray `*.4us  1 p 1 13 ]
+"148
+} 0
+"150
+[v _FLASH_EraseBlock FLASH_EraseBlock `(v  1 e 1 0 ]
+{
+"152
+[v FLASH_EraseBlock@GIEBitValue GIEBitValue `uc  1 a 1 10 ]
+"150
+[v FLASH_EraseBlock@startAddr startAddr `us  1 p 2 8 ]
+"175
+} 0
+"233 C:\Users\Damian\MPLABXProjects\LinearChopper.X\vcontrol.c
+[v _is_chopper_active is_chopper_active `(a  1 e 1 0 ]
+{
+"236
+} 0
+"292
+[v _get_vdc_speed get_vdc_speed `(us  1 e 2 0 ]
+{
+"295
+} 0
+"277
+[v _get_vdc_min get_vdc_min `(us  1 e 2 0 ]
+{
+"280
+} 0
+"282
+[v _get_vdc_max get_vdc_max `(us  1 e 2 0 ]
+{
+"285
+} 0
+"287
+[v _get_vdc_critic get_vdc_critic `(us  1 e 2 0 ]
+{
+"290
+} 0
+"297
+[v _get_vdc get_vdc `(us  1 e 2 0 ]
+{
+"300
+} 0
+"43 C:\Users\Damian\MPLABXProjects\LinearChopper.X\UartParser.c
+[v _uart_start uart_start `(v  1 e 1 0 ]
+{
+"51
+} 0
+"50 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+{
+"62
+} 0
+"76
+[v _WDT_Initialize WDT_Initialize `(v  1 e 1 0 ]
+{
+"80
+} 0
+"62 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr4.c
+[v _TMR4_Initialize TMR4_Initialize `(v  1 e 1 0 ]
+{
+"77
+} 0
+"64 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr2.c
+[v _TMR2_Initialize TMR2_Initialize `(v  1 e 1 0 ]
+{
+"85
+} 0
+"140
+[v _TMR2_SetInterruptHandler TMR2_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v TMR2_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 8 ]
+"142
+} 0
+"64 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr1.c
+[v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
+{
+"91
+} 0
+"178
+[v _TMR1_SetInterruptHandler TMR1_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v TMR1_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 8 ]
+"180
+} 0
+"58 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/pwm3.c
+[v _PWM3_Initialize PWM3_Initialize `(v  1 e 1 0 ]
+{
+"72
+} 0
+"55 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+{
+"111
+} 0
+"64 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+{
+"74
+} 0
+"83 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/eusart.c
+[v _EUSART_Initialize EUSART_Initialize `(v  1 e 1 0 ]
+{
+"119
+} 0
+"236
+[v _EUSART_SetRxInterruptHandler EUSART_SetRxInterruptHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetRxInterruptHandler@interruptHandler interruptHandler `*.37(v  1 p 2 8 ]
+"238
+} 0
+"227
+[v _EUSART_SetOverrunErrorHandler EUSART_SetOverrunErrorHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetOverrunErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 8 ]
+"229
+} 0
+"223
+[v _EUSART_SetFramingErrorHandler EUSART_SetFramingErrorHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetFramingErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 8 ]
+"225
+} 0
+"231
+[v _EUSART_SetErrorHandler EUSART_SetErrorHandler `(v  1 e 1 0 ]
+{
+[v EUSART_SetErrorHandler@interruptHandler interruptHandler `*.37(v  1 p 2 8 ]
+"233
+} 0
+"67 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/adc.c
+[v _ADC_Initialize ADC_Initialize `(v  1 e 1 0 ]
+{
+"91
+} 0
+"160
+[v _ADC_SetInterruptHandler ADC_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v ADC_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 8 ]
+"162
+} 0
+"58 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/memory.c
+[v _FLASH_ReadWord FLASH_ReadWord `(us  1 e 2 0 ]
+{
+"60
+[v FLASH_ReadWord@GIEBitValue GIEBitValue `uc  1 a 1 10 ]
+"58
+[v FLASH_ReadWord@flashAddr flashAddr `us  1 p 2 8 ]
+"73
+} 0
+"52 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
+{
+"83
+} 0
+"119 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr2.c
+[v _TMR2_ISR TMR2_ISR `(v  1 e 1 0 ]
+{
+"128
+} 0
+"130
+[v _TMR2_CallBack TMR2_CallBack `(v  1 e 1 0 ]
+{
+"138
+} 0
+"144
+[v _TMR2_DefaultInterruptHandler TMR2_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"147
+} 0
+"388 C:\Users\Damian\MPLABXProjects\LinearChopper.X\vcontrol.c
+[v _TMR2_DutyControlHandler_ISR TMR2_DutyControlHandler_ISR `(v  1 e 1 0 ]
+{
+"409
+} 0
+"157 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/tmr1.c
+[v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
+{
+"167
+} 0
+"120
+[v _TMR1_WriteTimer TMR1_WriteTimer `(v  1 e 1 0 ]
+{
+[v TMR1_WriteTimer@timerVal timerVal `us  1 p 2 0 ]
+"140
+} 0
+"169
+[v _TMR1_CallBack TMR1_CallBack `(v  1 e 1 0 ]
+{
+"176
+} 0
+"182
+[v _TMR1_DefaultInterruptHandler TMR1_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"185
+} 0
+"5 C:\Users\Damian\MPLABXProjects\LinearChopper.X\SystemTimer.c
+[v _TMR1_SystemTimer_ISR TMR1_SystemTimer_ISR `(v  1 e 1 0 ]
+{
+"8
+} 0
+"13 C:\Users\Damian\MPLABXProjects\LinearChopper.X\UartParser.c
+[v _EUSART_CommandHandler_ISR EUSART_CommandHandler_ISR `(v  1 e 1 0 ]
+{
+"15
+[v EUSART_CommandHandler_ISR@rx_data rx_data `uc  1 a 1 1 ]
+"21
+} 0
+"175 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/eusart.c
+[v _EUSART_Receive_ISR EUSART_Receive_ISR `(v  1 e 1 0 ]
+{
+"197
+} 0
+"211
+[v _EUSART_DefaultOverrunErrorHandler EUSART_DefaultOverrunErrorHandler `(v  1 e 1 0 ]
+{
+"217
+} 0
+"209
+[v _EUSART_DefaultFramingErrorHandler EUSART_DefaultFramingErrorHandler `(v  1 e 1 0 ]
+{
+} 0
+"219
+[v _EUSART_DefaultErrorHandler EUSART_DefaultErrorHandler `(v  1 e 1 0 ]
+{
+"221
+} 0
+"199
+[v _EUSART_RxDataHandler EUSART_RxDataHandler `(v  1 e 1 0 ]
+{
+"207
+} 0
+"149 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/adc.c
+[v _ADC_ISR ADC_ISR `(v  1 e 1 0 ]
+{
+"158
+} 0
+"164
+[v _ADC_DefaultInterruptHandler ADC_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"167
+} 0
+"302 C:\Users\Damian\MPLABXProjects\LinearChopper.X\vcontrol.c
+[v _ADC_VoltageControlHandler_ISR ADC_VoltageControlHandler_ISR `(v  1 e 1 0 ]
+{
+"340
+[v ADC_VoltageControlHandler_ISR@pwm pwm `ul  1 a 4 4 ]
+"384
+} 0
+"15 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+{
+"17
+[v ___lmul@product product `ul  1 a 4 8 ]
+"15
+[v ___lmul@multiplier multiplier `ul  1 p 4 0 ]
+[v ___lmul@multiplicand multiplicand `ul  1 p 4 4 ]
+"129
+} 0
+"5 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+{
+"10
+[v ___lldiv@quotient quotient `ul  1 a 4 9 ]
+"11
+[v ___lldiv@counter counter `uc  1 a 1 13 ]
+"5
+[v ___lldiv@divisor divisor `ul  1 p 4 0 ]
+[v ___lldiv@dividend dividend `ul  1 p 4 4 ]
+"30
+} 0
+"74 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/pwm3.c
+[v _PWM3_LoadDutyValue PWM3_LoadDutyValue `(v  1 e 1 0 ]
+{
+[v PWM3_LoadDutyValue@dutyValue dutyValue `us  1 p 2 0 ]
+"81
+} 0
+"197 C:\Users\Damian\MPLABXProjects\LinearChopper.X\vcontrol.c
+[v _LoadDutyValue LoadDutyValue `(v  1 e 1 0 ]
+{
+[v LoadDutyValue@duty duty `us  1 p 2 0 ]
+"200
+} 0
+"114 C:\Users\Damian\MPLABXProjects\LinearChopper.X\mcc_generated_files/adc.c
+[v _ADC_GetConversionResult ADC_GetConversionResult `(us  1 e 2 0 ]
+{
+"118
+} 0
