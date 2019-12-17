@@ -7331,6 +7331,7 @@ void WDT_Initialize(void);
 void ADC_VoltageControlHandler_ISR(void);
 void TMR2_DutyControlHandler_ISR(void);
 
+void init_chopper();
 void start_chopper();
 void stop_chopper();
 _Bool is_chopper_active();
@@ -7410,6 +7411,7 @@ void main(void)
 
 
 
+    init_chopper();
     uart_start();
     while (1)
     {

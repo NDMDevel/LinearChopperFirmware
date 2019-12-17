@@ -20,6 +20,7 @@
 void ADC_VoltageControlHandler_ISR(void);
 void TMR2_DutyControlHandler_ISR(void);
 
+void init_chopper();
 void start_chopper();
 void stop_chopper();
 bool is_chopper_active();

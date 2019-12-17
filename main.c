@@ -92,6 +92,7 @@ void main(void)
     // Disable the Peripheral Interrupts
     //INTERRUPT_PeripheralInterruptDisable();
 
+    init_chopper();
     uart_start();
     while (1)
     {

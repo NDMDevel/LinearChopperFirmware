@@ -6,20 +6,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 "99 ./mcc_generated_files/memory.h
 [; ;./mcc_generated_files/memory.h: 99: uint16_t FLASH_ReadWord(uint16_t flashAddr);
 [v _FLASH_ReadWord `(us ~T0 @X0 0 ef1`us ]
-"27 ./vcontrol.h
-[; ;./vcontrol.h: 27: void set_vdc_min(uint16_t vmin);
+"28 ./vcontrol.h
+[; ;./vcontrol.h: 28: void set_vdc_min(uint16_t vmin);
 [v _set_vdc_min `(v ~T0 @X0 0 ef1`us ]
-"28
-[; ;./vcontrol.h: 28: void set_vdc_max(uint16_t vmax);
-[v _set_vdc_max `(v ~T0 @X0 0 ef1`us ]
 "29
-[; ;./vcontrol.h: 29: void set_vdc_critic(uint16_t vc);
-[v _set_vdc_critic `(v ~T0 @X0 0 ef1`us ]
+[; ;./vcontrol.h: 29: void set_vdc_max(uint16_t vmax);
+[v _set_vdc_max `(v ~T0 @X0 0 ef1`us ]
 "30
-[; ;./vcontrol.h: 30: void set_vdc_speed(uint16_t msDelay);
+[; ;./vcontrol.h: 30: void set_vdc_critic(uint16_t vc);
+[v _set_vdc_critic `(v ~T0 @X0 0 ef1`us ]
+"31
+[; ;./vcontrol.h: 31: void set_vdc_speed(uint16_t msDelay);
 [v _set_vdc_speed `(v ~T0 @X0 0 ef1`us ]
-"23
-[; ;./vcontrol.h: 23: void start_chopper();
+"24
+[; ;./vcontrol.h: 24: void start_chopper();
 [v _start_chopper `(v ~T0 @X0 0 e? ]
 "357 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 357:     struct {
@@ -36,6 +36,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "374
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 374: extern volatile INTCONbits_t INTCONbits __attribute__((address(0x00B)));
 [v _INTCONbits `VS30 ~T0 @X0 0 e@11 ]
+"23 ./vcontrol.h
+[; ;./vcontrol.h: 23: void init_chopper();
+[v _init_chopper `(v ~T0 @X0 0 e? ]
 "12 ./UartParser.h
 [; ;./UartParser.h: 12: void uart_start(void);
 [v _uart_start `(v ~T0 @X0 0 ef ]
@@ -835,27 +838,30 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 87:     (INTCONbits.PEIE = 1);
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
 "95
-[; ;main.c: 95:     uart_start();
-[e ( _uart_start ..  ]
+[; ;main.c: 95:     init_chopper();
+[e ( _init_chopper ..  ]
 "96
-[; ;main.c: 96:     while (1)
-[e :U 602 ]
+[; ;main.c: 96:     uart_start();
+[e ( _uart_start ..  ]
 "97
-[; ;main.c: 97:     {
-{
+[; ;main.c: 97:     while (1)
+[e :U 602 ]
 "98
-[; ;main.c: 98:         uart_task();
-[e ( _uart_task ..  ]
+[; ;main.c: 98:     {
+{
 "99
-[; ;main.c: 99:         __asm("clrwdt");
-[; <" clrwdt ;# ">
+[; ;main.c: 99:         uart_task();
+[e ( _uart_task ..  ]
 "100
-[; ;main.c: 100:     }
+[; ;main.c: 100:         __asm("clrwdt");
+[; <" clrwdt ;# ">
+"101
+[; ;main.c: 101:     }
 }
 [e :U 601 ]
 [e $U 602  ]
 [e :U 603 ]
-"101
-[; ;main.c: 101: }
+"102
+[; ;main.c: 102: }
 [e :UE 594 ]
 }

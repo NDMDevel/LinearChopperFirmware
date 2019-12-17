@@ -7345,6 +7345,7 @@ void TMR1_SystemTimer_ISR(void);
 void ADC_VoltageControlHandler_ISR(void);
 void TMR2_DutyControlHandler_ISR(void);
 
+void init_chopper();
 void start_chopper();
 void stop_chopper();
 _Bool is_chopper_active();

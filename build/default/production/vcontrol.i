@@ -128,6 +128,7 @@ typedef uint32_t uint_fast32_t;
 void ADC_VoltageControlHandler_ISR(void);
 void TMR2_DutyControlHandler_ISR(void);
 
+void init_chopper();
 void start_chopper();
 void stop_chopper();
 _Bool is_chopper_active();
@@ -7382,13 +7383,14 @@ static _Bool diff_positive;
 static uint16_t target_duty = 0;
 static uint16_t current_duty = 0;
 
-static uint16_t duty_pwm_inc = 200;
+static uint16_t duty_pwm_inc = 4;
 static uint16_t duty_count_up;
-static uint16_t duty_count_up_max = 500;
+static uint16_t duty_count_up_max = 5;
 static uint16_t duty_pwm_dec = 5;
 static uint16_t duty_count_down;
 static uint16_t duty_count_down_max = 100;
 static _Bool chopper_active = 0;
+static _Bool init_required = 1;
 
 static const int16_t v_table[1024] = {
    0 , 1 , 2 , 2 , 3 , 4 , 5 ,
@@ -7557,9 +7559,23 @@ static void set_vdc_threshold(uint16_t v_val,uint16_t *v_target)
         *v_target = v_val;
 }
 
-void LoadDutyValue(uint16_t duty)
+static void LoadDutyValue(uint16_t duty)
 {
     target_duty = duty;
+}
+
+void init_chopper()
+{
+    if( init_required == 0 )
+        return;
+    init_required = 0;
+    ADC_SelectChannel(V_BUSDC);
+    _delay((unsigned long)((1)*(16000000/4000.0)));
+    ADC_StartConversion();
+    TMR2_StartTimer();
+
+    TMR2_SetInterruptHandler(TMR2_DutyControlHandler_ISR);
+    ADC_SetInterruptHandler(ADC_VoltageControlHandler_ISR);
 }
 
 void start_chopper()
@@ -7571,14 +7587,11 @@ void start_chopper()
     pwm_duty = 0;
     current_duty = 0;
     target_duty = 0;
-    ADC_SelectChannel(V_BUSDC);
-    _delay((unsigned long)((1)*(16000000/4000.0)));
-    ADC_StartConversion();
-    TMR2_StartTimer();
+
+    if( init_required == 1 )
+        init_chopper();
 
     chopper_active = 1;
-    TMR2_SetInterruptHandler(TMR2_DutyControlHandler_ISR);
-    ADC_SetInterruptHandler(ADC_VoltageControlHandler_ISR);
 }
 
 void stop_chopper()
@@ -7617,8 +7630,8 @@ void set_vdc_speed(uint16_t msDelay)
 {
     if( msDelay == 0xFFFF )
         return;
-    if( msDelay > 10000 )
-        duty_count_up_max = 250;
+    if( msDelay > 100 )
+        duty_count_up_max = 100;
     else
         duty_count_up_max = msDelay;
 }
@@ -7654,7 +7667,7 @@ uint16_t get_vdc_critic(void)
 
 uint16_t get_vdc_speed(void)
 {
-    return duty_count_up_max;
+    return duty_count_up_max * 100;
 }
 
 uint16_t get_vdc(void)
@@ -7698,19 +7711,26 @@ void ADC_VoltageControlHandler_ISR(void)
             {
                 do { LATAbits.LATA4 = 1; } while(0);
                 do { LATAbits.LATA5 = 1; } while(0);
+                _Bool force_inc = 1;
                 if( diff_positive == 1 )
                 {
                     uint32_t pwm = (uint32_t)399 * (uint32_t)(vdc - vdc_min);
                     pwm /= (vdc_max - vdc_min);
                     if( pwm > 399 )
+                    {
                         pwm_duty = 399;
+                        force_inc = 0;
+                    }
                     else
                     {
                         if( pwm_duty < pwm )
+                        {
                             pwm_duty = pwm;
+                            force_inc = 0;
+                        }
                     }
                 }
-                else
+                if( force_inc == 1 )
                 {
                     if( duty_count_up >= duty_count_up_max )
                     {

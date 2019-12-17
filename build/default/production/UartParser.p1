@@ -7,8 +7,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _system_counter `uc ~T0 @X0 0 e ]
 "32 UartParser.c
 [; ;UartParser.c: 32: }st = SHUTDOWN;
-[c E4307 0 1 2 3 4 5 .. ]
-[n E4307 . SHUTDOWN INIT WAIT_IDLE READ_FRAME PARSE_FRAME SEND_RESPONSE  ]
+[c E4308 0 1 2 3 4 5 .. ]
+[n E4308 . SHUTDOWN INIT WAIT_IDLE READ_FRAME PARSE_FRAME SEND_RESPONSE  ]
 [v F4172 `(v ~T0 @X0 0 tf ]
 "403 ./mcc_generated_files/tmr1.h
 [; ;./mcc_generated_files/tmr1.h: 403:  void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
@@ -28,46 +28,46 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _EUSART_Receive_ISR `(v ~T0 @X0 0 ef ]
 "92 UartParser.c
 [; ;UartParser.c: 92:         if( xor != 0 ||
-[c E4316 170 85 165 .. ]
-[n E4316 Commands SET_PARAMS GET_PARAMS GET_VDC  ]
-"27 ./vcontrol.h
-[; ;./vcontrol.h: 27: void set_vdc_min(uint16_t vmin);
+[c E4317 170 85 165 .. ]
+[n E4317 Commands SET_PARAMS GET_PARAMS GET_VDC  ]
+"28 ./vcontrol.h
+[; ;./vcontrol.h: 28: void set_vdc_min(uint16_t vmin);
 [v _set_vdc_min `(v ~T0 @X0 0 ef1`us ]
-"28
-[; ;./vcontrol.h: 28: void set_vdc_max(uint16_t vmax);
-[v _set_vdc_max `(v ~T0 @X0 0 ef1`us ]
 "29
-[; ;./vcontrol.h: 29: void set_vdc_critic(uint16_t vc);
-[v _set_vdc_critic `(v ~T0 @X0 0 ef1`us ]
+[; ;./vcontrol.h: 29: void set_vdc_max(uint16_t vmax);
+[v _set_vdc_max `(v ~T0 @X0 0 ef1`us ]
 "30
-[; ;./vcontrol.h: 30: void set_vdc_speed(uint16_t msDelay);
-[v _set_vdc_speed `(v ~T0 @X0 0 ef1`us ]
-"24
-[; ;./vcontrol.h: 24: void stop_chopper();
-[v _stop_chopper `(v ~T0 @X0 0 e? ]
-"23
-[; ;./vcontrol.h: 23: void start_chopper();
-[v _start_chopper `(v ~T0 @X0 0 e? ]
+[; ;./vcontrol.h: 30: void set_vdc_critic(uint16_t vc);
+[v _set_vdc_critic `(v ~T0 @X0 0 ef1`us ]
 "31
-[; ;./vcontrol.h: 31: void save_to_flash(void);
-[v _save_to_flash `(v ~T0 @X0 0 ef ]
-"33
-[; ;./vcontrol.h: 33: uint16_t get_vdc_min(void);
-[v _get_vdc_min `(us ~T0 @X0 0 ef ]
-"34
-[; ;./vcontrol.h: 34: uint16_t get_vdc_max(void);
-[v _get_vdc_max `(us ~T0 @X0 0 ef ]
-"35
-[; ;./vcontrol.h: 35: uint16_t get_vdc_critic(void);
-[v _get_vdc_critic `(us ~T0 @X0 0 ef ]
-"36
-[; ;./vcontrol.h: 36: uint16_t get_vdc_speed(void);
-[v _get_vdc_speed `(us ~T0 @X0 0 ef ]
+[; ;./vcontrol.h: 31: void set_vdc_speed(uint16_t msDelay);
+[v _set_vdc_speed `(v ~T0 @X0 0 ef1`us ]
 "25
-[; ;./vcontrol.h: 25: _Bool is_chopper_active();
-[v _is_chopper_active `(a ~T0 @X0 0 e? ]
+[; ;./vcontrol.h: 25: void stop_chopper();
+[v _stop_chopper `(v ~T0 @X0 0 e? ]
+"24
+[; ;./vcontrol.h: 24: void start_chopper();
+[v _start_chopper `(v ~T0 @X0 0 e? ]
+"32
+[; ;./vcontrol.h: 32: void save_to_flash(void);
+[v _save_to_flash `(v ~T0 @X0 0 ef ]
+"34
+[; ;./vcontrol.h: 34: uint16_t get_vdc_min(void);
+[v _get_vdc_min `(us ~T0 @X0 0 ef ]
+"35
+[; ;./vcontrol.h: 35: uint16_t get_vdc_max(void);
+[v _get_vdc_max `(us ~T0 @X0 0 ef ]
+"36
+[; ;./vcontrol.h: 36: uint16_t get_vdc_critic(void);
+[v _get_vdc_critic `(us ~T0 @X0 0 ef ]
 "37
-[; ;./vcontrol.h: 37: uint16_t get_vdc(void);
+[; ;./vcontrol.h: 37: uint16_t get_vdc_speed(void);
+[v _get_vdc_speed `(us ~T0 @X0 0 ef ]
+"26
+[; ;./vcontrol.h: 26: _Bool is_chopper_active();
+[v _is_chopper_active `(a ~T0 @X0 0 e? ]
+"38
+[; ;./vcontrol.h: 38: uint16_t get_vdc(void);
 [v _get_vdc `(us ~T0 @X0 0 ef ]
 "3401 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 3401:     struct {
@@ -838,9 +838,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "32
 [; ;UartParser.c: 32: }st = SHUTDOWN;
-[v _st `E4307 ~T0 @X0 1 s ]
+[v _st `E4308 ~T0 @X0 1 s ]
 [i _st
-. `E4307 0
+. `E4308 0
 ]
 "34
 [; ;UartParser.c: 34: static uint8_t tx_idx;
@@ -855,7 +855,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "45
 [; ;UartParser.c: 45:     if( st == SHUTDOWN )
-[e $ ! == -> _st `ui -> . `E4307 0 `ui 598  ]
+[e $ ! == -> _st `ui -> . `E4308 0 `ui 598  ]
 "46
 [; ;UartParser.c: 46:     {
 {
@@ -867,7 +867,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _EUSART_SetRxInterruptHandler (1 &U _EUSART_CommandHandler_ISR ]
 "49
 [; ;UartParser.c: 49:         st = INIT;
-[e = _st . `E4307 1 ]
+[e = _st . `E4308 1 ]
 "50
 [; ;UartParser.c: 50:     }
 }
@@ -892,7 +892,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _EUSART_SetRxInterruptHandler (1 &U _EUSART_Receive_ISR ]
 "57
 [; ;UartParser.c: 57:     st = SHUTDOWN;
-[e = _st . `E4307 0 ]
+[e = _st . `E4308 0 ]
 "58
 [; ;UartParser.c: 58: }
 [e :UE 599 ]
@@ -907,14 +907,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "62
 [; ;UartParser.c: 62:     if( st == SHUTDOWN )
-[e $ ! == -> _st `ui -> . `E4307 0 `ui 601  ]
+[e $ ! == -> _st `ui -> . `E4308 0 `ui 601  ]
 "63
 [; ;UartParser.c: 63:         return;
 [e $UE 600  ]
 [e :U 601 ]
 "64
 [; ;UartParser.c: 64:     if( st == INIT )
-[e $ ! == -> _st `ui -> . `E4307 1 `ui 602  ]
+[e $ ! == -> _st `ui -> . `E4308 1 `ui 602  ]
 "65
 [; ;UartParser.c: 65:     {
 {
@@ -926,7 +926,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _lock_isr -> -> 0 `i `a ]
 "68
 [; ;UartParser.c: 68:         st = WAIT_IDLE;
-[e = _st . `E4307 2 ]
+[e = _st . `E4308 2 ]
 "69
 [; ;UartParser.c: 69:         return;
 [e $UE 600  ]
@@ -936,7 +936,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 602 ]
 "71
 [; ;UartParser.c: 71:     if( st == WAIT_IDLE )
-[e $ ! == -> _st `ui -> . `E4307 2 `ui 603  ]
+[e $ ! == -> _st `ui -> . `E4308 2 `ui 603  ]
 "72
 [; ;UartParser.c: 72:     {
 {
@@ -952,7 +952,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _rx_idx -> -> 0 `i `uc ]
 "76
 [; ;UartParser.c: 76:         st = READ_FRAME;
-[e = _st . `E4307 3 ]
+[e = _st . `E4308 3 ]
 "77
 [; ;UartParser.c: 77:         return;
 [e $UE 600  ]
@@ -962,7 +962,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 603 ]
 "79
 [; ;UartParser.c: 79:     if( st == READ_FRAME )
-[e $ ! == -> _st `ui -> . `E4307 3 `ui 605  ]
+[e $ ! == -> _st `ui -> . `E4308 3 `ui 605  ]
 "80
 [; ;UartParser.c: 80:     {
 {
@@ -1006,7 +1006,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "92
 [; ;UartParser.c: 92:         if( xor != 0 ||
-[e $ ! || || != -> _xor `i -> 0 `i && && != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4316 0 `i != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4316 1 `i != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4316 2 `i && != -> _rx_idx `i -> 11 `i != -> _rx_idx `i -> 2 `i 612  ]
+[e $ ! || || != -> _xor `i -> 0 `i && && != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4317 0 `i != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4317 1 `i != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4317 2 `i && != -> _rx_idx `i -> 11 `i != -> _rx_idx `i -> 2 `i 612  ]
 "95
 [; ;UartParser.c: 95:         {
 {
@@ -1025,7 +1025,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 612 ]
 "100
 [; ;UartParser.c: 100:             st = PARSE_FRAME;
-[e = _st . `E4307 4 ]
+[e = _st . `E4308 4 ]
 [e :U 613 ]
 "101
 [; ;UartParser.c: 101:         return;
@@ -1036,13 +1036,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 605 ]
 "103
 [; ;UartParser.c: 103:     if( st == PARSE_FRAME )
-[e $ ! == -> _st `ui -> . `E4307 4 `ui 614  ]
+[e $ ! == -> _st `ui -> . `E4308 4 `ui 614  ]
 "104
 [; ;UartParser.c: 104:     {
 {
 "105
 [; ;UartParser.c: 105:         if( rx_buffer[0] == SET_PARAMS && rx_idx == 11 )
-[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4316 0 `i == -> _rx_idx `i -> 11 `i 615  ]
+[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4317 0 `i == -> _rx_idx `i -> 11 `i 615  ]
 "106
 [; ;UartParser.c: 106:         {
 {
@@ -1104,7 +1104,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _save_to_flash ..  ]
 "125
 [; ;UartParser.c: 125:             st = INIT;
-[e = _st . `E4307 1 ]
+[e = _st . `E4308 1 ]
 "126
 [; ;UartParser.c: 126:             return;
 [e $UE 600  ]
@@ -1120,7 +1120,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "130
 [; ;UartParser.c: 130:             if( rx_buffer[0] == GET_PARAMS && rx_idx == 2 )
-[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4316 1 `i == -> _rx_idx `i -> 2 `i 619  ]
+[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4317 1 `i == -> _rx_idx `i -> 2 `i 619  ]
 "131
 [; ;UartParser.c: 131:             {
 {
@@ -1198,7 +1198,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _tx_idx -> -> 0 `i `uc ]
 "153
 [; ;UartParser.c: 153:                 st = SEND_RESPONSE;
-[e = _st . `E4307 5 ]
+[e = _st . `E4308 5 ]
 "154
 [; ;UartParser.c: 154:             }
 }
@@ -1211,7 +1211,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "157
 [; ;UartParser.c: 157:                 if( rx_buffer[0] == GET_VDC && rx_idx == 2 )
-[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4316 2 `i == -> _rx_idx `i -> 2 `i 624  ]
+[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4317 2 `i == -> _rx_idx `i -> 2 `i 624  ]
 "158
 [; ;UartParser.c: 158:                 {
 {
@@ -1238,7 +1238,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _tx_idx -> -> 0 `i `uc ]
 "166
 [; ;UartParser.c: 166:                     st = SEND_RESPONSE;
-[e = _st . `E4307 5 ]
+[e = _st . `E4308 5 ]
 "167
 [; ;UartParser.c: 167:                 }
 }
@@ -1248,7 +1248,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 624 ]
 "170
 [; ;UartParser.c: 170:                     st = INIT;
-[e = _st . `E4307 1 ]
+[e = _st . `E4308 1 ]
 [e :U 625 ]
 "171
 [; ;UartParser.c: 171:             }
@@ -1267,7 +1267,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 614 ]
 "175
 [; ;UartParser.c: 175:     if( st == SEND_RESPONSE )
-[e $ ! == -> _st `ui -> . `E4307 5 `ui 626  ]
+[e $ ! == -> _st `ui -> . `E4308 5 `ui 626  ]
 "176
 [; ;UartParser.c: 176:     {
 {
@@ -1290,7 +1290,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 628 ]
 "182
 [; ;UartParser.c: 182:             st = INIT;
-[e = _st . `E4307 1 ]
+[e = _st . `E4308 1 ]
 [e :U 629 ]
 "183
 [; ;UartParser.c: 183:         return;
