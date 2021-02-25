@@ -56,6 +56,20 @@ void main(void)
     // initialize the device
     SYSTEM_Initialize();
 
+//    uint16_t buff[WRITE_FLASH_BLOCKSIZE];
+//    buff[0] = 0x3FFF;
+//    buff[1] = 0x3FFF;
+//    buff[2] = 0x3FFF;
+//    buff[3] = 0x3FFF;
+//    buff[4] = 0x3FFF;
+//    buff[5] = 0x3FFF;
+//    buff[6] = 0x3FFF;
+//    buff[7] = 0;
+//    buff[8] = 0;
+//    FLASH_WriteBlock(FLASH_START_ADDRESS,buff);
+//    while(1)
+//        CLRWDT();
+    
     ApplicationInit();
     
     // Enable the Global Interrupts
@@ -67,11 +81,11 @@ void main(void)
     init_relay_watchdog();
     
     uart_start();
-    start_relay_watchdog();
     while (1)
     {
         uart_task();
         relay_watchdog_task();
+        relay_watchdog_record_activations_task();
         CLRWDT();
     }
 }

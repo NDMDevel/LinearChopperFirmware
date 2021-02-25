@@ -2,6 +2,7 @@
 #include "mcc_generated_files/mcc.h"
 #include "SystemTimer.h"
 #include "vcontrol.h"
+#include "SolidStateRelay.h"
 #include <stdbool.h>
 
 #define RX_BUFFER_LENGTH 32
@@ -183,8 +184,15 @@ void uart_task(void)
                     val = get_vdc();
                     rx_buffer[1] = (val>>8) & 0xFF;
                     rx_buffer[2] = val & 0xFF;
-                    rx_buffer[3] = rx_buffer[0] ^ rx_buffer[1] ^ rx_buffer[2];
-                    rx_idx = 4;
+                    uint32_t activation_counter = get_relay_activation_counter();
+                    rx_buffer[3] = (activation_counter >> 24) & 0xFF;
+                    rx_buffer[4] = (activation_counter >> 16) & 0xFF;
+                    rx_buffer[5] = (activation_counter >> 8) & 0xFF;
+                    rx_buffer[6] = activation_counter & 0xFF;
+                    rx_buffer[7] = rx_buffer[0];
+                    for( uint8_t idx=1 ; idx<7 ; idx++ )
+                        rx_buffer[7] ^= rx_buffer[idx];
+                    rx_idx = 8;
                     tx_idx = 0;
                     st = SEND_RESPONSE;
                 }

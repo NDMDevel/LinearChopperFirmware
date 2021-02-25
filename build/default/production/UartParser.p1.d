@@ -13,4 +13,5 @@ mcc_generated_files/memory.h  \
 mcc_generated_files/adc.h  \
 mcc_generated_files/eusart.h  \
 SystemTimer.h  \
-vcontrol.h 
+vcontrol.h  \
+SolidStateRelay.h 

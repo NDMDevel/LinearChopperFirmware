@@ -5,16 +5,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 "13 ./SystemTimer.h
 [; ;./SystemTimer.h: 13: extern uint8_t system_counter;
 [v _system_counter `uc ~T0 @X0 0 e ]
-"32 UartParser.c
-[; ;UartParser.c: 32: }st = SHUTDOWN;
-[c E4319 0 1 2 3 4 5 .. ]
-[n E4319 . SHUTDOWN INIT WAIT_IDLE READ_FRAME PARSE_FRAME SEND_RESPONSE  ]
+"33 UartParser.c
+[; ;UartParser.c: 33: }st = SHUTDOWN;
+[c E4339 0 1 2 3 4 5 .. ]
+[n E4339 . SHUTDOWN INIT WAIT_IDLE READ_FRAME PARSE_FRAME SEND_RESPONSE  ]
 [v F4172 `(v ~T0 @X0 0 tf ]
 "403 ./mcc_generated_files/tmr1.h
 [; ;./mcc_generated_files/tmr1.h: 403:  void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
 [v _TMR1_SetInterruptHandler `(v ~T0 @X0 0 ef1`*F4172 ]
-"29 ./SystemTimer.h
-[; ;./SystemTimer.h: 29: void TMR1_SystemTimer_ISR(void);
+"39 ./SystemTimer.h
+[; ;./SystemTimer.h: 39: void TMR1_SystemTimer_ISR(void);
 [v _TMR1_SystemTimer_ISR `(v ~T0 @X0 0 ef ]
 [v F4274 `(v ~T0 @X0 0 tf ]
 "465 ./mcc_generated_files/eusart.h
@@ -26,10 +26,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "369 ./mcc_generated_files/eusart.h
 [; ;./mcc_generated_files/eusart.h: 369: void EUSART_Receive_ISR(void);
 [v _EUSART_Receive_ISR `(v ~T0 @X0 0 ef ]
-"92 UartParser.c
-[; ;UartParser.c: 92:         if( xor != 0 ||
-[c E4328 170 85 165 .. ]
-[n E4328 Commands SET_PARAMS GET_PARAMS GET_VDC  ]
+"93 UartParser.c
+[; ;UartParser.c: 93:         if( xor != 0 ||
+[c E4348 170 85 165 .. ]
+[n E4348 Commands SET_PARAMS GET_PARAMS GET_VDC  ]
 "34 ./vcontrol.h
 [; ;./vcontrol.h: 34: void set_vdc_min(uint16_t vmin);
 [v _set_vdc_min `(v ~T0 @X0 0 ef1`us ]
@@ -42,13 +42,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "37
 [; ;./vcontrol.h: 37: void set_vdc_speed(uint16_t msDelay);
 [v _set_vdc_speed `(v ~T0 @X0 0 ef1`us ]
-"38
-[; ;./vcontrol.h: 38: void set_relay_reset_voltage(uint16_t relay_vthres);
+"27 ./SolidStateRelay.h
+[; ;./SolidStateRelay.h: 27: void set_relay_reset_voltage(uint16_t relay_vthres);
 [v _set_relay_reset_voltage `(v ~T0 @X0 0 ef1`us ]
-"39
-[; ;./vcontrol.h: 39: void set_reset_duration(uint16_t reset_dur_ms);
+"28
+[; ;./SolidStateRelay.h: 28: void set_reset_duration(uint16_t reset_dur_ms);
 [v _set_reset_duration `(v ~T0 @X0 0 ef1`us ]
-"25
+"25 ./vcontrol.h
 [; ;./vcontrol.h: 25: void stop_chopper();
 [v _stop_chopper `(v ~T0 @X0 0 e? ]
 "24
@@ -69,18 +69,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "45
 [; ;./vcontrol.h: 45: uint16_t get_vdc_speed(void);
 [v _get_vdc_speed `(us ~T0 @X0 0 ef ]
-"46
-[; ;./vcontrol.h: 46: uint16_t get_relay_reset_voltage(void);
+"29 ./SolidStateRelay.h
+[; ;./SolidStateRelay.h: 29: uint16_t get_relay_reset_voltage(void);
 [v _get_relay_reset_voltage `(us ~T0 @X0 0 ef ]
-"47
-[; ;./vcontrol.h: 47: uint16_t get_reset_duration(void);
+"30
+[; ;./SolidStateRelay.h: 30: uint16_t get_reset_duration(void);
 [v _get_reset_duration `(us ~T0 @X0 0 ef ]
-"26
+"26 ./vcontrol.h
 [; ;./vcontrol.h: 26: _Bool is_chopper_active();
 [v _is_chopper_active `(a ~T0 @X0 0 e? ]
 "48
 [; ;./vcontrol.h: 48: uint16_t get_vdc(void);
 [v _get_vdc `(us ~T0 @X0 0 ef ]
+"36 ./SolidStateRelay.h
+[; ;./SolidStateRelay.h: 36: uint32_t get_relay_activation_counter(void);
+[v _get_relay_activation_counter `(ul ~T0 @X0 0 ef ]
 "3401 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 3401:     struct {
 [s S187 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -797,576 +800,607 @@ Version 4.0 HI-TECH Software Intermediate Code
 "11826
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 11826: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
-"8 UartParser.c
-[; ;UartParser.c: 8: static uint8_t rx_buffer[32];
+"9 UartParser.c
+[; ;UartParser.c: 9: static uint8_t rx_buffer[32];
 [v _rx_buffer `uc ~T0 @X0 -> 32 `i s ]
-"9
-[; ;UartParser.c: 9: static uint8_t rx_idx = 0;
+"10
+[; ;UartParser.c: 10: static uint8_t rx_idx = 0;
 [v _rx_idx `uc ~T0 @X0 1 s ]
 [i _rx_idx
 -> -> 0 `i `uc
 ]
-"11
-[; ;UartParser.c: 11: static uint8_t isr_timer;
-[v _isr_timer `uc ~T0 @X0 1 s ]
 "12
-[; ;UartParser.c: 12: static _Bool lock_isr = 1;
+[; ;UartParser.c: 12: static uint8_t isr_timer;
+[v _isr_timer `uc ~T0 @X0 1 s ]
+"13
+[; ;UartParser.c: 13: static _Bool lock_isr = 1;
 [v _lock_isr `a ~T0 @X0 1 s ]
 [i _lock_isr
 -> -> 1 `i `a
 ]
-"13
-[; ;UartParser.c: 13: void EUSART_CommandHandler_ISR(void)
-[v _EUSART_CommandHandler_ISR `(v ~T0 @X0 1 ef ]
 "14
-[; ;UartParser.c: 14: {
+[; ;UartParser.c: 14: void EUSART_CommandHandler_ISR(void)
+[v _EUSART_CommandHandler_ISR `(v ~T0 @X0 1 ef ]
+"15
+[; ;UartParser.c: 15: {
 {
 [e :U _EUSART_CommandHandler_ISR ]
 [f ]
-"15
-[; ;UartParser.c: 15:     uint8_t rx_data = RC1REG;
+"16
+[; ;UartParser.c: 16:     uint8_t rx_data = RC1REG;
 [v _rx_data `uc ~T0 @X0 1 a ]
 [e = _rx_data _RC1REG ]
-"16
-[; ;UartParser.c: 16:     if( lock_isr )
-[e $ ! != -> _lock_isr `i -> 0 `i 595  ]
 "17
-[; ;UartParser.c: 17:         return;
+[; ;UartParser.c: 17:     if( lock_isr )
+[e $ ! != -> _lock_isr `i -> 0 `i 595  ]
+"18
+[; ;UartParser.c: 18:         return;
 [e $UE 594  ]
 [e :U 595 ]
-"18
-[; ;UartParser.c: 18:     isr_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
-[e = _isr_timer -> + -> -> ~ -> _system_counter `i `uc `i -> -> -> 1 `i `uc `i `uc ]
 "19
-[; ;UartParser.c: 19:     if( rx_idx < 32 )
-[e $ ! < -> _rx_idx `i -> 32 `i 596  ]
+[; ;UartParser.c: 19:     isr_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
+[e = _isr_timer -> + -> -> ~ -> _system_counter `i `uc `i -> -> -> 1 `i `uc `i `uc ]
 "20
-[; ;UartParser.c: 20:         rx_buffer[rx_idx++] = rx_data;
+[; ;UartParser.c: 20:     if( rx_idx < 32 )
+[e $ ! < -> _rx_idx `i -> 32 `i 596  ]
+"21
+[; ;UartParser.c: 21:         rx_buffer[rx_idx++] = rx_data;
 [e = *U + &U _rx_buffer * -> ++ _rx_idx -> -> 1 `i `uc `ux -> -> # *U &U _rx_buffer `ui `ux _rx_data ]
 [e :U 596 ]
-"21
-[; ;UartParser.c: 21: }
+"22
+[; ;UartParser.c: 22: }
 [e :UE 594 ]
 }
-"32
-[; ;UartParser.c: 32: }st = SHUTDOWN;
-[v _st `E4319 ~T0 @X0 1 s ]
+"33
+[; ;UartParser.c: 33: }st = SHUTDOWN;
+[v _st `E4339 ~T0 @X0 1 s ]
 [i _st
-. `E4319 0
+. `E4339 0
 ]
-"34
-[; ;UartParser.c: 34: static uint8_t tx_idx;
+"35
+[; ;UartParser.c: 35: static uint8_t tx_idx;
 [v _tx_idx `uc ~T0 @X0 1 s ]
-"43
-[; ;UartParser.c: 43: void uart_start(void)
-[v _uart_start `(v ~T0 @X0 1 ef ]
 "44
-[; ;UartParser.c: 44: {
+[; ;UartParser.c: 44: void uart_start(void)
+[v _uart_start `(v ~T0 @X0 1 ef ]
+"45
+[; ;UartParser.c: 45: {
 {
 [e :U _uart_start ]
 [f ]
-"45
-[; ;UartParser.c: 45:     if( st == SHUTDOWN )
-[e $ ! == -> _st `ui -> . `E4319 0 `ui 598  ]
 "46
-[; ;UartParser.c: 46:     {
-{
+[; ;UartParser.c: 46:     if( st == SHUTDOWN )
+[e $ ! == -> _st `ui -> . `E4339 0 `ui 598  ]
 "47
-[; ;UartParser.c: 47:         TMR1_SetInterruptHandler(TMR1_SystemTimer_ISR);
-[e ( _TMR1_SetInterruptHandler (1 &U _TMR1_SystemTimer_ISR ]
+[; ;UartParser.c: 47:     {
+{
 "48
-[; ;UartParser.c: 48:         EUSART_SetRxInterruptHandler(EUSART_CommandHandler_ISR);
-[e ( _EUSART_SetRxInterruptHandler (1 &U _EUSART_CommandHandler_ISR ]
+[; ;UartParser.c: 48:         TMR1_SetInterruptHandler(TMR1_SystemTimer_ISR);
+[e ( _TMR1_SetInterruptHandler (1 &U _TMR1_SystemTimer_ISR ]
 "49
-[; ;UartParser.c: 49:         st = INIT;
-[e = _st . `E4319 1 ]
+[; ;UartParser.c: 49:         EUSART_SetRxInterruptHandler(EUSART_CommandHandler_ISR);
+[e ( _EUSART_SetRxInterruptHandler (1 &U _EUSART_CommandHandler_ISR ]
 "50
-[; ;UartParser.c: 50:     }
+[; ;UartParser.c: 50:         st = INIT;
+[e = _st . `E4339 1 ]
+"51
+[; ;UartParser.c: 51:     }
 }
 [e :U 598 ]
-"51
-[; ;UartParser.c: 51: }
+"52
+[; ;UartParser.c: 52: }
 [e :UE 597 ]
 }
-"53
-[; ;UartParser.c: 53: void uart_stop(void)
-[v _uart_stop `(v ~T0 @X0 1 ef ]
 "54
-[; ;UartParser.c: 54: {
+[; ;UartParser.c: 54: void uart_stop(void)
+[v _uart_stop `(v ~T0 @X0 1 ef ]
+"55
+[; ;UartParser.c: 55: {
 {
 [e :U _uart_stop ]
 [f ]
-"55
-[; ;UartParser.c: 55:     TMR1_SetInterruptHandler(TMR1_DefaultInterruptHandler);
-[e ( _TMR1_SetInterruptHandler (1 &U _TMR1_DefaultInterruptHandler ]
 "56
-[; ;UartParser.c: 56:     EUSART_SetRxInterruptHandler(EUSART_Receive_ISR);
-[e ( _EUSART_SetRxInterruptHandler (1 &U _EUSART_Receive_ISR ]
+[; ;UartParser.c: 56:     TMR1_SetInterruptHandler(TMR1_DefaultInterruptHandler);
+[e ( _TMR1_SetInterruptHandler (1 &U _TMR1_DefaultInterruptHandler ]
 "57
-[; ;UartParser.c: 57:     st = SHUTDOWN;
-[e = _st . `E4319 0 ]
+[; ;UartParser.c: 57:     EUSART_SetRxInterruptHandler(EUSART_Receive_ISR);
+[e ( _EUSART_SetRxInterruptHandler (1 &U _EUSART_Receive_ISR ]
 "58
-[; ;UartParser.c: 58: }
+[; ;UartParser.c: 58:     st = SHUTDOWN;
+[e = _st . `E4339 0 ]
+"59
+[; ;UartParser.c: 59: }
 [e :UE 599 ]
 }
-"60
-[; ;UartParser.c: 60: void uart_task(void)
-[v _uart_task `(v ~T0 @X0 1 ef ]
 "61
-[; ;UartParser.c: 61: {
+[; ;UartParser.c: 61: void uart_task(void)
+[v _uart_task `(v ~T0 @X0 1 ef ]
+"62
+[; ;UartParser.c: 62: {
 {
 [e :U _uart_task ]
 [f ]
-"62
-[; ;UartParser.c: 62:     if( st == SHUTDOWN )
-[e $ ! == -> _st `ui -> . `E4319 0 `ui 601  ]
 "63
-[; ;UartParser.c: 63:         return;
+[; ;UartParser.c: 63:     if( st == SHUTDOWN )
+[e $ ! == -> _st `ui -> . `E4339 0 `ui 601  ]
+"64
+[; ;UartParser.c: 64:         return;
 [e $UE 600  ]
 [e :U 601 ]
-"64
-[; ;UartParser.c: 64:     if( st == INIT )
-[e $ ! == -> _st `ui -> . `E4319 1 `ui 602  ]
 "65
-[; ;UartParser.c: 65:     {
-{
+[; ;UartParser.c: 65:     if( st == INIT )
+[e $ ! == -> _st `ui -> . `E4339 1 `ui 602  ]
 "66
-[; ;UartParser.c: 66:         isr_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
-[e = _isr_timer -> + -> -> ~ -> _system_counter `i `uc `i -> -> -> 1 `i `uc `i `uc ]
+[; ;UartParser.c: 66:     {
+{
 "67
-[; ;UartParser.c: 67:         lock_isr = 0;
-[e = _lock_isr -> -> 0 `i `a ]
+[; ;UartParser.c: 67:         isr_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
+[e = _isr_timer -> + -> -> ~ -> _system_counter `i `uc `i -> -> -> 1 `i `uc `i `uc ]
 "68
-[; ;UartParser.c: 68:         st = WAIT_IDLE;
-[e = _st . `E4319 2 ]
+[; ;UartParser.c: 68:         lock_isr = 0;
+[e = _lock_isr -> -> 0 `i `a ]
 "69
-[; ;UartParser.c: 69:         return;
-[e $UE 600  ]
+[; ;UartParser.c: 69:         st = WAIT_IDLE;
+[e = _st . `E4339 2 ]
 "70
-[; ;UartParser.c: 70:     }
+[; ;UartParser.c: 70:         return;
+[e $UE 600  ]
+"71
+[; ;UartParser.c: 71:     }
 }
 [e :U 602 ]
-"71
-[; ;UartParser.c: 71:     if( st == WAIT_IDLE )
-[e $ ! == -> _st `ui -> . `E4319 2 `ui 603  ]
 "72
-[; ;UartParser.c: 72:     {
-{
+[; ;UartParser.c: 72:     if( st == WAIT_IDLE )
+[e $ ! == -> _st `ui -> . `E4339 2 `ui 603  ]
 "73
-[; ;UartParser.c: 73:         if( ((uint8_t)(system_counter + isr_timer) >= ((uint8_t)3)) == 0 )
-[e $ ! == -> >= -> -> + -> _system_counter `i -> _isr_timer `i `uc `i -> -> -> 3 `i `uc `i `i -> 0 `i 604  ]
+[; ;UartParser.c: 73:     {
+{
 "74
-[; ;UartParser.c: 74:             return;
+[; ;UartParser.c: 74:         if( ((uint8_t)(system_counter + isr_timer) >= ((uint8_t)3)) == 0 )
+[e $ ! == -> >= -> -> + -> _system_counter `i -> _isr_timer `i `uc `i -> -> -> 3 `i `uc `i `i -> 0 `i 604  ]
+"75
+[; ;UartParser.c: 75:             return;
 [e $UE 600  ]
 [e :U 604 ]
-"75
-[; ;UartParser.c: 75:         rx_idx = 0;
-[e = _rx_idx -> -> 0 `i `uc ]
 "76
-[; ;UartParser.c: 76:         st = READ_FRAME;
-[e = _st . `E4319 3 ]
+[; ;UartParser.c: 76:         rx_idx = 0;
+[e = _rx_idx -> -> 0 `i `uc ]
 "77
-[; ;UartParser.c: 77:         return;
-[e $UE 600  ]
+[; ;UartParser.c: 77:         st = READ_FRAME;
+[e = _st . `E4339 3 ]
 "78
-[; ;UartParser.c: 78:     }
+[; ;UartParser.c: 78:         return;
+[e $UE 600  ]
+"79
+[; ;UartParser.c: 79:     }
 }
 [e :U 603 ]
-"79
-[; ;UartParser.c: 79:     if( st == READ_FRAME )
-[e $ ! == -> _st `ui -> . `E4319 3 `ui 605  ]
 "80
-[; ;UartParser.c: 80:     {
-{
+[; ;UartParser.c: 80:     if( st == READ_FRAME )
+[e $ ! == -> _st `ui -> . `E4339 3 `ui 605  ]
 "81
-[; ;UartParser.c: 81:         if( rx_idx == 0 )
-[e $ ! == -> _rx_idx `i -> 0 `i 606  ]
+[; ;UartParser.c: 81:     {
+{
 "82
-[; ;UartParser.c: 82:             return;
+[; ;UartParser.c: 82:         if( rx_idx == 0 )
+[e $ ! == -> _rx_idx `i -> 0 `i 606  ]
+"83
+[; ;UartParser.c: 83:             return;
 [e $UE 600  ]
 [e :U 606 ]
-"83
-[; ;UartParser.c: 83:         if( ((uint8_t)(system_counter + isr_timer) >= ((uint8_t)3)) == 0 )
-[e $ ! == -> >= -> -> + -> _system_counter `i -> _isr_timer `i `uc `i -> -> -> 3 `i `uc `i `i -> 0 `i 607  ]
 "84
-[; ;UartParser.c: 84:             return;
+[; ;UartParser.c: 84:         if( ((uint8_t)(system_counter + isr_timer) >= ((uint8_t)3)) == 0 )
+[e $ ! == -> >= -> -> + -> _system_counter `i -> _isr_timer `i `uc `i -> -> -> 3 `i `uc `i `i -> 0 `i 607  ]
+"85
+[; ;UartParser.c: 85:             return;
 [e $UE 600  ]
 [e :U 607 ]
-"86
-[; ;UartParser.c: 86:         lock_isr = 1;
+"87
+[; ;UartParser.c: 87:         lock_isr = 1;
 [e = _lock_isr -> -> 1 `i `a ]
-"88
-[; ;UartParser.c: 88:         uint8_t i;
-[v _i `uc ~T0 @X0 1 a ]
 "89
-[; ;UartParser.c: 89:         uint8_t xor = rx_buffer[0];
+[; ;UartParser.c: 89:         uint8_t i;
+[v _i `uc ~T0 @X0 1 a ]
+"90
+[; ;UartParser.c: 90:         uint8_t xor = rx_buffer[0];
 [v _xor `uc ~T0 @X0 1 a ]
 [e = _xor *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux ]
-"90
-[; ;UartParser.c: 90:         for( i=1 ; i<rx_idx ; i++ )
+"91
+[; ;UartParser.c: 91:         for( i=1 ; i<rx_idx ; i++ )
 {
 [e = _i -> -> 1 `i `uc ]
 [e $U 611  ]
 [e :U 608 ]
-"91
-[; ;UartParser.c: 91:             xor ^= rx_buffer[i];
+"92
+[; ;UartParser.c: 92:             xor ^= rx_buffer[i];
 [e =^ _xor -> *U + &U _rx_buffer * -> _i `ux -> -> # *U &U _rx_buffer `ui `ux `uc ]
 [e ++ _i -> -> 1 `i `uc ]
 [e :U 611 ]
 [e $ < -> _i `i -> _rx_idx `i 608  ]
 [e :U 609 ]
 }
-"92
-[; ;UartParser.c: 92:         if( xor != 0 ||
-[e $ ! || || != -> _xor `i -> 0 `i && && != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4328 0 `i != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4328 1 `i != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4328 2 `i && != -> _rx_idx `i -> 15 `i != -> _rx_idx `i -> 2 `i 612  ]
-"97
-[; ;UartParser.c: 97:         {
-{
+"93
+[; ;UartParser.c: 93:         if( xor != 0 ||
+[e $ ! || || != -> _xor `i -> 0 `i && && != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4348 0 `i != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4348 1 `i != -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4348 2 `i && != -> _rx_idx `i -> 15 `i != -> _rx_idx `i -> 2 `i 612  ]
 "98
-[; ;UartParser.c: 98:             rx_idx = 0;
-[e = _rx_idx -> -> 0 `i `uc ]
+[; ;UartParser.c: 98:         {
+{
 "99
-[; ;UartParser.c: 99:             lock_isr = 0;
-[e = _lock_isr -> -> 0 `i `a ]
+[; ;UartParser.c: 99:             rx_idx = 0;
+[e = _rx_idx -> -> 0 `i `uc ]
 "100
-[; ;UartParser.c: 100:         }
+[; ;UartParser.c: 100:             lock_isr = 0;
+[e = _lock_isr -> -> 0 `i `a ]
+"101
+[; ;UartParser.c: 101:         }
 }
 [e $U 613  ]
-"101
-[; ;UartParser.c: 101:         else
-[e :U 612 ]
 "102
-[; ;UartParser.c: 102:             st = PARSE_FRAME;
-[e = _st . `E4319 4 ]
-[e :U 613 ]
+[; ;UartParser.c: 102:         else
+[e :U 612 ]
 "103
-[; ;UartParser.c: 103:         return;
-[e $UE 600  ]
+[; ;UartParser.c: 103:             st = PARSE_FRAME;
+[e = _st . `E4339 4 ]
+[e :U 613 ]
 "104
-[; ;UartParser.c: 104:     }
+[; ;UartParser.c: 104:         return;
+[e $UE 600  ]
+"105
+[; ;UartParser.c: 105:     }
 }
 [e :U 605 ]
-"105
-[; ;UartParser.c: 105:     if( st == PARSE_FRAME )
-[e $ ! == -> _st `ui -> . `E4319 4 `ui 614  ]
 "106
-[; ;UartParser.c: 106:     {
-{
+[; ;UartParser.c: 106:     if( st == PARSE_FRAME )
+[e $ ! == -> _st `ui -> . `E4339 4 `ui 614  ]
 "107
-[; ;UartParser.c: 107:         if( rx_buffer[0] == SET_PARAMS )
-[e $ ! == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4328 0 `i 615  ]
-"108
-[; ;UartParser.c: 108:         {
+[; ;UartParser.c: 107:     {
 {
+"108
+[; ;UartParser.c: 108:         if( rx_buffer[0] == SET_PARAMS )
+[e $ ! == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4348 0 `i 615  ]
 "109
-[; ;UartParser.c: 109:             static uint8_t none = 2;
-[v F4341 `uc ~T0 @X0 1 s none ]
-[i F4341
+[; ;UartParser.c: 109:         {
+{
+"110
+[; ;UartParser.c: 110:             static uint8_t none = 2;
+[v F4361 `uc ~T0 @X0 1 s none ]
+[i F4361
 -> -> 2 `i `uc
 ]
-"110
-[; ;UartParser.c: 110:             none++;
-[e ++ F4341 -> -> 1 `i `uc ]
 "111
-[; ;UartParser.c: 111:         }
+[; ;UartParser.c: 111:             none++;
+[e ++ F4361 -> -> 1 `i `uc ]
+"112
+[; ;UartParser.c: 112:         }
 }
 [e :U 615 ]
-"112
-[; ;UartParser.c: 112:         if( rx_buffer[0] == SET_PARAMS && rx_idx == 15 )
-[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4328 0 `i == -> _rx_idx `i -> 15 `i 616  ]
 "113
-[; ;UartParser.c: 113:         {
-{
+[; ;UartParser.c: 113:         if( rx_buffer[0] == SET_PARAMS && rx_idx == 15 )
+[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4348 0 `i == -> _rx_idx `i -> 15 `i 616  ]
 "114
-[; ;UartParser.c: 114:             uint16_t val;
-[v _val `us ~T0 @X0 1 a ]
+[; ;UartParser.c: 114:         {
+{
 "115
-[; ;UartParser.c: 115:             val = rx_buffer[1];
-[e = _val -> *U + &U _rx_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
+[; ;UartParser.c: 115:             uint16_t val;
+[v _val `us ~T0 @X0 1 a ]
 "116
-[; ;UartParser.c: 116:             val = val<<8 | rx_buffer[2];
-[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
+[; ;UartParser.c: 116:             val = rx_buffer[1];
+[e = _val -> *U + &U _rx_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
 "117
-[; ;UartParser.c: 117:             set_vdc_min(val);
-[e ( _set_vdc_min (1 _val ]
+[; ;UartParser.c: 117:             val = val<<8 | rx_buffer[2];
+[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
 "118
-[; ;UartParser.c: 118:             val = rx_buffer[3];
-[e = _val -> *U + &U _rx_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
+[; ;UartParser.c: 118:             set_vdc_min(val);
+[e ( _set_vdc_min (1 _val ]
 "119
-[; ;UartParser.c: 119:             val = val<<8 | rx_buffer[4];
-[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
+[; ;UartParser.c: 119:             val = rx_buffer[3];
+[e = _val -> *U + &U _rx_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
 "120
-[; ;UartParser.c: 120:             set_vdc_max(val);
-[e ( _set_vdc_max (1 _val ]
+[; ;UartParser.c: 120:             val = val<<8 | rx_buffer[4];
+[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
 "121
-[; ;UartParser.c: 121:             val = rx_buffer[5];
-[e = _val -> *U + &U _rx_buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
+[; ;UartParser.c: 121:             set_vdc_max(val);
+[e ( _set_vdc_max (1 _val ]
 "122
-[; ;UartParser.c: 122:             val = val<<8 | rx_buffer[6];
-[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
+[; ;UartParser.c: 122:             val = rx_buffer[5];
+[e = _val -> *U + &U _rx_buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
 "123
-[; ;UartParser.c: 123:             set_vdc_critic(val);
-[e ( _set_vdc_critic (1 _val ]
+[; ;UartParser.c: 123:             val = val<<8 | rx_buffer[6];
+[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
 "124
-[; ;UartParser.c: 124:             val = rx_buffer[7];
-[e = _val -> *U + &U _rx_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
+[; ;UartParser.c: 124:             set_vdc_critic(val);
+[e ( _set_vdc_critic (1 _val ]
 "125
-[; ;UartParser.c: 125:             val = val<<8 | rx_buffer[8];
-[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 8 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
+[; ;UartParser.c: 125:             val = rx_buffer[7];
+[e = _val -> *U + &U _rx_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
 "126
-[; ;UartParser.c: 126:             set_vdc_speed(val);
+[; ;UartParser.c: 126:             val = val<<8 | rx_buffer[8];
+[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 8 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
+"127
+[; ;UartParser.c: 127:             set_vdc_speed(val);
 [e ( _set_vdc_speed (1 _val ]
-"128
-[; ;UartParser.c: 128:             val = rx_buffer[9];
-[e = _val -> *U + &U _rx_buffer * -> -> -> 9 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
 "129
-[; ;UartParser.c: 129:             val = val<<8 | rx_buffer[10];
-[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 10 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
+[; ;UartParser.c: 129:             val = rx_buffer[9];
+[e = _val -> *U + &U _rx_buffer * -> -> -> 9 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
 "130
-[; ;UartParser.c: 130:             set_relay_reset_voltage(val);
-[e ( _set_relay_reset_voltage (1 _val ]
+[; ;UartParser.c: 130:             val = val<<8 | rx_buffer[10];
+[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 10 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
 "131
-[; ;UartParser.c: 131:             val = rx_buffer[11];
-[e = _val -> *U + &U _rx_buffer * -> -> -> 11 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
+[; ;UartParser.c: 131:             set_relay_reset_voltage(val);
+[e ( _set_relay_reset_voltage (1 _val ]
 "132
-[; ;UartParser.c: 132:             val = val<<8 | rx_buffer[12];
-[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 12 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
+[; ;UartParser.c: 132:             val = rx_buffer[11];
+[e = _val -> *U + &U _rx_buffer * -> -> -> 11 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `us ]
 "133
-[; ;UartParser.c: 133:             set_reset_duration(val);
+[; ;UartParser.c: 133:             val = val<<8 | rx_buffer[12];
+[e = _val -> | << -> _val `ui -> 8 `i -> *U + &U _rx_buffer * -> -> -> 12 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `ui `us ]
+"134
+[; ;UartParser.c: 134:             set_reset_duration(val);
 [e ( _set_reset_duration (1 _val ]
-"135
-[; ;UartParser.c: 135:             if( rx_buffer[13] == 0 )
-[e $ ! == -> *U + &U _rx_buffer * -> -> -> 13 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> 0 `i 617  ]
 "136
-[; ;UartParser.c: 136:                 stop_chopper();
+[; ;UartParser.c: 136:             if( rx_buffer[13] == 0 )
+[e $ ! == -> *U + &U _rx_buffer * -> -> -> 13 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> 0 `i 617  ]
+"137
+[; ;UartParser.c: 137:                 stop_chopper();
 [e ( _stop_chopper ..  ]
 [e $U 618  ]
-"137
-[; ;UartParser.c: 137:             else
-[e :U 617 ]
 "138
-[; ;UartParser.c: 138:                 start_chopper();
+[; ;UartParser.c: 138:             else
+[e :U 617 ]
+"139
+[; ;UartParser.c: 139:                 start_chopper();
 [e ( _start_chopper ..  ]
 [e :U 618 ]
-"139
-[; ;UartParser.c: 139:             save_to_flash();
-[e ( _save_to_flash ..  ]
 "140
-[; ;UartParser.c: 140:             st = INIT;
-[e = _st . `E4319 1 ]
+[; ;UartParser.c: 140:             save_to_flash();
+[e ( _save_to_flash ..  ]
 "141
-[; ;UartParser.c: 141:             return;
-[e $UE 600  ]
+[; ;UartParser.c: 141:             st = INIT;
+[e = _st . `E4339 1 ]
 "142
-[; ;UartParser.c: 142:         }
+[; ;UartParser.c: 142:             return;
+[e $UE 600  ]
+"143
+[; ;UartParser.c: 143:         }
 }
 [e $U 619  ]
-"143
-[; ;UartParser.c: 143:         else
-[e :U 616 ]
 "144
-[; ;UartParser.c: 144:         {
-{
+[; ;UartParser.c: 144:         else
+[e :U 616 ]
 "145
-[; ;UartParser.c: 145:             if( rx_buffer[0] == GET_PARAMS && rx_idx == 2 )
-[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4328 1 `i == -> _rx_idx `i -> 2 `i 620  ]
-"146
-[; ;UartParser.c: 146:             {
+[; ;UartParser.c: 145:         {
 {
+"146
+[; ;UartParser.c: 146:             if( rx_buffer[0] == GET_PARAMS && rx_idx == 2 )
+[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4348 1 `i == -> _rx_idx `i -> 2 `i 620  ]
 "147
-[; ;UartParser.c: 147:                 uint16_t val;
-[v _val `us ~T0 @X0 1 a ]
+[; ;UartParser.c: 147:             {
+{
 "148
-[; ;UartParser.c: 148:                 val = get_vdc_min();
-[e = _val ( _get_vdc_min ..  ]
+[; ;UartParser.c: 148:                 uint16_t val;
+[v _val `us ~T0 @X0 1 a ]
 "149
-[; ;UartParser.c: 149:                 rx_buffer[1] = (val>>8) & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 149:                 val = get_vdc_min();
+[e = _val ( _get_vdc_min ..  ]
 "150
-[; ;UartParser.c: 150:                 rx_buffer[2] = val & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 150:                 rx_buffer[1] = (val>>8) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
 "151
-[; ;UartParser.c: 151:                 val = get_vdc_max();
-[e = _val ( _get_vdc_max ..  ]
+[; ;UartParser.c: 151:                 rx_buffer[2] = val & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
 "152
-[; ;UartParser.c: 152:                 rx_buffer[3] = (val>>8) & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 152:                 val = get_vdc_max();
+[e = _val ( _get_vdc_max ..  ]
 "153
-[; ;UartParser.c: 153:                 rx_buffer[4] = val & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 153:                 rx_buffer[3] = (val>>8) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
 "154
-[; ;UartParser.c: 154:                 val = get_vdc_critic();
-[e = _val ( _get_vdc_critic ..  ]
+[; ;UartParser.c: 154:                 rx_buffer[4] = val & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
 "155
-[; ;UartParser.c: 155:                 rx_buffer[5] = (val>>8) & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 155:                 val = get_vdc_critic();
+[e = _val ( _get_vdc_critic ..  ]
 "156
-[; ;UartParser.c: 156:                 rx_buffer[6] = val & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 156:                 rx_buffer[5] = (val>>8) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
 "157
-[; ;UartParser.c: 157:                 val = get_vdc_speed();
-[e = _val ( _get_vdc_speed ..  ]
+[; ;UartParser.c: 157:                 rx_buffer[6] = val & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
 "158
-[; ;UartParser.c: 158:                 rx_buffer[7] = (val>>8) & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 158:                 val = get_vdc_speed();
+[e = _val ( _get_vdc_speed ..  ]
 "159
-[; ;UartParser.c: 159:                 rx_buffer[8] = val & 0xFF;
+[; ;UartParser.c: 159:                 rx_buffer[7] = (val>>8) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
+"160
+[; ;UartParser.c: 160:                 rx_buffer[8] = val & 0xFF;
 [e = *U + &U _rx_buffer * -> -> -> 8 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
-"161
-[; ;UartParser.c: 161:                 val = get_relay_reset_voltage();
-[e = _val ( _get_relay_reset_voltage ..  ]
 "162
-[; ;UartParser.c: 162:                 rx_buffer[9] = (val>>8) & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 9 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 162:                 val = get_relay_reset_voltage();
+[e = _val ( _get_relay_reset_voltage ..  ]
 "163
-[; ;UartParser.c: 163:                 rx_buffer[10] = val & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 10 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 163:                 rx_buffer[9] = (val>>8) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 9 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
 "164
-[; ;UartParser.c: 164:                 val = get_reset_duration();
-[e = _val ( _get_reset_duration ..  ]
+[; ;UartParser.c: 164:                 rx_buffer[10] = val & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 10 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
 "165
-[; ;UartParser.c: 165:                 rx_buffer[11] = (val>>8) & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 11 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 165:                 val = get_reset_duration();
+[e = _val ( _get_reset_duration ..  ]
 "166
-[; ;UartParser.c: 166:                 rx_buffer[12] = val & 0xFF;
+[; ;UartParser.c: 166:                 rx_buffer[11] = (val>>8) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 11 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
+"167
+[; ;UartParser.c: 167:                 rx_buffer[12] = val & 0xFF;
 [e = *U + &U _rx_buffer * -> -> -> 12 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
-"168
-[; ;UartParser.c: 168:                 rx_buffer[13] = is_chopper_active();
-[e = *U + &U _rx_buffer * -> -> -> 13 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> ( _is_chopper_active ..  `uc ]
 "169
-[; ;UartParser.c: 169:                 uint8_t i;
-[v _i `uc ~T0 @X0 1 a ]
+[; ;UartParser.c: 169:                 rx_buffer[13] = is_chopper_active();
+[e = *U + &U _rx_buffer * -> -> -> 13 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> ( _is_chopper_active ..  `uc ]
 "170
-[; ;UartParser.c: 170:                 uint8_t xor = rx_buffer[0];
+[; ;UartParser.c: 170:                 uint8_t i;
+[v _i `uc ~T0 @X0 1 a ]
+"171
+[; ;UartParser.c: 171:                 uint8_t xor = rx_buffer[0];
 [v _xor `uc ~T0 @X0 1 a ]
 [e = _xor *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux ]
-"171
-[; ;UartParser.c: 171:                 for( i=1 ; i<14 ; i++ )
+"172
+[; ;UartParser.c: 172:                 for( i=1 ; i<14 ; i++ )
 {
 [e = _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 14 `i 621  ]
 [e $U 622  ]
 [e :U 621 ]
-"172
-[; ;UartParser.c: 172:                     xor ^= rx_buffer[i];
+"173
+[; ;UartParser.c: 173:                     xor ^= rx_buffer[i];
 [e =^ _xor -> *U + &U _rx_buffer * -> _i `ux -> -> # *U &U _rx_buffer `ui `ux `uc ]
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 14 `i 621  ]
 [e :U 622 ]
 }
-"173
-[; ;UartParser.c: 173:                 rx_buffer[14] = xor;
-[e = *U + &U _rx_buffer * -> -> -> 14 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux _xor ]
 "174
-[; ;UartParser.c: 174:                 rx_idx = 15;
-[e = _rx_idx -> -> 15 `i `uc ]
+[; ;UartParser.c: 174:                 rx_buffer[14] = xor;
+[e = *U + &U _rx_buffer * -> -> -> 14 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux _xor ]
 "175
-[; ;UartParser.c: 175:                 tx_idx = 0;
-[e = _tx_idx -> -> 0 `i `uc ]
+[; ;UartParser.c: 175:                 rx_idx = 15;
+[e = _rx_idx -> -> 15 `i `uc ]
 "176
-[; ;UartParser.c: 176:                 st = SEND_RESPONSE;
-[e = _st . `E4319 5 ]
+[; ;UartParser.c: 176:                 tx_idx = 0;
+[e = _tx_idx -> -> 0 `i `uc ]
 "177
-[; ;UartParser.c: 177:             }
+[; ;UartParser.c: 177:                 st = SEND_RESPONSE;
+[e = _st . `E4339 5 ]
+"178
+[; ;UartParser.c: 178:             }
 }
 [e $U 624  ]
-"178
-[; ;UartParser.c: 178:             else
-[e :U 620 ]
 "179
-[; ;UartParser.c: 179:             {
-{
+[; ;UartParser.c: 179:             else
+[e :U 620 ]
 "180
-[; ;UartParser.c: 180:                 if( rx_buffer[0] == GET_VDC && rx_idx == 2 )
-[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4328 2 `i == -> _rx_idx `i -> 2 `i 625  ]
-"181
-[; ;UartParser.c: 181:                 {
+[; ;UartParser.c: 180:             {
 {
+"181
+[; ;UartParser.c: 181:                 if( rx_buffer[0] == GET_VDC && rx_idx == 2 )
+[e $ ! && == -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> . `E4348 2 `i == -> _rx_idx `i -> 2 `i 625  ]
 "182
-[; ;UartParser.c: 182:                     uint16_t val;
-[v _val `us ~T0 @X0 1 a ]
+[; ;UartParser.c: 182:                 {
+{
 "183
-[; ;UartParser.c: 183:                     val = get_vdc();
-[e = _val ( _get_vdc ..  ]
+[; ;UartParser.c: 183:                     uint16_t val;
+[v _val `us ~T0 @X0 1 a ]
 "184
-[; ;UartParser.c: 184:                     rx_buffer[1] = (val>>8) & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 184:                     val = get_vdc();
+[e = _val ( _get_vdc ..  ]
 "185
-[; ;UartParser.c: 185:                     rx_buffer[2] = val & 0xFF;
-[e = *U + &U _rx_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
+[; ;UartParser.c: 185:                     rx_buffer[1] = (val>>8) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> -> _val `ui -> 8 `i -> -> 255 `i `ui `uc ]
 "186
-[; ;UartParser.c: 186:                     rx_buffer[3] = rx_buffer[0] ^ rx_buffer[1] ^ rx_buffer[2];
-[e = *U + &U _rx_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> ^ ^ -> *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> *U + &U _rx_buffer * -> -> -> 1 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i -> *U + &U _rx_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux `i `uc ]
+[; ;UartParser.c: 186:                     rx_buffer[2] = val & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 2 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & -> _val `ui -> -> 255 `i `ui `uc ]
 "187
-[; ;UartParser.c: 187:                     rx_idx = 4;
-[e = _rx_idx -> -> 4 `i `uc ]
+[; ;UartParser.c: 187:                     uint32_t activation_counter = get_relay_activation_counter();
+[v _activation_counter `ul ~T0 @X0 1 a ]
+[e = _activation_counter ( _get_relay_activation_counter ..  ]
 "188
-[; ;UartParser.c: 188:                     tx_idx = 0;
-[e = _tx_idx -> -> 0 `i `uc ]
+[; ;UartParser.c: 188:                     rx_buffer[3] = (activation_counter >> 24) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 3 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> _activation_counter -> 24 `i -> -> -> 255 `i `l `ul `uc ]
 "189
-[; ;UartParser.c: 189:                     st = SEND_RESPONSE;
-[e = _st . `E4319 5 ]
+[; ;UartParser.c: 189:                     rx_buffer[4] = (activation_counter >> 16) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 4 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> _activation_counter -> 16 `i -> -> -> 255 `i `l `ul `uc ]
 "190
-[; ;UartParser.c: 190:                 }
-}
-[e $U 626  ]
+[; ;UartParser.c: 190:                     rx_buffer[5] = (activation_counter >> 8) & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 5 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & >> _activation_counter -> 8 `i -> -> -> 255 `i `l `ul `uc ]
 "191
-[; ;UartParser.c: 191:                 else
-[e :U 625 ]
+[; ;UartParser.c: 191:                     rx_buffer[6] = activation_counter & 0xFF;
+[e = *U + &U _rx_buffer * -> -> -> 6 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> & _activation_counter -> -> -> 255 `i `l `ul `uc ]
+"192
+[; ;UartParser.c: 192:                     rx_buffer[7] = rx_buffer[0];
+[e = *U + &U _rx_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux *U + &U _rx_buffer * -> -> -> 0 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux ]
 "193
-[; ;UartParser.c: 193:                     st = INIT;
-[e = _st . `E4319 1 ]
+[; ;UartParser.c: 193:                     for( uint8_t idx=1 ; idx<7 ; idx++ )
+{
+[v _idx `uc ~T0 @X0 1 a ]
+[e = _idx -> -> 1 `i `uc ]
+[e $ < -> _idx `i -> 7 `i 626  ]
+[e $U 627  ]
 [e :U 626 ]
 "194
-[; ;UartParser.c: 194:             }
+[; ;UartParser.c: 194:                         rx_buffer[7] ^= rx_buffer[idx];
+[e =^ *U + &U _rx_buffer * -> -> -> 7 `i `ui `ux -> -> # *U &U _rx_buffer `ui `ux -> *U + &U _rx_buffer * -> _idx `ux -> -> # *U &U _rx_buffer `ui `ux `uc ]
+[e ++ _idx -> -> 1 `i `uc ]
+[e $ < -> _idx `i -> 7 `i 626  ]
+[e :U 627 ]
+}
+"195
+[; ;UartParser.c: 195:                     rx_idx = 8;
+[e = _rx_idx -> -> 8 `i `uc ]
+"196
+[; ;UartParser.c: 196:                     tx_idx = 0;
+[e = _tx_idx -> -> 0 `i `uc ]
+"197
+[; ;UartParser.c: 197:                     st = SEND_RESPONSE;
+[e = _st . `E4339 5 ]
+"198
+[; ;UartParser.c: 198:                 }
+}
+[e $U 629  ]
+"199
+[; ;UartParser.c: 199:                 else
+[e :U 625 ]
+"201
+[; ;UartParser.c: 201:                     st = INIT;
+[e = _st . `E4339 1 ]
+[e :U 629 ]
+"202
+[; ;UartParser.c: 202:             }
 }
 [e :U 624 ]
-"195
-[; ;UartParser.c: 195:         }
+"203
+[; ;UartParser.c: 203:         }
 }
 [e :U 619 ]
-"196
-[; ;UartParser.c: 196:         return;
+"204
+[; ;UartParser.c: 204:         return;
 [e $UE 600  ]
-"197
-[; ;UartParser.c: 197:     }
+"205
+[; ;UartParser.c: 205:     }
 }
 [e :U 614 ]
-"198
-[; ;UartParser.c: 198:     if( st == SEND_RESPONSE )
-[e $ ! == -> _st `ui -> . `E4319 5 `ui 627  ]
-"199
-[; ;UartParser.c: 199:     {
-{
-"200
-[; ;UartParser.c: 200:         if( TX1STAbits.TRMT == 0 )
-[e $ ! == -> . . _TX1STAbits 0 1 `i -> 0 `i 628  ]
-"201
-[; ;UartParser.c: 201:             return;
-[e $UE 600  ]
-[e :U 628 ]
-"202
-[; ;UartParser.c: 202:         if( tx_idx < rx_idx )
-[e $ ! < -> _tx_idx `i -> _rx_idx `i 629  ]
-"203
-[; ;UartParser.c: 203:             TX1REG = rx_buffer[tx_idx++];
-[e = _TX1REG *U + &U _rx_buffer * -> ++ _tx_idx -> -> 1 `i `uc `ux -> -> # *U &U _rx_buffer `ui `ux ]
-[e $U 630  ]
-"204
-[; ;UartParser.c: 204:         else
-[e :U 629 ]
-"205
-[; ;UartParser.c: 205:             st = INIT;
-[e = _st . `E4319 1 ]
-[e :U 630 ]
 "206
-[; ;UartParser.c: 206:         return;
-[e $UE 600  ]
+[; ;UartParser.c: 206:     if( st == SEND_RESPONSE )
+[e $ ! == -> _st `ui -> . `E4339 5 `ui 630  ]
 "207
-[; ;UartParser.c: 207:     }
-}
-[e :U 627 ]
+[; ;UartParser.c: 207:     {
+{
 "208
-[; ;UartParser.c: 208: }
+[; ;UartParser.c: 208:         if( TX1STAbits.TRMT == 0 )
+[e $ ! == -> . . _TX1STAbits 0 1 `i -> 0 `i 631  ]
+"209
+[; ;UartParser.c: 209:             return;
+[e $UE 600  ]
+[e :U 631 ]
+"210
+[; ;UartParser.c: 210:         if( tx_idx < rx_idx )
+[e $ ! < -> _tx_idx `i -> _rx_idx `i 632  ]
+"211
+[; ;UartParser.c: 211:             TX1REG = rx_buffer[tx_idx++];
+[e = _TX1REG *U + &U _rx_buffer * -> ++ _tx_idx -> -> 1 `i `uc `ux -> -> # *U &U _rx_buffer `ui `ux ]
+[e $U 633  ]
+"212
+[; ;UartParser.c: 212:         else
+[e :U 632 ]
+"213
+[; ;UartParser.c: 213:             st = INIT;
+[e = _st . `E4339 1 ]
+[e :U 633 ]
+"214
+[; ;UartParser.c: 214:         return;
+[e $UE 600  ]
+"215
+[; ;UartParser.c: 215:     }
+}
+[e :U 630 ]
+"216
+[; ;UartParser.c: 216: }
 [e :UE 600 ]
 }

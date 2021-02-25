@@ -30,15 +30,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "12 ./UartParser.h
 [; ;./UartParser.h: 12: void uart_start(void);
 [v _uart_start `(v ~T0 @X0 0 ef ]
-"23 ./SolidStateRelay.h
-[; ;./SolidStateRelay.h: 23: void start_relay_watchdog(void);
-[v _start_relay_watchdog `(v ~T0 @X0 0 ef ]
-"14 ./UartParser.h
+"14
 [; ;./UartParser.h: 14: void uart_task(void);
 [v _uart_task `(v ~T0 @X0 0 ef ]
 "32 ./SolidStateRelay.h
 [; ;./SolidStateRelay.h: 32: void relay_watchdog_task(void);
 [v _relay_watchdog_task `(v ~T0 @X0 0 ef ]
+"33
+[; ;./SolidStateRelay.h: 33: void relay_watchdog_record_activations_task(void);
+[v _relay_watchdog_record_activations_task `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -753,49 +753,49 @@ Version 4.0 HI-TECH Software Intermediate Code
 "57
 [; ;main.c: 57:     SYSTEM_Initialize();
 [e ( _SYSTEM_Initialize ..  ]
-"59
-[; ;main.c: 59:     ApplicationInit();
-[e ( _ApplicationInit ..  ]
-"62
-[; ;main.c: 62:     (INTCONbits.GIE = 1);
-[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-"64
-[; ;main.c: 64:     (INTCONbits.PEIE = 1);
-[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
-"66
-[; ;main.c: 66:     init_chopper();
-[e ( _init_chopper ..  ]
-"67
-[; ;main.c: 67:     init_relay_watchdog();
-[e ( _init_relay_watchdog ..  ]
-"69
-[; ;main.c: 69:     uart_start();
-[e ( _uart_start ..  ]
-"70
-[; ;main.c: 70:     start_relay_watchdog();
-[e ( _start_relay_watchdog ..  ]
-"71
-[; ;main.c: 71:     while (1)
-[e :U 596 ]
-"72
-[; ;main.c: 72:     {
-{
 "73
-[; ;main.c: 73:         uart_task();
-[e ( _uart_task ..  ]
-"74
-[; ;main.c: 74:         relay_watchdog_task();
-[e ( _relay_watchdog_task ..  ]
-"75
-[; ;main.c: 75:         __asm("clrwdt");
-[; <" clrwdt ;# ">
+[; ;main.c: 73:     ApplicationInit();
+[e ( _ApplicationInit ..  ]
 "76
-[; ;main.c: 76:     }
+[; ;main.c: 76:     (INTCONbits.GIE = 1);
+[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
+"78
+[; ;main.c: 78:     (INTCONbits.PEIE = 1);
+[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
+"80
+[; ;main.c: 80:     init_chopper();
+[e ( _init_chopper ..  ]
+"81
+[; ;main.c: 81:     init_relay_watchdog();
+[e ( _init_relay_watchdog ..  ]
+"83
+[; ;main.c: 83:     uart_start();
+[e ( _uart_start ..  ]
+"84
+[; ;main.c: 84:     while (1)
+[e :U 596 ]
+"85
+[; ;main.c: 85:     {
+{
+"86
+[; ;main.c: 86:         uart_task();
+[e ( _uart_task ..  ]
+"87
+[; ;main.c: 87:         relay_watchdog_task();
+[e ( _relay_watchdog_task ..  ]
+"88
+[; ;main.c: 88:         relay_watchdog_record_activations_task();
+[e ( _relay_watchdog_record_activations_task ..  ]
+"89
+[; ;main.c: 89:         __asm("clrwdt");
+[; <" clrwdt ;# ">
+"90
+[; ;main.c: 90:     }
 }
 [e :U 595 ]
 [e $U 596  ]
 [e :U 597 ]
-"77
-[; ;main.c: 77: }
+"91
+[; ;main.c: 91: }
 [e :UE 594 ]
 }

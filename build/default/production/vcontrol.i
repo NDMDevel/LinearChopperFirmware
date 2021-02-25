@@ -7387,9 +7387,11 @@ uint16_t get_relay_reset_voltage(void);
 uint16_t get_reset_duration(void);
 
 void relay_watchdog_task(void);
+void relay_watchdog_record_activations_task(void);
 
 void reset_activation_counter(void);
-uint32_t get_activation_counter(void);
+uint32_t get_relay_activation_counter(void);
+void set_relay_activation_counter(uint32_t act_count);
 
 
 static void close_relay(void);
@@ -7608,6 +7610,9 @@ void start_chopper()
 {
     if( chopper_active == 1 )
         return;
+
+    start_relay_watchdog();
+
     TRISAbits.TRISA5 = 0;
     TRISAbits.TRISA4 = 0;
     pwm_duty = 0;
@@ -7624,6 +7629,8 @@ void stop_chopper()
 {
     if( chopper_active == 0 )
         return;
+
+    stop_relay_watchdog();
 
     TRISAbits.TRISA5 = 1;
     TRISAbits.TRISA4 = 1;
@@ -7674,6 +7681,11 @@ void save_to_flash(void)
     buff[4] = duty_count_up_max;
     buff[5] = get_relay_reset_voltage();
     buff[6] = get_reset_duration();
+
+    uint32_t activation_counter = get_relay_activation_counter();
+    buff[7] = (activation_counter>>16) & 0xFFFF;
+    buff[8] = activation_counter & 0xFFFF;
+
     FLASH_WriteBlock(0x1F00,buff);
 }
 

@@ -30,9 +30,11 @@ uint16_t get_relay_reset_voltage(void);
 uint16_t get_reset_duration(void);
 
 void relay_watchdog_task(void);
+void relay_watchdog_record_activations_task(void);
 
 void reset_activation_counter(void);
-uint32_t get_activation_counter(void);
+uint32_t get_relay_activation_counter(void);
+void set_relay_activation_counter(uint32_t act_count);
 
 //private methods
 static void close_relay(void);

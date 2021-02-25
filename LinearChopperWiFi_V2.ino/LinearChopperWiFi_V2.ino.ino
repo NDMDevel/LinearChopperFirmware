@@ -47,6 +47,7 @@ String page_head = R"=====(
       <div style="background-color: #00AC13;">
         <span class="param_row">Relay reset voltage:<input id="mcu_relay_reset_voltage" type="text" readonly disabled></span>
         <span class="param_row">Reset duration:<input id="mcu_relay_duration" type="text" readonly disabled></span>
+        <span class="param_row">Relay activations:<input id="relay_counter" type="text" readonly disabled></span>
       </div>
       <span class="param_row">VDC:<input id="vdc" type="text" readonly disabled></span>
     </div>
@@ -54,109 +55,114 @@ String page_head = R"=====(
 
 String page_tail = R"=====(
   </body>
-  <script>
-  //insert the options inside the delay combo box (select html tag)
-  init_speed();
-  init_relay_reset_duration();
-  setInterval(function(){ ajax_req(); },1000);
-  var get_params_timer = setInterval(function(){ ajax_get_params(); },1500);
-  function ajax_req(req_id)
-  {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200)
-        document.getElementById("vdc").value = this.responseText;
-    };
-    xhttp.open("GET", "get_vdc", true);
-    xhttp.send();
-  }
-  function ajax_get_params()
-  {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        clearInterval(get_params_timer);
-        resp = this.responseText.split(",");
-        console.log(this.responseText);
-        document.getElementById("mcu_vmin").value = resp[0] + String(" V");
-        document.getElementById("mcu_vmax").value = resp[1] + String(" V");
-        document.getElementById("mcu_vcritic").value = resp[2] + String(" V");
-        if( resp[3] >= 1000 )
-          document.getElementById("mcu_speed").value = resp[3]/1000 + String(" s");
-        else
-          document.getElementById("mcu_speed").value = resp[3] + String(" ms");
-        document.getElementById("mcu_relay_reset_voltage").value = resp[4] + String(" V");
-        if( resp[5] >= 1000 )
-          document.getElementById("mcu_relay_duration").value = resp[5]/1000 + String(" s");
-        else
-          document.getElementById("mcu_relay_duration").value = resp[5] + String(" ms");
-        if( resp[6] == "active" )// resp[6] == "active"
-        {
-          resp = true;
-          document.getElementById("monitor_id").textContent = "Monitor: Chopper Enabled";
-        }
-        else
-        {
-          resp = false;
-          document.getElementById("monitor_id").textContent = "Monitor: Chopper Disabled";
-        }
-        document.getElementById("chopper_active").checked = resp;
-      }
-    };
-    xhttp.open("GET", "get_params", true);
-    xhttp.send();
-  }
-  function init_speed()
-  {
-    parent = document.getElementById("speed_select");
-    var ms = 100;
-    var integer = 100;
-    var decimal = 0;
-    var unit = " ms";
-    while( ms <= 10000 )
+<script>
+//insert the options inside the delay combo box (select html tag)
+init_speed();
+init_relay_reset_duration();
+setInterval(function(){ ajax_req(); },1000);
+var get_params_timer = setInterval(function(){ ajax_get_params(); },1500);
+function ajax_req(req_id)
+{
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200)
     {
-      opt = document.createElement("option");
-      opt.value = ms;
-      if( ms < 1000 )
+      var resp = this.responseText.split(",");
+      document.getElementById("vdc").value = resp[0];//this.responseText;
+      if( resp.length > 1 )
+        document.getElementById("relay_counter").value = resp[1];
+    }
+  };
+  xhttp.open("GET", "get_vdc", true);
+  xhttp.send();
+}
+function ajax_get_params()
+{
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      clearInterval(get_params_timer);
+      resp = this.responseText.split(",");
+      console.log(this.responseText);
+      document.getElementById("mcu_vmin").value = resp[0] + String(" V");
+      document.getElementById("mcu_vmax").value = resp[1] + String(" V");
+      document.getElementById("mcu_vcritic").value = resp[2] + String(" V");
+      if( resp[3] >= 1000 )
+        document.getElementById("mcu_speed").value = resp[3]/1000 + String(" s");
+      else
+        document.getElementById("mcu_speed").value = resp[3] + String(" ms");
+      document.getElementById("mcu_relay_reset_voltage").value = resp[4] + String(" V");
+      if( resp[5] >= 1000 )
+        document.getElementById("mcu_relay_duration").value = resp[5]/1000 + String(" s");
+      else
+        document.getElementById("mcu_relay_duration").value = resp[5] + String(" ms");
+      if( resp[6] == "active" )
       {
-        opt.textContent = integer + unit;
-        integer += 100;
+        resp = true;
+        document.getElementById("monitor_id").textContent = "Monitor: Chopper Enabled";
       }
       else
       {
-        if( integer > 10 )
-        {
-          integer = 1;
-          unit = " s";
-        }
-        if( decimal == 0 )
-          opt.textContent = integer + unit;
-        else
-          opt.textContent = integer + "." + decimal + unit;
-        decimal++;
-        if( decimal == 10 )
-        {
-          decimal = 0;
-          integer++;
-        }
+        resp = false;
+        document.getElementById("monitor_id").textContent = "Monitor: Chopper Disabled";
       }
-      parent.appendChild(opt);
-      ms += 100;
+      document.getElementById("chopper_active").checked = resp;
     }
-  }
-  function init_relay_reset_duration()
+  };
+  xhttp.open("GET", "get_params", true);
+  xhttp.send();
+}
+function init_speed()
+{
+  parent = document.getElementById("speed_select");
+  var ms = 100;
+  var integer = 100;
+  var decimal = 0;
+  var unit = " ms";
+  while( ms <= 10000 )
   {
-    parent = document.getElementById("relay_duration_select");
-    var duration = [ 1000 , 2000 , 5000 , 10000 ]; //time in ms
-    for( i=0 ; i<duration.length ; i++ )
+    opt = document.createElement("option");
+    opt.value = ms;
+    if( ms < 1000 )
     {
-      opt = document.createElement("option");
-      opt.value = duration[i];
-      opt.textContent = duration[i]/1000 + " s";
-      parent.appendChild(opt);
+      opt.textContent = integer + unit;
+      integer += 100;
     }
+    else
+    {
+      if( integer > 10 )
+      {
+        integer = 1;
+        unit = " s";
+      }
+      if( decimal == 0 )
+        opt.textContent = integer + unit;
+      else
+        opt.textContent = integer + "." + decimal + unit;
+      decimal++;
+      if( decimal == 10 )
+      {
+        decimal = 0;
+        integer++;
+      }
+    }
+    parent.appendChild(opt);
+    ms += 100;
   }
-  </script>
+}
+function init_relay_reset_duration()
+{
+  parent = document.getElementById("relay_duration_select");
+  var duration = [ 1000 , 2000 , 5000 , 10000 ]; //time in ms
+  for( i=0 ; i<duration.length ; i++ )
+  {
+    opt = document.createElement("option");
+    opt.value = duration[i];
+    opt.textContent = duration[i]/1000 + " s";
+    parent.appendChild(opt);
+  }
+}
+</script>
 <style>
   body{font-family: Verdana, Times, serif;}
   .param_row{

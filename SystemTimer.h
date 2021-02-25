@@ -11,10 +11,20 @@
 #include <stdint.h>
 
 extern uint8_t system_counter;
+extern uint8_t system_seconds;
+extern uint8_t system_minutes;
 
 //this timer increments system_counter with an interval of 100ms
 #define	TIMER_RESET(T)	T = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1))
 #define TIMER_ELAPSE(T,TE) 	((uint8_t)(system_counter + T) >= ((uint8_t)TE))
+
+//these macros must be used for counting seconds:
+#define	TIMER_RESET_SEC(T)	T = ((uint8_t)((uint8_t)~system_seconds)+((uint8_t)1))
+#define TIMER_ELAPSE_SEC(T,TE) 	((uint8_t)(system_seconds + T) >= ((uint8_t)TE))
+
+//these macros must be used for counting minutes:
+#define	TIMER_RESET_MIN(T)	T = ((uint8_t)((uint8_t)~system_minutes)+((uint8_t)1))
+#define TIMER_ELAPSE_MIN(T,TE) 	((uint8_t)(system_minutes + T) >= ((uint8_t)TE))
 
 #define t200ms 2
 #define t300ms 3

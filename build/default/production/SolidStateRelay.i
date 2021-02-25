@@ -129,9 +129,11 @@ uint16_t get_relay_reset_voltage(void);
 uint16_t get_reset_duration(void);
 
 void relay_watchdog_task(void);
+void relay_watchdog_record_activations_task(void);
 
 void reset_activation_counter(void);
-uint32_t get_activation_counter(void);
+uint32_t get_relay_activation_counter(void);
+void set_relay_activation_counter(uint32_t act_count);
 
 
 static void close_relay(void);
@@ -174,7 +176,9 @@ uint16_t get_vdc(void);
 # 1 "./SystemTimer.h" 1
 # 13 "./SystemTimer.h"
 extern uint8_t system_counter;
-# 29 "./SystemTimer.h"
+extern uint8_t system_seconds;
+extern uint8_t system_minutes;
+# 39 "./SystemTimer.h"
 void TMR1_SystemTimer_ISR(void);
 # 3 "SolidStateRelay.c" 2
 
@@ -7162,6 +7166,17 @@ void PIN_MANAGER_Initialize (void);
 void PIN_MANAGER_IOC(void);
 # 4 "SolidStateRelay.c" 2
 
+# 1 "./mcc_generated_files/memory.h" 1
+# 99 "./mcc_generated_files/memory.h"
+uint16_t FLASH_ReadWord(uint16_t flashAddr);
+# 128 "./mcc_generated_files/memory.h"
+void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word);
+# 164 "./mcc_generated_files/memory.h"
+int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
+# 189 "./mcc_generated_files/memory.h"
+void FLASH_EraseBlock(uint16_t startAddr);
+# 5 "SolidStateRelay.c" 2
+
 
 
 enum RelayWatchdog
@@ -7172,6 +7187,14 @@ enum RelayWatchdog
     WAIT_VOLTAGE_FALL,
     WAIT_RESET_DURATION
 };
+
+static enum RelayActivationStatus
+{
+    RA_SHUTDOWN,
+    RA_INIT,
+    RA_WAIT_INTERVAL
+
+}st_act = RA_SHUTDOWN;
 static enum RelayWatchdog st = SHUTDOWN;
 static uint16_t relay_reset_voltage;
 static uint16_t reset_duration;
@@ -7188,12 +7211,16 @@ void init_relay_watchdog()
 void start_relay_watchdog()
 {
     if( st == SHUTDOWN )
+    {
         st = INIT;
+        st_act = RA_INIT;
+    }
 }
 
 void stop_relay_watchdog()
 {
     st = SHUTDOWN;
+    st_act = RA_SHUTDOWN;
     close_relay();
 }
 
@@ -7241,11 +7268,15 @@ void reset_activation_counter(void)
     activation_counter = 0;
 }
 
-uint32_t get_activation_counter(void)
+uint32_t get_relay_activation_counter(void)
 {
     return activation_counter;
 }
 
+void set_relay_activation_counter(uint32_t act_count)
+{
+    activation_counter = act_count;
+}
 
 static void open_relay(void)
 {
@@ -7302,6 +7333,39 @@ void relay_watchdog_task()
         close_relay();
 
         st = WAIT_VOLTAGE_RISE;
+        return;
+    }
+}
+
+static uint8_t ra_local_timer;
+
+void relay_watchdog_record_activations_task(void)
+{
+    if( st_act == RA_SHUTDOWN )
+        return;
+    if( st_act == RA_INIT )
+    {
+
+        ra_local_timer = ((uint8_t)((uint8_t)~system_minutes)+((uint8_t)1));
+        st_act = RA_WAIT_INTERVAL;
+        return;
+    }
+    if( st_act == RA_WAIT_INTERVAL )
+    {
+
+        if( !((uint8_t)(system_minutes + ra_local_timer) >= ((uint8_t)60)) )
+            return;
+
+
+        ra_local_timer = ((uint8_t)((uint8_t)~system_minutes)+((uint8_t)1));
+
+
+
+
+
+        if( activation_counter == 0x3FFF3FFF )
+            activation_counter++;
+        save_to_flash();
         return;
     }
 }

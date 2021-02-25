@@ -170,14 +170,23 @@ void UartParser::operator()()
 
       server->send(200, "text/plane",ajax_resp);
     }
-    if( buffer[0] == com && buff_idx == 4 && com == GET_VDC )
-    {
+    if( buffer[0] == com && buff_idx == 8 && com == GET_VDC )
+    {                       //buff_idx == 4
       //ajax response:
       String ajax_resp;
       mcu_vdc = buffer[1];
       mcu_vdc = (mcu_vdc<<8) | buffer[2];
 
-      ajax_resp = mcu_vdc + String(" V");
+      uint32_t val = buffer[3];
+      mcu_relay_counter = (val<<24);
+      val = buffer[4];
+      mcu_relay_counter |= (val<<16);
+      val = buffer[5];
+      mcu_relay_counter |= (val<<8);
+      val = buffer[6];
+      mcu_relay_counter |= val;
+
+      ajax_resp = mcu_vdc + String(" V,") + mcu_relay_counter;
       server->send(200, "text/plane",ajax_resp);
     }
     /*if( buffer[0] == com && buff_idx == 6 && com == GET_RELAY_COUNTER )

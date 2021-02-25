@@ -48,7 +48,7 @@ class UartParser
     uint16_t mcu_relay_reset_voltage;
     uint16_t mcu_reset_duration;
     uint8_t  mcu_chopper_active;
-//    uint32_t mcu_relay_counter;
+    uint32_t mcu_relay_counter;
     ESP8266WebServer *server;
   public:
     void begin(ESP8266WebServer *server);
@@ -63,7 +63,6 @@ class UartParser
                    uint8_t chopper_active);
     void getParams();
     void getVdc();
-//    void getRelayCounter();
   protected:
     void resetTimer(uint32_t &local_timer);
     bool timerElapse(uint32_t local_timer,uint32_t ms);

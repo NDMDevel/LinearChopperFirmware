@@ -23,6 +23,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "24 ./vcontrol.h
 [; ;./vcontrol.h: 24: void start_chopper();
 [v _start_chopper `(v ~T0 @X0 0 e? ]
+"37 ./SolidStateRelay.h
+[; ;./SolidStateRelay.h: 37: void set_relay_activation_counter(uint32_t act_count);
+[v _set_relay_activation_counter `(v ~T0 @X0 0 ef1`ul ]
+"40 ./vcontrol.h
+[; ;./vcontrol.h: 40: void save_to_flash(void);
+[v _save_to_flash `(v ~T0 @X0 0 ef ]
 "13 GlobalSystem.c
 [; ;GlobalSystem.c: 13: void ApplicationInit(void)
 [v _ApplicationInit `(v ~T0 @X0 1 ef ]
@@ -95,8 +101,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;GlobalSystem.c: 35:     val = FLASH_ReadWord(0x1F00 +4);
 [e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 4 `i `us ]
 "36
-[; ;GlobalSystem.c: 36:     if( val <= 25500 )
-[e $ ! <= -> _val `ui -> -> 25500 `i `ui 8  ]
+[; ;GlobalSystem.c: 36:     if( val <= 10000 )
+[e $ ! <= -> _val `ui -> -> 10000 `i `ui 8  ]
 "37
 [; ;GlobalSystem.c: 37:         set_vdc_speed(val);
 [e ( _set_vdc_speed (1 _val ]
@@ -205,6 +211,48 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 18 ]
 "76
-[; ;GlobalSystem.c: 76: }
+[; ;GlobalSystem.c: 76:     val = FLASH_ReadWord(0x1F00 +7);
+[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 7 `i `us ]
+"77
+[; ;GlobalSystem.c: 77:     uint32_t act_counter = val;
+[v _act_counter `ul ~T0 @X0 1 a ]
+[e = _act_counter -> _val `ul ]
+"78
+[; ;GlobalSystem.c: 78:     act_counter <<= 16;
+[e =<< _act_counter -> -> 16 `i `ul ]
+"79
+[; ;GlobalSystem.c: 79:     val = FLASH_ReadWord(0x1F00 +8);
+[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 8 `i `us ]
+"80
+[; ;GlobalSystem.c: 80:     act_counter |= val;
+[e =| _act_counter -> _val `ul ]
+"81
+[; ;GlobalSystem.c: 81:     if( act_counter == 0x3FFF3FFF )
+[e $ ! == _act_counter -> -> 1073692671 `l `ul 19  ]
+"82
+[; ;GlobalSystem.c: 82:     {
+{
+"83
+[; ;GlobalSystem.c: 83:         act_counter = 0;
+[e = _act_counter -> -> -> 0 `i `l `ul ]
+"84
+[; ;GlobalSystem.c: 84:         set_relay_activation_counter(act_counter);
+[e ( _set_relay_activation_counter (1 _act_counter ]
+"85
+[; ;GlobalSystem.c: 85:         save_to_flash();
+[e ( _save_to_flash ..  ]
+"86
+[; ;GlobalSystem.c: 86:     }
+}
+[e $U 20  ]
+"87
+[; ;GlobalSystem.c: 87:     else
+[e :U 19 ]
+"88
+[; ;GlobalSystem.c: 88:         set_relay_activation_counter(act_counter);
+[e ( _set_relay_activation_counter (1 _act_counter ]
+[e :U 20 ]
+"89
+[; ;GlobalSystem.c: 89: }
 [e :UE 1 ]
 }

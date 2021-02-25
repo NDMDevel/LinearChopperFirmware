@@ -5,13 +5,8 @@
         <group>
             <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/main.c</file>
             <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/vcontrol.c</file>
-            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/mcc_generated_files/adc.c</file>
-            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/vcontrol.h</file>
-            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/UartParser.h</file>
-            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/mcc_generated_files/interrupt_manager.c</file>
-            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/SolidStateRelay.h</file>
+            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/GlobalSystem.c</file>
             <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/SolidStateRelay.c</file>
-            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/UartParser.c</file>
         </group>
     </open-files>
 </project-private>

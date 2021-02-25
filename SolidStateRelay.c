@@ -2,6 +2,7 @@
 #include "vcontrol.h"
 #include "SystemTimer.h"
 #include "mcc_generated_files/pin_manager.h"
+#include "mcc_generated_files/memory.h"
 
 //RELAY WATCHDOG
 enum RelayWatchdog
@@ -12,6 +13,14 @@ enum RelayWatchdog
     WAIT_VOLTAGE_FALL,
     WAIT_RESET_DURATION
 };
+
+static enum RelayActivationStatus
+{
+    RA_SHUTDOWN,
+    RA_INIT,
+    RA_WAIT_INTERVAL
+
+}st_act = RA_SHUTDOWN;
 static enum RelayWatchdog st = SHUTDOWN;
 static uint16_t relay_reset_voltage;
 static uint16_t reset_duration;
@@ -28,12 +37,16 @@ void init_relay_watchdog()
 void start_relay_watchdog()
 {
     if( st == SHUTDOWN )
+    {
         st = INIT;
+        st_act = RA_INIT;
+    }
 }
 
 void stop_relay_watchdog()
 {
     st = SHUTDOWN;
+    st_act = RA_SHUTDOWN;
     close_relay();
 }
 
@@ -81,11 +94,15 @@ void reset_activation_counter(void)
     activation_counter = 0;
 }
 
-uint32_t get_activation_counter(void)
+uint32_t get_relay_activation_counter(void)
 {
     return activation_counter;
 }
 
+void set_relay_activation_counter(uint32_t act_count)
+{
+    activation_counter = act_count;
+}
 
 static void open_relay(void)
 {
@@ -142,6 +159,39 @@ void relay_watchdog_task()
         close_relay();
         //now goes to wait again for the woltage to rise and repeat the process:
         st = WAIT_VOLTAGE_RISE;
+        return;
+    }
+}
+
+static uint8_t ra_local_timer;
+
+void relay_watchdog_record_activations_task(void)
+{
+    if( st_act == RA_SHUTDOWN )
+        return;
+    if( st_act == RA_INIT )
+    {
+        //resets the timer to wait for 1 hour
+        TIMER_RESET_MIN(ra_local_timer);
+        st_act = RA_WAIT_INTERVAL;
+        return;
+    }
+    if( st_act == RA_WAIT_INTERVAL )
+    {
+        //wait here for 1 Hour
+        if( !TIMER_ELAPSE_MIN(ra_local_timer,60) )
+            return;
+        
+        //the hour has passed, now store the activation counter to flash mem:
+        TIMER_RESET_MIN(ra_local_timer);
+        
+        //0x3FFF3FFF is the reset flash value of the MCU, to avoid confusing it
+        //with a non initialize activation_counter value, we increase activation_counter
+        //so the actual value store in flash is 0x3FFF4000 (this produce an error
+        //in the activation count of only one count...)
+        if( activation_counter == 0x3FFF3FFF )  
+            activation_counter++;
+        save_to_flash();
         return;
     }
 }

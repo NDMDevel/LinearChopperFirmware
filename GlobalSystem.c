@@ -33,7 +33,7 @@ void ApplicationInit(void)
         invalid_param = true;
 
     val = FLASH_ReadWord(FLASH_START_ADDRESS+4);
-    if( val <= 25500 )
+    if( val <= 10000 )
         set_vdc_speed(val);
     else
         invalid_param = true;
@@ -72,5 +72,18 @@ void ApplicationInit(void)
         set_vdc_speed(0);
         set_relay_reset_voltage(0);
         set_reset_duration(0);
-    } 
+    }
+    val = FLASH_ReadWord(FLASH_START_ADDRESS+7);
+    uint32_t act_counter = val;
+    act_counter <<= 16;
+    val = FLASH_ReadWord(FLASH_START_ADDRESS+8);
+    act_counter |= val;
+    if( act_counter == 0x3FFF3FFF )
+    {
+        act_counter = 0;
+        set_relay_activation_counter(act_counter);
+        save_to_flash();
+    }
+    else
+        set_relay_activation_counter(act_counter);
 }

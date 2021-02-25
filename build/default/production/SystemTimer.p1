@@ -1,19 +1,84 @@
 Version 4.0 HI-TECH Software Intermediate Code
 "3 SystemTimer.c
-[; ;SystemTimer.c: 3: uint8_t system_counter;
+[; ;SystemTimer.c: 3: uint8_t system_counter = 0;
 [v _system_counter `uc ~T0 @X0 1 e ]
+[i _system_counter
+-> -> 0 `i `uc
+]
+"4
+[; ;SystemTimer.c: 4: static uint8_t _100ms_counter = 0;
+[v __100ms_counter `uc ~T0 @X0 1 s ]
+[i __100ms_counter
+-> -> 0 `i `uc
+]
 "5
-[; ;SystemTimer.c: 5: void TMR1_SystemTimer_ISR(void)
-[v _TMR1_SystemTimer_ISR `(v ~T0 @X0 1 ef ]
+[; ;SystemTimer.c: 5: static uint8_t _1000ms_counter = 0;
+[v __1000ms_counter `uc ~T0 @X0 1 s ]
+[i __1000ms_counter
+-> -> 0 `i `uc
+]
 "6
-[; ;SystemTimer.c: 6: {
+[; ;SystemTimer.c: 6: uint8_t system_seconds = 0;
+[v _system_seconds `uc ~T0 @X0 1 e ]
+[i _system_seconds
+-> -> 0 `i `uc
+]
+"7
+[; ;SystemTimer.c: 7: uint8_t system_minutes = 0;
+[v _system_minutes `uc ~T0 @X0 1 e ]
+[i _system_minutes
+-> -> 0 `i `uc
+]
+"9
+[; ;SystemTimer.c: 9: void TMR1_SystemTimer_ISR(void)
+[v _TMR1_SystemTimer_ISR `(v ~T0 @X0 1 ef ]
+"10
+[; ;SystemTimer.c: 10: {
 {
 [e :U _TMR1_SystemTimer_ISR ]
 [f ]
-"7
-[; ;SystemTimer.c: 7:     system_counter++;
+"11
+[; ;SystemTimer.c: 11:     system_counter++;
 [e ++ _system_counter -> -> 1 `i `uc ]
-"8
-[; ;SystemTimer.c: 8: }
+"12
+[; ;SystemTimer.c: 12:     _100ms_counter++;
+[e ++ __100ms_counter -> -> 1 `i `uc ]
+"13
+[; ;SystemTimer.c: 13:     if( _100ms_counter == 10 )
+[e $ ! == -> __100ms_counter `i -> 10 `i 2  ]
+"14
+[; ;SystemTimer.c: 14:     {
+{
+"15
+[; ;SystemTimer.c: 15:         _100ms_counter = 0;
+[e = __100ms_counter -> -> 0 `i `uc ]
+"16
+[; ;SystemTimer.c: 16:         system_seconds++;
+[e ++ _system_seconds -> -> 1 `i `uc ]
+"18
+[; ;SystemTimer.c: 18:         _1000ms_counter++;
+[e ++ __1000ms_counter -> -> 1 `i `uc ]
+"19
+[; ;SystemTimer.c: 19:         if( _1000ms_counter == 60 )
+[e $ ! == -> __1000ms_counter `i -> 60 `i 3  ]
+"20
+[; ;SystemTimer.c: 20:         {
+{
+"21
+[; ;SystemTimer.c: 21:             _1000ms_counter = 0;
+[e = __1000ms_counter -> -> 0 `i `uc ]
+"22
+[; ;SystemTimer.c: 22:             system_minutes++;
+[e ++ _system_minutes -> -> 1 `i `uc ]
+"23
+[; ;SystemTimer.c: 23:         }
+}
+[e :U 3 ]
+"24
+[; ;SystemTimer.c: 24:     }
+}
+[e :U 2 ]
+"25
+[; ;SystemTimer.c: 25: }
 [e :UE 1 ]
 }

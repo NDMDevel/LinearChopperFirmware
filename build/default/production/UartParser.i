@@ -7336,7 +7336,9 @@ void WDT_Initialize(void);
 # 1 "./SystemTimer.h" 1
 # 13 "./SystemTimer.h"
 extern uint8_t system_counter;
-# 29 "./SystemTimer.h"
+extern uint8_t system_seconds;
+extern uint8_t system_minutes;
+# 39 "./SystemTimer.h"
 void TMR1_SystemTimer_ISR(void);
 # 3 "UartParser.c" 2
 
@@ -7372,6 +7374,30 @@ uint16_t get_relay_reset_voltage(void);
 uint16_t get_reset_duration(void);
 uint16_t get_vdc(void);
 # 4 "UartParser.c" 2
+
+# 1 "./SolidStateRelay.h" 1
+# 22 "./SolidStateRelay.h"
+void init_relay_watchdog(void);
+void start_relay_watchdog(void);
+void stop_relay_watchdog(void);
+_Bool is_relay_watchdog_active(void);
+
+void set_relay_reset_voltage(uint16_t relay_vthres);
+void set_reset_duration(uint16_t reset_dur_ms);
+uint16_t get_relay_reset_voltage(void);
+uint16_t get_reset_duration(void);
+
+void relay_watchdog_task(void);
+void relay_watchdog_record_activations_task(void);
+
+void reset_activation_counter(void);
+uint32_t get_relay_activation_counter(void);
+void set_relay_activation_counter(uint32_t act_count);
+
+
+static void close_relay(void);
+static void open_relay(void);
+# 5 "UartParser.c" 2
 
 
 
@@ -7554,8 +7580,15 @@ void uart_task(void)
                     val = get_vdc();
                     rx_buffer[1] = (val>>8) & 0xFF;
                     rx_buffer[2] = val & 0xFF;
-                    rx_buffer[3] = rx_buffer[0] ^ rx_buffer[1] ^ rx_buffer[2];
-                    rx_idx = 4;
+                    uint32_t activation_counter = get_relay_activation_counter();
+                    rx_buffer[3] = (activation_counter >> 24) & 0xFF;
+                    rx_buffer[4] = (activation_counter >> 16) & 0xFF;
+                    rx_buffer[5] = (activation_counter >> 8) & 0xFF;
+                    rx_buffer[6] = activation_counter & 0xFF;
+                    rx_buffer[7] = rx_buffer[0];
+                    for( uint8_t idx=1 ; idx<7 ; idx++ )
+                        rx_buffer[7] ^= rx_buffer[idx];
+                    rx_idx = 8;
                     tx_idx = 0;
                     st = SEND_RESPONSE;
                 }

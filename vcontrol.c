@@ -225,6 +225,9 @@ void start_chopper()
 {
     if( chopper_active == true )
         return;
+
+    start_relay_watchdog();
+    
     LED_G_TRIS = 0;
     LED_R_TRIS = 0;
     pwm_duty = 0;
@@ -242,6 +245,8 @@ void stop_chopper()
     if( chopper_active == false )
         return;
 
+    stop_relay_watchdog();
+    
     LED_G_TRIS = 1;
     LED_R_TRIS = 1;
     target_duty = 0;
@@ -291,6 +296,11 @@ void save_to_flash(void)
     buff[4] = duty_count_up_max;
     buff[5] = get_relay_reset_voltage();
     buff[6] = get_reset_duration();
+
+    uint32_t activation_counter = get_relay_activation_counter();
+    buff[7] = (activation_counter>>16) & 0xFFFF;
+    buff[8] = activation_counter & 0xFFFF;
+
     FLASH_WriteBlock(FLASH_START_ADDRESS,buff);
 }
 

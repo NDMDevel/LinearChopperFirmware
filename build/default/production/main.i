@@ -7370,7 +7370,9 @@ void uart_task(void);
 # 1 "./SystemTimer.h" 1
 # 13 "./SystemTimer.h"
 extern uint8_t system_counter;
-# 29 "./SystemTimer.h"
+extern uint8_t system_seconds;
+extern uint8_t system_minutes;
+# 39 "./SystemTimer.h"
 void TMR1_SystemTimer_ISR(void);
 # 47 "main.c" 2
 
@@ -7387,9 +7389,11 @@ uint16_t get_relay_reset_voltage(void);
 uint16_t get_reset_duration(void);
 
 void relay_watchdog_task(void);
+void relay_watchdog_record_activations_task(void);
 
 void reset_activation_counter(void);
-uint32_t get_activation_counter(void);
+uint32_t get_relay_activation_counter(void);
+void set_relay_activation_counter(uint32_t act_count);
 
 
 static void close_relay(void);
@@ -7414,7 +7418,7 @@ void main(void)
 {
 
     SYSTEM_Initialize();
-
+# 73 "main.c"
     ApplicationInit();
 
 
@@ -7426,11 +7430,11 @@ void main(void)
     init_relay_watchdog();
 
     uart_start();
-    start_relay_watchdog();
     while (1)
     {
         uart_task();
         relay_watchdog_task();
+        relay_watchdog_record_activations_task();
         __asm("clrwdt");
     }
 }
