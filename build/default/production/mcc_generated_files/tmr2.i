@@ -7128,7 +7128,7 @@ void TMR2_Initialize(void)
 
 
 
-    PR2 = 0xF9;
+    PR2 = 0x3E;
 
 
     TMR2 = 0x00;
@@ -7143,7 +7143,7 @@ void TMR2_Initialize(void)
     TMR2_SetInterruptHandler(TMR2_DefaultInterruptHandler);
 
 
-    T2CON = 0x06;
+    T2CON = 0x07;
 }
 
 void TMR2_StartTimer(void)

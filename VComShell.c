@@ -11,7 +11,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <xc.h>
-#include "GlobalParameters.h"
+#include "GlobalSystem.h"
 
 static uint8_t rx_buffer[RX_BUFFER_LENGTH];
 static uint8_t rx_idx;

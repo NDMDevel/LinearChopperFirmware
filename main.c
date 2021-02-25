@@ -45,6 +45,8 @@
 #include "vcontrol.h"
 #include "UartParser.h"
 #include "SystemTimer.h"
+#include "SolidStateRelay.h"
+#include "GlobalSystem.h"
 
 /*
                          Main application
@@ -54,49 +56,22 @@ void main(void)
     // initialize the device
     SYSTEM_Initialize();
 
-    // When using interrupts, you need to set the Global and Peripheral Interrupt Enable bits
-    // Use the following macros to:
-
-    {
-        uint16_t chopper_state;
-        chopper_state = FLASH_ReadWord(FLASH_START_ADDRESS);
-        if( chopper_state == CHOPPER_ENABLED || chopper_state == CHOPPER_DISABLED )
-        {
-            uint16_t val;
-            val = FLASH_ReadWord(FLASH_START_ADDRESS+1);
-            if( val <= 800 )
-                set_vdc_min(val);
-            val = FLASH_ReadWord(FLASH_START_ADDRESS+2);
-            if( val <= 800 )
-                set_vdc_max(val);
-            val = FLASH_ReadWord(FLASH_START_ADDRESS+3);
-            if( val <= 800 )
-                set_vdc_critic(val);
-            val = FLASH_ReadWord(FLASH_START_ADDRESS+4);
-            if( val <= 10000 )
-                set_vdc_speed(val);
-            if( chopper_state == CHOPPER_ENABLED )
-                start_chopper();
-        }
-    }
+    ApplicationInit();
     
     // Enable the Global Interrupts
     INTERRUPT_GlobalInterruptEnable();
-
     // Enable the Peripheral Interrupts
     INTERRUPT_PeripheralInterruptEnable();
 
-    // Disable the Global Interrupts
-    //INTERRUPT_GlobalInterruptDisable();
-
-    // Disable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptDisable();
-
     init_chopper();
+    init_relay_watchdog();
+    
     uart_start();
+    start_relay_watchdog();
     while (1)
     {
         uart_task();
+        relay_watchdog_task();
         CLRWDT();
     }
 }

@@ -3,24 +3,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "77 ./mcc_generated_files/mcc.h
 [; ;./mcc_generated_files/mcc.h: 77: void SYSTEM_Initialize(void);
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
-"99 ./mcc_generated_files/memory.h
-[; ;./mcc_generated_files/memory.h: 99: uint16_t FLASH_ReadWord(uint16_t flashAddr);
-[v _FLASH_ReadWord `(us ~T0 @X0 0 ef1`us ]
-"28 ./vcontrol.h
-[; ;./vcontrol.h: 28: void set_vdc_min(uint16_t vmin);
-[v _set_vdc_min `(v ~T0 @X0 0 ef1`us ]
-"29
-[; ;./vcontrol.h: 29: void set_vdc_max(uint16_t vmax);
-[v _set_vdc_max `(v ~T0 @X0 0 ef1`us ]
-"30
-[; ;./vcontrol.h: 30: void set_vdc_critic(uint16_t vc);
-[v _set_vdc_critic `(v ~T0 @X0 0 ef1`us ]
-"31
-[; ;./vcontrol.h: 31: void set_vdc_speed(uint16_t msDelay);
-[v _set_vdc_speed `(v ~T0 @X0 0 ef1`us ]
-"24
-[; ;./vcontrol.h: 24: void start_chopper();
-[v _start_chopper `(v ~T0 @X0 0 e? ]
+"7 ./GlobalSystem.h
+[; ;./GlobalSystem.h: 7: void ApplicationInit(void);
+[v _ApplicationInit `(v ~T0 @X0 0 ef ]
 "357 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 357:     struct {
 [s S31 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -39,12 +24,21 @@ Version 4.0 HI-TECH Software Intermediate Code
 "23 ./vcontrol.h
 [; ;./vcontrol.h: 23: void init_chopper();
 [v _init_chopper `(v ~T0 @X0 0 e? ]
+"22 ./SolidStateRelay.h
+[; ;./SolidStateRelay.h: 22: void init_relay_watchdog(void);
+[v _init_relay_watchdog `(v ~T0 @X0 0 ef ]
 "12 ./UartParser.h
 [; ;./UartParser.h: 12: void uart_start(void);
 [v _uart_start `(v ~T0 @X0 0 ef ]
-"14
+"23 ./SolidStateRelay.h
+[; ;./SolidStateRelay.h: 23: void start_relay_watchdog(void);
+[v _start_relay_watchdog `(v ~T0 @X0 0 ef ]
+"14 ./UartParser.h
 [; ;./UartParser.h: 14: void uart_task(void);
 [v _uart_task `(v ~T0 @X0 0 ef ]
+"32 ./SolidStateRelay.h
+[; ;./SolidStateRelay.h: 32: void relay_watchdog_task(void);
+[v _relay_watchdog_task `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -748,120 +742,60 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 11826: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
 [v $root$_main `(v ~T0 @X0 0 e ]
-"52 main.c
-[; ;main.c: 52: void main(void)
+"54 main.c
+[; ;main.c: 54: void main(void)
 [v _main `(v ~T0 @X0 1 ef ]
-"53
-[; ;main.c: 53: {
+"55
+[; ;main.c: 55: {
 {
 [e :U _main ]
 [f ]
-"55
-[; ;main.c: 55:     SYSTEM_Initialize();
+"57
+[; ;main.c: 57:     SYSTEM_Initialize();
 [e ( _SYSTEM_Initialize ..  ]
-"60
-[; ;main.c: 60:     {
-{
-"61
-[; ;main.c: 61:         uint16_t chopper_state;
-[v _chopper_state `us ~T0 @X0 1 a ]
+"59
+[; ;main.c: 59:     ApplicationInit();
+[e ( _ApplicationInit ..  ]
 "62
-[; ;main.c: 62:         chopper_state = FLASH_ReadWord(0x1F00);
-[e = _chopper_state ( _FLASH_ReadWord (1 -> -> 7936 `i `us ]
-"63
-[; ;main.c: 63:         if( chopper_state == 0x0ABC || chopper_state == 0x0CBA )
-[e $ ! || == -> _chopper_state `ui -> -> 2748 `i `ui == -> _chopper_state `ui -> -> 3258 `i `ui 595  ]
+[; ;main.c: 62:     (INTCONbits.GIE = 1);
+[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
 "64
-[; ;main.c: 64:         {
-{
-"65
-[; ;main.c: 65:             uint16_t val;
-[v _val `us ~T0 @X0 1 a ]
+[; ;main.c: 64:     (INTCONbits.PEIE = 1);
+[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
 "66
-[; ;main.c: 66:             val = FLASH_ReadWord(0x1F00 +1);
-[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 1 `i `us ]
+[; ;main.c: 66:     init_chopper();
+[e ( _init_chopper ..  ]
 "67
-[; ;main.c: 67:             if( val <= 800 )
-[e $ ! <= -> _val `ui -> -> 800 `i `ui 596  ]
-"68
-[; ;main.c: 68:                 set_vdc_min(val);
-[e ( _set_vdc_min (1 _val ]
-[e :U 596 ]
+[; ;main.c: 67:     init_relay_watchdog();
+[e ( _init_relay_watchdog ..  ]
 "69
-[; ;main.c: 69:             val = FLASH_ReadWord(0x1F00 +2);
-[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 2 `i `us ]
+[; ;main.c: 69:     uart_start();
+[e ( _uart_start ..  ]
 "70
-[; ;main.c: 70:             if( val <= 800 )
-[e $ ! <= -> _val `ui -> -> 800 `i `ui 597  ]
+[; ;main.c: 70:     start_relay_watchdog();
+[e ( _start_relay_watchdog ..  ]
 "71
-[; ;main.c: 71:                 set_vdc_max(val);
-[e ( _set_vdc_max (1 _val ]
-[e :U 597 ]
+[; ;main.c: 71:     while (1)
+[e :U 596 ]
 "72
-[; ;main.c: 72:             val = FLASH_ReadWord(0x1F00 +3);
-[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 3 `i `us ]
+[; ;main.c: 72:     {
+{
 "73
-[; ;main.c: 73:             if( val <= 800 )
-[e $ ! <= -> _val `ui -> -> 800 `i `ui 598  ]
+[; ;main.c: 73:         uart_task();
+[e ( _uart_task ..  ]
 "74
-[; ;main.c: 74:                 set_vdc_critic(val);
-[e ( _set_vdc_critic (1 _val ]
-[e :U 598 ]
+[; ;main.c: 74:         relay_watchdog_task();
+[e ( _relay_watchdog_task ..  ]
 "75
-[; ;main.c: 75:             val = FLASH_ReadWord(0x1F00 +4);
-[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 4 `i `us ]
+[; ;main.c: 75:         __asm("clrwdt");
+[; <" clrwdt ;# ">
 "76
-[; ;main.c: 76:             if( val <= 10000 )
-[e $ ! <= -> _val `ui -> -> 10000 `i `ui 599  ]
-"77
-[; ;main.c: 77:                 set_vdc_speed(val);
-[e ( _set_vdc_speed (1 _val ]
-[e :U 599 ]
-"78
-[; ;main.c: 78:             if( chopper_state == 0x0ABC )
-[e $ ! == -> _chopper_state `ui -> -> 2748 `i `ui 600  ]
-"79
-[; ;main.c: 79:                 start_chopper();
-[e ( _start_chopper ..  ]
-[e :U 600 ]
-"80
-[; ;main.c: 80:         }
+[; ;main.c: 76:     }
 }
 [e :U 595 ]
-"81
-[; ;main.c: 81:     }
-}
-"84
-[; ;main.c: 84:     (INTCONbits.GIE = 1);
-[e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-"87
-[; ;main.c: 87:     (INTCONbits.PEIE = 1);
-[e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
-"95
-[; ;main.c: 95:     init_chopper();
-[e ( _init_chopper ..  ]
-"96
-[; ;main.c: 96:     uart_start();
-[e ( _uart_start ..  ]
-"97
-[; ;main.c: 97:     while (1)
-[e :U 602 ]
-"98
-[; ;main.c: 98:     {
-{
-"99
-[; ;main.c: 99:         uart_task();
-[e ( _uart_task ..  ]
-"100
-[; ;main.c: 100:         __asm("clrwdt");
-[; <" clrwdt ;# ">
-"101
-[; ;main.c: 101:     }
-}
-[e :U 601 ]
-[e $U 602  ]
-[e :U 603 ]
-"102
-[; ;main.c: 102: }
+[e $U 596  ]
+[e :U 597 ]
+"77
+[; ;main.c: 77: }
 [e :UE 594 ]
 }

@@ -1,4 +1,4 @@
-# 1 "main.c"
+# 1 "SolidStateRelay.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,10 +6,180 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main.c" 2
-# 44 "main.c"
-# 1 "./mcc_generated_files/mcc.h" 1
-# 49 "./mcc_generated_files/mcc.h"
+# 1 "SolidStateRelay.c" 2
+# 1 "./SolidStateRelay.h" 1
+# 11 "./SolidStateRelay.h"
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 1 3
+
+
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\musl_xc8.h" 1 3
+# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 1 3
+# 135 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long uintptr_t;
+# 150 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long intptr_t;
+# 166 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef signed char int8_t;
+
+
+
+
+typedef short int16_t;
+
+
+
+
+typedef __int24 int24_t;
+
+
+
+
+typedef long int32_t;
+
+
+
+
+
+typedef long long int64_t;
+# 196 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef long long intmax_t;
+
+
+
+
+
+typedef unsigned char uint8_t;
+
+
+
+
+typedef unsigned short uint16_t;
+
+
+
+
+typedef __uint24 uint24_t;
+
+
+
+
+typedef unsigned long uint32_t;
+
+
+
+
+
+typedef unsigned long long uint64_t;
+# 237 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
+typedef unsigned long long uintmax_t;
+# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
+
+
+typedef int8_t int_fast8_t;
+
+typedef int64_t int_fast64_t;
+
+
+typedef int8_t int_least8_t;
+typedef int16_t int_least16_t;
+
+typedef int24_t int_least24_t;
+
+typedef int32_t int_least32_t;
+
+typedef int64_t int_least64_t;
+
+
+typedef uint8_t uint_fast8_t;
+
+typedef uint64_t uint_fast64_t;
+
+
+typedef uint8_t uint_least8_t;
+typedef uint16_t uint_least16_t;
+
+typedef uint24_t uint_least24_t;
+
+typedef uint32_t uint_least32_t;
+
+typedef uint64_t uint_least64_t;
+# 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/stdint.h" 1 3
+typedef int32_t int_fast16_t;
+typedef int32_t int_fast32_t;
+typedef uint32_t uint_fast16_t;
+typedef uint32_t uint_fast32_t;
+# 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
+# 11 "./SolidStateRelay.h" 2
+
+# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdbool.h" 1 3
+# 12 "./SolidStateRelay.h" 2
+# 22 "./SolidStateRelay.h"
+void init_relay_watchdog(void);
+void start_relay_watchdog(void);
+void stop_relay_watchdog(void);
+_Bool is_relay_watchdog_active(void);
+
+void set_relay_reset_voltage(uint16_t relay_vthres);
+void set_reset_duration(uint16_t reset_dur_ms);
+uint16_t get_relay_reset_voltage(void);
+uint16_t get_reset_duration(void);
+
+void relay_watchdog_task(void);
+
+void reset_activation_counter(void);
+uint32_t get_activation_counter(void);
+
+
+static void close_relay(void);
+static void open_relay(void);
+# 1 "SolidStateRelay.c" 2
+
+# 1 "./vcontrol.h" 1
+# 20 "./vcontrol.h"
+void ADC_VoltageControlHandler_ISR(void);
+void TMR2_DutyControlHandler_ISR(void);
+
+void init_chopper();
+void start_chopper();
+void stop_chopper();
+_Bool is_chopper_active();
+
+void init_relay_watchdog();
+void start_relay_watchdog();
+void stop_relay_watchdog();
+void relay_watchdog_task();
+_Bool is_relay_watchdog_active();
+
+void set_vdc_min(uint16_t vmin);
+void set_vdc_max(uint16_t vmax);
+void set_vdc_critic(uint16_t vc);
+void set_vdc_speed(uint16_t msDelay);
+void set_relay_reset_voltage(uint16_t relay_vthres);
+void set_reset_duration(uint16_t reset_dur_ms);
+void save_to_flash(void);
+
+uint16_t get_vdc_min(void);
+uint16_t get_vdc_max(void);
+uint16_t get_vdc_critic(void);
+uint16_t get_vdc_speed(void);
+uint16_t get_relay_reset_voltage(void);
+uint16_t get_reset_duration(void);
+uint16_t get_vdc(void);
+# 2 "SolidStateRelay.c" 2
+
+# 1 "./SystemTimer.h" 1
+# 13 "./SystemTimer.h"
+extern uint8_t system_counter;
+# 29 "./SystemTimer.h"
+void TMR1_SystemTimer_ISR(void);
+# 3 "SolidStateRelay.c" 2
+
+# 1 "./mcc_generated_files/pin_manager.h" 1
+# 54 "./mcc_generated_files/pin_manager.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -23,17 +193,7 @@ extern double __fpnormalize(double);
 
 
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 1 3
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\musl_xc8.h" 1 3
-# 4 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 2 3
-
-
-
-
-
-
+# 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 3
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\features.h" 1 3
 # 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 2 3
 # 21 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 3
@@ -42,10 +202,6 @@ extern double __fpnormalize(double);
 typedef long int wchar_t;
 # 127 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
 typedef unsigned size_t;
-# 176 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef __int24 int24_t;
-# 212 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef __uint24 uint24_t;
 # 21 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdlib.h" 2 3
 
 
@@ -6999,438 +7155,153 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 49 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/device_config.h" 1
-# 50 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/pin_manager.h" 1
+# 54 "./mcc_generated_files/pin_manager.h" 2
 # 203 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 # 215 "./mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_IOC(void);
-# 51 "./mcc_generated_files/mcc.h" 2
+# 4 "SolidStateRelay.c" 2
 
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 1 3
-# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 135 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long uintptr_t;
-# 150 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long intptr_t;
-# 166 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef signed char int8_t;
 
 
-
-
-typedef short int16_t;
-# 181 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long int32_t;
-
-
-
-
-
-typedef long long int64_t;
-# 196 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef long long intmax_t;
-
-
-
-
-
-typedef unsigned char uint8_t;
-
-
-
-
-typedef unsigned short uint16_t;
-# 217 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long uint32_t;
-
-
-
-
-
-typedef unsigned long long uint64_t;
-# 237 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef unsigned long long uintmax_t;
-# 22 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
-
-
-typedef int8_t int_fast8_t;
-
-typedef int64_t int_fast64_t;
-
-
-typedef int8_t int_least8_t;
-typedef int16_t int_least16_t;
-
-typedef int24_t int_least24_t;
-
-typedef int32_t int_least32_t;
-
-typedef int64_t int_least64_t;
-
-
-typedef uint8_t uint_fast8_t;
-
-typedef uint64_t uint_fast64_t;
-
-
-typedef uint8_t uint_least8_t;
-typedef uint16_t uint_least16_t;
-
-typedef uint24_t uint_least24_t;
-
-typedef uint32_t uint_least32_t;
-
-typedef uint64_t uint_least64_t;
-# 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 3
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\bits/stdint.h" 1 3
-typedef int32_t int_fast16_t;
-typedef int32_t int_fast32_t;
-typedef uint32_t uint_fast16_t;
-typedef uint32_t uint_fast32_t;
-# 155 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdint.h" 2 3
-# 52 "./mcc_generated_files/mcc.h" 2
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\stdbool.h" 1 3
-# 53 "./mcc_generated_files/mcc.h" 2
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\conio.h" 1 3
-
-
-
-
-
-
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\errno.h" 1 3
-# 10 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\errno.h" 3
-extern int errno;
-# 8 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\conio.h" 2 3
-
-# 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\__null.h" 1 3
-# 9 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\c99\\conio.h" 2 3
-
-
-
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-
-
-extern char * cgets(char *);
-extern void cputs(const char *);
-# 54 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/interrupt_manager.h" 1
-# 55 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/tmr4.h" 1
-# 103 "./mcc_generated_files/tmr4.h"
-void TMR4_Initialize(void);
-# 132 "./mcc_generated_files/tmr4.h"
-void TMR4_StartTimer(void);
-# 164 "./mcc_generated_files/tmr4.h"
-void TMR4_StopTimer(void);
-# 199 "./mcc_generated_files/tmr4.h"
-uint8_t TMR4_ReadTimer(void);
-# 238 "./mcc_generated_files/tmr4.h"
-void TMR4_WriteTimer(uint8_t timerVal);
-# 290 "./mcc_generated_files/tmr4.h"
-void TMR4_LoadPeriodRegister(uint8_t periodVal);
-# 325 "./mcc_generated_files/tmr4.h"
-_Bool TMR4_HasOverflowOccured(void);
-# 56 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/tmr1.h" 1
-# 101 "./mcc_generated_files/tmr1.h"
-void TMR1_Initialize(void);
-# 130 "./mcc_generated_files/tmr1.h"
-void TMR1_StartTimer(void);
-# 162 "./mcc_generated_files/tmr1.h"
-void TMR1_StopTimer(void);
-# 197 "./mcc_generated_files/tmr1.h"
-uint16_t TMR1_ReadTimer(void);
-# 236 "./mcc_generated_files/tmr1.h"
-void TMR1_WriteTimer(uint16_t timerVal);
-# 272 "./mcc_generated_files/tmr1.h"
-void TMR1_Reload(void);
-# 311 "./mcc_generated_files/tmr1.h"
-void TMR1_StartSinglePulseAcquisition(void);
-# 350 "./mcc_generated_files/tmr1.h"
-uint8_t TMR1_CheckGateValueStatus(void);
-# 368 "./mcc_generated_files/tmr1.h"
-void TMR1_ISR(void);
-# 385 "./mcc_generated_files/tmr1.h"
-void TMR1_CallBack(void);
-# 403 "./mcc_generated_files/tmr1.h"
- void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
-# 421 "./mcc_generated_files/tmr1.h"
-extern void (*TMR1_InterruptHandler)(void);
-# 439 "./mcc_generated_files/tmr1.h"
-void TMR1_DefaultInterruptHandler(void);
-# 57 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/tmr2.h" 1
-# 103 "./mcc_generated_files/tmr2.h"
-void TMR2_Initialize(void);
-# 132 "./mcc_generated_files/tmr2.h"
-void TMR2_StartTimer(void);
-# 164 "./mcc_generated_files/tmr2.h"
-void TMR2_StopTimer(void);
-# 199 "./mcc_generated_files/tmr2.h"
-uint8_t TMR2_ReadTimer(void);
-# 238 "./mcc_generated_files/tmr2.h"
-void TMR2_WriteTimer(uint8_t timerVal);
-# 290 "./mcc_generated_files/tmr2.h"
-void TMR2_LoadPeriodRegister(uint8_t periodVal);
-# 308 "./mcc_generated_files/tmr2.h"
-void TMR2_ISR(void);
-# 326 "./mcc_generated_files/tmr2.h"
- void TMR2_CallBack(void);
-# 343 "./mcc_generated_files/tmr2.h"
- void TMR2_SetInterruptHandler(void (* InterruptHandler)(void));
-# 361 "./mcc_generated_files/tmr2.h"
-extern void (*TMR2_InterruptHandler)(void);
-# 379 "./mcc_generated_files/tmr2.h"
-void TMR2_DefaultInterruptHandler(void);
-# 58 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/pwm3.h" 1
-# 102 "./mcc_generated_files/pwm3.h"
- void PWM3_Initialize(void);
-# 129 "./mcc_generated_files/pwm3.h"
- void PWM3_LoadDutyValue(uint16_t dutyValue);
-# 59 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/memory.h" 1
-# 99 "./mcc_generated_files/memory.h"
-uint16_t FLASH_ReadWord(uint16_t flashAddr);
-# 128 "./mcc_generated_files/memory.h"
-void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word);
-# 164 "./mcc_generated_files/memory.h"
-int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
-# 189 "./mcc_generated_files/memory.h"
-void FLASH_EraseBlock(uint16_t startAddr);
-# 60 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/adc.h" 1
-# 72 "./mcc_generated_files/adc.h"
-typedef uint16_t adc_result_t;
-
-
-
-
-typedef struct
+enum RelayWatchdog
 {
-    adc_result_t adcResult1;
-    adc_result_t adcResult2;
-} adc_sync_double_result_t;
-# 95 "./mcc_generated_files/adc.h"
-typedef enum
-{
-    V_BUSDC = 0x7,
-    channel_FVRBuffer2 = 0x1C,
-    channel_Temp = 0x1D,
-    channel_DAC = 0x1E,
-    channel_FVRBuffer1 = 0x1F
-} adc_channel_t;
-# 137 "./mcc_generated_files/adc.h"
-void ADC_Initialize(void);
-# 167 "./mcc_generated_files/adc.h"
-void ADC_SelectChannel(adc_channel_t channel);
-# 194 "./mcc_generated_files/adc.h"
-void ADC_StartConversion();
-# 226 "./mcc_generated_files/adc.h"
-_Bool ADC_IsConversionDone();
-# 259 "./mcc_generated_files/adc.h"
-adc_result_t ADC_GetConversionResult(void);
-# 289 "./mcc_generated_files/adc.h"
-adc_result_t ADC_GetConversion(adc_channel_t channel);
-# 317 "./mcc_generated_files/adc.h"
-void ADC_TemperatureAcquisitionDelay(void);
-# 333 "./mcc_generated_files/adc.h"
-void ADC_ISR(void);
-# 351 "./mcc_generated_files/adc.h"
- void ADC_SetInterruptHandler(void (* InterruptHandler)(void));
-# 369 "./mcc_generated_files/adc.h"
-extern void (*ADC_InterruptHandler)(void);
-# 387 "./mcc_generated_files/adc.h"
-void ADC_DefaultInterruptHandler(void);
-# 61 "./mcc_generated_files/mcc.h" 2
+    SHUTDOWN = 0,
+    INIT,
+    WAIT_VOLTAGE_RISE,
+    WAIT_VOLTAGE_FALL,
+    WAIT_RESET_DURATION
+};
+static enum RelayWatchdog st = SHUTDOWN;
+static uint16_t relay_reset_voltage;
+static uint16_t reset_duration;
+static uint16_t prev_vdc;
+static uint8_t local_timer;
+static uint16_t reset_duration_ms;
+static uint32_t activation_counter = 0;
 
-# 1 "./mcc_generated_files/eusart.h" 1
-# 75 "./mcc_generated_files/eusart.h"
-typedef union {
-    struct {
-        unsigned perr : 1;
-        unsigned ferr : 1;
-        unsigned oerr : 1;
-        unsigned reserved : 5;
-    };
-    uint8_t status;
-}eusart_status_t;
-
-
-
-
-extern volatile uint8_t eusartTxBufferRemaining;
-extern volatile uint8_t eusartRxCount;
-
-
-
-
-extern void (*EUSART_RxDefaultInterruptHandler)(void);
-# 116 "./mcc_generated_files/eusart.h"
-void EUSART_Initialize(void);
-# 164 "./mcc_generated_files/eusart.h"
-_Bool EUSART_is_tx_ready(void);
-# 212 "./mcc_generated_files/eusart.h"
-_Bool EUSART_is_rx_ready(void);
-# 259 "./mcc_generated_files/eusart.h"
-_Bool EUSART_is_tx_done(void);
-# 307 "./mcc_generated_files/eusart.h"
-eusart_status_t EUSART_get_last_status(void);
-# 327 "./mcc_generated_files/eusart.h"
-uint8_t EUSART_Read(void);
-# 347 "./mcc_generated_files/eusart.h"
-void EUSART_Write(uint8_t txData);
-# 369 "./mcc_generated_files/eusart.h"
-void EUSART_Receive_ISR(void);
-# 390 "./mcc_generated_files/eusart.h"
-void EUSART_RxDataHandler(void);
-# 408 "./mcc_generated_files/eusart.h"
-void EUSART_SetFramingErrorHandler(void (* interruptHandler)(void));
-# 426 "./mcc_generated_files/eusart.h"
-void EUSART_SetOverrunErrorHandler(void (* interruptHandler)(void));
-# 444 "./mcc_generated_files/eusart.h"
-void EUSART_SetErrorHandler(void (* interruptHandler)(void));
-# 465 "./mcc_generated_files/eusart.h"
-void EUSART_SetRxInterruptHandler(void (* interruptHandler)(void));
-# 62 "./mcc_generated_files/mcc.h" 2
-# 77 "./mcc_generated_files/mcc.h"
-void SYSTEM_Initialize(void);
-# 90 "./mcc_generated_files/mcc.h"
-void OSCILLATOR_Initialize(void);
-# 102 "./mcc_generated_files/mcc.h"
-void WDT_Initialize(void);
-# 44 "main.c" 2
-
-# 1 "./vcontrol.h" 1
-# 20 "./vcontrol.h"
-void ADC_VoltageControlHandler_ISR(void);
-void TMR2_DutyControlHandler_ISR(void);
-
-void init_chopper();
-void start_chopper();
-void stop_chopper();
-_Bool is_chopper_active();
-
-void init_relay_watchdog();
-void start_relay_watchdog();
-void stop_relay_watchdog();
-void relay_watchdog_task();
-_Bool is_relay_watchdog_active();
-
-void set_vdc_min(uint16_t vmin);
-void set_vdc_max(uint16_t vmax);
-void set_vdc_critic(uint16_t vc);
-void set_vdc_speed(uint16_t msDelay);
-void set_relay_reset_voltage(uint16_t relay_vthres);
-void set_reset_duration(uint16_t reset_dur_ms);
-void save_to_flash(void);
-
-uint16_t get_vdc_min(void);
-uint16_t get_vdc_max(void);
-uint16_t get_vdc_critic(void);
-uint16_t get_vdc_speed(void);
-uint16_t get_relay_reset_voltage(void);
-uint16_t get_reset_duration(void);
-uint16_t get_vdc(void);
-# 45 "main.c" 2
-
-# 1 "./UartParser.h" 1
-# 11 "./UartParser.h"
-void EUSART_CommandHandler_ISR(void);
-void uart_start(void);
-void uart_stop(void);
-void uart_task(void);
-# 46 "main.c" 2
-
-# 1 "./SystemTimer.h" 1
-# 13 "./SystemTimer.h"
-extern uint8_t system_counter;
-# 29 "./SystemTimer.h"
-void TMR1_SystemTimer_ISR(void);
-# 47 "main.c" 2
-
-# 1 "./SolidStateRelay.h" 1
-# 22 "./SolidStateRelay.h"
-void init_relay_watchdog(void);
-void start_relay_watchdog(void);
-void stop_relay_watchdog(void);
-_Bool is_relay_watchdog_active(void);
-
-void set_relay_reset_voltage(uint16_t relay_vthres);
-void set_reset_duration(uint16_t reset_dur_ms);
-uint16_t get_relay_reset_voltage(void);
-uint16_t get_reset_duration(void);
-
-void relay_watchdog_task(void);
-
-void reset_activation_counter(void);
-uint32_t get_activation_counter(void);
-
-
-static void close_relay(void);
-static void open_relay(void);
-# 48 "main.c" 2
-
-# 1 "./GlobalSystem.h" 1
-
-
-
-
-
-
-void ApplicationInit(void);
-# 49 "main.c" 2
-
-
-
-
-
-void main(void)
+void init_relay_watchdog()
 {
 
-    SYSTEM_Initialize();
+}
 
-    ApplicationInit();
+void start_relay_watchdog()
+{
+    if( st == SHUTDOWN )
+        st = INIT;
+}
+
+void stop_relay_watchdog()
+{
+    st = SHUTDOWN;
+    close_relay();
+}
+
+_Bool is_relay_watchdog_active()
+{
+    return st != SHUTDOWN;
+}
+
+void set_relay_reset_voltage(uint16_t relay_vthres)
+{
+    if( relay_vthres == 0xFFFF )
+        return;
+    if( relay_vthres > 800 )
+        relay_reset_voltage = 800;
+    else
+        relay_reset_voltage = relay_vthres;
+}
+
+void set_reset_duration(uint16_t reset_dur_ms)
+{
+    if( reset_dur_ms == 0xFFFF )
+        return;
+    if( reset_dur_ms > 25500 )
+        reset_duration = 25500;
+    else
+        reset_duration = reset_dur_ms;
 
 
-    (INTCONbits.GIE = 1);
 
-    (INTCONbits.PEIE = 1);
+    reset_duration_ms = reset_duration/100;
+}
 
-    init_chopper();
-    init_relay_watchdog();
+uint16_t get_relay_reset_voltage(void)
+{
+    return relay_reset_voltage;
+}
 
-    uart_start();
-    start_relay_watchdog();
-    while (1)
+uint16_t get_reset_duration(void)
+{
+    return reset_duration;
+}
+
+void reset_activation_counter(void)
+{
+    activation_counter = 0;
+}
+
+uint32_t get_activation_counter(void)
+{
+    return activation_counter;
+}
+
+
+static void open_relay(void)
+{
+    do { LATCbits.LATC5 = 1; } while(0);
+}
+
+static void close_relay(void)
+{
+    do { LATCbits.LATC5 = 0; } while(0);
+}
+
+void relay_watchdog_task()
+{
+    if( st == SHUTDOWN )
+        return;
+    if( st == INIT )
     {
-        uart_task();
-        relay_watchdog_task();
-        __asm("clrwdt");
+
+        close_relay();
+        st = WAIT_VOLTAGE_RISE;
+        return;
+    }
+    if( st == WAIT_VOLTAGE_RISE )
+    {
+
+        if( get_vdc() <= relay_reset_voltage )
+            return;
+
+
+
+        st = WAIT_VOLTAGE_FALL;
+        return;
+    }
+    if( st == WAIT_VOLTAGE_FALL )
+    {
+
+        if( get_vdc() >= relay_reset_voltage )
+            return;
+
+
+        open_relay();
+        activation_counter++;
+        local_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
+        st = WAIT_RESET_DURATION;
+        return;
+    }
+    if( st == WAIT_RESET_DURATION )
+    {
+
+        if( !((uint8_t)(system_counter + local_timer) >= ((uint8_t)reset_duration_ms)) )
+            return;
+
+
+        close_relay();
+
+        st = WAIT_VOLTAGE_RISE;
+        return;
     }
 }

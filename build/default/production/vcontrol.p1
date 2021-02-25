@@ -1,18 +1,18 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"186 vcontrol.c
-[; ;vcontrol.c: 186: }st = SHUTDOWN;
-[c E4316 0 1 .. ]
-[n E4316 . SHUTDOWN ACTIVE  ]
-"208
-[; ;vcontrol.c: 208:     ADC_SelectChannel(V_BUSDC);
-[c E4230 7 28 29 30 31 .. ]
-[n E4230 . V_BUSDC channel_FVRBuffer2 channel_Temp channel_DAC channel_FVRBuffer1  ]
+"193 vcontrol.c
+[; ;vcontrol.c: 193: }st = SHUTDOWN;
+[c E4342 0 1 .. ]
+[n E4342 . SHUTDOWN ACTIVE  ]
+"215
+[; ;vcontrol.c: 215:     ADC_SelectChannel(V_BUSDC);
+[c E4241 7 28 29 30 31 .. ]
+[n E4241 . V_BUSDC channel_FVRBuffer2 channel_Temp channel_DAC channel_FVRBuffer1  ]
 "167 ./mcc_generated_files/adc.h
 [; ;./mcc_generated_files/adc.h: 167: void ADC_SelectChannel(adc_channel_t channel);
-[v _ADC_SelectChannel `(v ~T0 @X0 0 ef1`E4230 ]
-[v F4141 `(v ~T0 @X0 1 tf1`ul ]
+[v _ADC_SelectChannel `(v ~T0 @X0 0 ef1`E4241 ]
+[v F4152 `(v ~T0 @X0 1 tf1`ul ]
 "92 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic.h
-[v __delay `JF4141 ~T0 @X0 0 e ]
+[v __delay `JF4152 ~T0 @X0 0 e ]
 [p i __delay ]
 "194 ./mcc_generated_files/adc.h
 [; ;./mcc_generated_files/adc.h: 194: void ADC_StartConversion();
@@ -20,17 +20,17 @@ Version 4.0 HI-TECH Software Intermediate Code
 "132 ./mcc_generated_files/tmr2.h
 [; ;./mcc_generated_files/tmr2.h: 132: void TMR2_StartTimer(void);
 [v _TMR2_StartTimer `(v ~T0 @X0 0 ef ]
-[v F4205 `(v ~T0 @X0 0 tf ]
+[v F4216 `(v ~T0 @X0 0 tf ]
 "343
 [; ;./mcc_generated_files/tmr2.h: 343:  void TMR2_SetInterruptHandler(void (* InterruptHandler)(void));
-[v _TMR2_SetInterruptHandler `(v ~T0 @X0 0 ef1`*F4205 ]
+[v _TMR2_SetInterruptHandler `(v ~T0 @X0 0 ef1`*F4216 ]
 "21 ./vcontrol.h
 [; ;./vcontrol.h: 21: void TMR2_DutyControlHandler_ISR(void);
 [v _TMR2_DutyControlHandler_ISR `(v ~T0 @X0 0 ef ]
-[v F4248 `(v ~T0 @X0 0 tf ]
+[v F4259 `(v ~T0 @X0 0 tf ]
 "351 ./mcc_generated_files/adc.h
 [; ;./mcc_generated_files/adc.h: 351:  void ADC_SetInterruptHandler(void (* InterruptHandler)(void));
-[v _ADC_SetInterruptHandler `(v ~T0 @X0 0 ef1`*F4248 ]
+[v _ADC_SetInterruptHandler `(v ~T0 @X0 0 ef1`*F4259 ]
 "20 ./vcontrol.h
 [; ;./vcontrol.h: 20: void ADC_VoltageControlHandler_ISR(void);
 [v _ADC_VoltageControlHandler_ISR `(v ~T0 @X0 0 ef ]
@@ -45,15 +45,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1037
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 1037: extern volatile TRISAbits_t TRISAbits __attribute__((address(0x08C)));
 [v _TRISAbits `VS63 ~T0 @X0 0 e@140 ]
+"29 ./SolidStateRelay.h
+[; ;./SolidStateRelay.h: 29: uint16_t get_relay_reset_voltage(void);
+[v _get_relay_reset_voltage `(us ~T0 @X0 0 ef ]
+"30
+[; ;./SolidStateRelay.h: 30: uint16_t get_reset_duration(void);
+[v _get_reset_duration `(us ~T0 @X0 0 ef ]
 "164 ./mcc_generated_files/memory.h
 [; ;./mcc_generated_files/memory.h: 164: int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
 [v _FLASH_WriteBlock `(c ~T0 @X0 0 ef2`us`*us ]
 "259 ./mcc_generated_files/adc.h
 [; ;./mcc_generated_files/adc.h: 259: adc_result_t ADC_GetConversionResult(void);
 [v _ADC_GetConversionResult `(us ~T0 @X0 0 ef ]
-"129 ./mcc_generated_files/pwm3.h
-[; ;./mcc_generated_files/pwm3.h: 129:  void PWM3_LoadDutyValue(uint16_t dutyValue);
-[v _PWM3_LoadDutyValue `(v ~T0 @X0 0 ef1`us ]
 "1915 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 1915:     struct {
 [s S105 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -65,17 +68,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1924
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 1924: extern volatile LATAbits_t LATAbits __attribute__((address(0x10C)));
 [v _LATAbits `VS104 ~T0 @X0 0 e@268 ]
-"1960
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 1960:     struct {
-[s S107 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S107 . LATC0 LATC1 LATC2 LATC3 LATC4 LATC5 ]
-"1959
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 1959: typedef union {
-[u S106 `S107 1 ]
-[n S106 . . ]
-"1969
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 1969: extern volatile LATCbits_t LATCbits __attribute__((address(0x10E)));
-[v _LATCbits `VS106 ~T0 @X0 0 e@270 ]
+"129 ./mcc_generated_files/pwm3.h
+[; ;./mcc_generated_files/pwm3.h: 129:  void PWM3_LoadDutyValue(uint16_t dutyValue);
+[v _PWM3_LoadDutyValue `(v ~T0 @X0 0 ef1`us ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -778,89 +773,89 @@ Version 4.0 HI-TECH Software Intermediate Code
 "11826
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 11826: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
-"9 vcontrol.c
-[; ;vcontrol.c: 9: static uint16_t vdc_min;
+"16 vcontrol.c
+[; ;vcontrol.c: 16: static uint16_t vdc_min;
 [v _vdc_min `us ~T0 @X0 1 s ]
-"10
-[; ;vcontrol.c: 10: static uint16_t vdc_max;
-[v _vdc_max `us ~T0 @X0 1 s ]
-"11
-[; ;vcontrol.c: 11: static uint16_t vdc_critic;
-[v _vdc_critic `us ~T0 @X0 1 s ]
-"13
-[; ;vcontrol.c: 13: static uint16_t diff_vdc;
-[v _diff_vdc `us ~T0 @X0 1 s ]
-"14
-[; ;vcontrol.c: 14: static uint16_t vdc_prev;
-[v _vdc_prev `us ~T0 @X0 1 s ]
-"15
-[; ;vcontrol.c: 15: static uint16_t vdc;
-[v _vdc `us ~T0 @X0 1 s ]
-"16
-[; ;vcontrol.c: 16: static uint16_t pwm_duty;
-[v _pwm_duty `us ~T0 @X0 1 s ]
 "17
-[; ;vcontrol.c: 17: static uint16_t delta_duty;
-[v _delta_duty `us ~T0 @X0 1 s ]
+[; ;vcontrol.c: 17: static uint16_t vdc_max;
+[v _vdc_max `us ~T0 @X0 1 s ]
 "18
-[; ;vcontrol.c: 18: static _Bool diff_positive;
+[; ;vcontrol.c: 18: static uint16_t vdc_critic;
+[v _vdc_critic `us ~T0 @X0 1 s ]
+"20
+[; ;vcontrol.c: 20: static uint16_t diff_vdc;
+[v _diff_vdc `us ~T0 @X0 1 s ]
+"21
+[; ;vcontrol.c: 21: static uint16_t vdc_prev;
+[v _vdc_prev `us ~T0 @X0 1 s ]
+"22
+[; ;vcontrol.c: 22: static uint16_t vdc;
+[v _vdc `us ~T0 @X0 1 s ]
+"23
+[; ;vcontrol.c: 23: static uint16_t pwm_duty;
+[v _pwm_duty `us ~T0 @X0 1 s ]
+"24
+[; ;vcontrol.c: 24: static uint16_t delta_duty;
+[v _delta_duty `us ~T0 @X0 1 s ]
+"25
+[; ;vcontrol.c: 25: static _Bool diff_positive;
 [v _diff_positive `a ~T0 @X0 1 s ]
-"19
-[; ;vcontrol.c: 19: static uint16_t target_duty = 0;
+"26
+[; ;vcontrol.c: 26: static uint16_t target_duty = 0;
 [v _target_duty `us ~T0 @X0 1 s ]
 [i _target_duty
 -> -> 0 `i `us
 ]
-"20
-[; ;vcontrol.c: 20: static uint16_t current_duty = 0;
+"27
+[; ;vcontrol.c: 27: static uint16_t current_duty = 0;
 [v _current_duty `us ~T0 @X0 1 s ]
 [i _current_duty
 -> -> 0 `i `us
 ]
-"22
-[; ;vcontrol.c: 22: static uint16_t duty_pwm_inc = 4;
-[v _duty_pwm_inc `us ~T0 @X0 1 s ]
+"29
+[; ;vcontrol.c: 29: static const uint16_t duty_pwm_inc = 8;
+[v _duty_pwm_inc `Cus ~T0 @X0 1 s ]
 [i _duty_pwm_inc
--> -> 4 `i `us
+-> -> 8 `i `us
 ]
-"23
-[; ;vcontrol.c: 23: static uint16_t duty_count_up;
+"30
+[; ;vcontrol.c: 30: static uint16_t duty_count_up;
 [v _duty_count_up `us ~T0 @X0 1 s ]
-"24
-[; ;vcontrol.c: 24: static uint16_t duty_count_up_max = 5;
+"31
+[; ;vcontrol.c: 31: static uint16_t duty_count_up_max = 5;
 [v _duty_count_up_max `us ~T0 @X0 1 s ]
 [i _duty_count_up_max
 -> -> 5 `i `us
 ]
-"25
-[; ;vcontrol.c: 25: static uint16_t duty_pwm_dec = 5;
+"32
+[; ;vcontrol.c: 32: static uint16_t duty_pwm_dec = 4;
 [v _duty_pwm_dec `us ~T0 @X0 1 s ]
 [i _duty_pwm_dec
--> -> 5 `i `us
+-> -> 4 `i `us
 ]
-"26
-[; ;vcontrol.c: 26: static uint16_t duty_count_down;
+"33
+[; ;vcontrol.c: 33: static uint16_t duty_count_down;
 [v _duty_count_down `us ~T0 @X0 1 s ]
-"27
-[; ;vcontrol.c: 27: static uint16_t duty_count_down_max = 100;
+"34
+[; ;vcontrol.c: 34: static uint16_t duty_count_down_max = 10;
 [v _duty_count_down_max `us ~T0 @X0 1 s ]
 [i _duty_count_down_max
--> -> 100 `i `us
+-> -> 10 `i `us
 ]
-"28
-[; ;vcontrol.c: 28: static _Bool chopper_active = 0;
+"35
+[; ;vcontrol.c: 35: static _Bool chopper_active = 0;
 [v _chopper_active `a ~T0 @X0 1 s ]
 [i _chopper_active
 -> -> 0 `i `a
 ]
-"29
-[; ;vcontrol.c: 29: static _Bool init_required = 1;
+"36
+[; ;vcontrol.c: 36: static _Bool init_required = 1;
 [v _init_required `a ~T0 @X0 1 s ]
 [i _init_required
 -> -> 1 `i `a
 ]
-"31
-[; ;vcontrol.c: 31: static const int16_t v_table[1024] = {
+"38
+[; ;vcontrol.c: 38: static const int16_t v_table[1024] = {
 [v _v_table `Cs ~T0 @X0 -> 1024 `i s ]
 [i _v_table
 :U ..
@@ -1890,803 +1885,808 @@ Version 4.0 HI-TECH Software Intermediate Code
 -> -> 840 `i `s
 ..
 ]
-"186
-[; ;vcontrol.c: 186: }st = SHUTDOWN;
-[v _st `E4316 ~T0 @X0 1 s ]
+"193
+[; ;vcontrol.c: 193: }st = SHUTDOWN;
+[v _st `E4342 ~T0 @X0 1 s ]
 [i _st
-. `E4316 0
+. `E4342 0
 ]
-"188
-[; ;vcontrol.c: 188: static void set_vdc_threshold(uint16_t v_val,uint16_t *v_target)
+"195
+[; ;vcontrol.c: 195: static void set_vdc_threshold(uint16_t v_val,uint16_t *v_target)
 [v _set_vdc_threshold `(v ~T0 @X0 1 sf2`us`*us ]
-"189
-[; ;vcontrol.c: 189: {
+"196
+[; ;vcontrol.c: 196: {
 {
 [e :U _set_vdc_threshold ]
-"188
-[; ;vcontrol.c: 188: static void set_vdc_threshold(uint16_t v_val,uint16_t *v_target)
+"195
+[; ;vcontrol.c: 195: static void set_vdc_threshold(uint16_t v_val,uint16_t *v_target)
 [v _v_val `us ~T0 @X0 1 r1 ]
 [v _v_target `*us ~T0 @X0 1 r2 ]
-"189
-[; ;vcontrol.c: 189: {
+"196
+[; ;vcontrol.c: 196: {
 [f ]
-"190
-[; ;vcontrol.c: 190:     if( v_val == 0xFFFF )
+"197
+[; ;vcontrol.c: 197:     if( v_val == 0xFFFF )
 [e $ ! == -> _v_val `ui -> 65535 `ui 595  ]
-"191
-[; ;vcontrol.c: 191:         return;
+"198
+[; ;vcontrol.c: 198:         return;
 [e $UE 594  ]
 [e :U 595 ]
-"192
-[; ;vcontrol.c: 192:     if( v_val >= 800 )
+"199
+[; ;vcontrol.c: 199:     if( v_val >= 800 )
 [e $ ! >= -> _v_val `ui -> -> 800 `i `ui 596  ]
-"193
-[; ;vcontrol.c: 193:         *v_target = 800;
+"200
+[; ;vcontrol.c: 200:         *v_target = 800;
 [e = *U _v_target -> -> 800 `i `us ]
 [e $U 597  ]
-"194
-[; ;vcontrol.c: 194:     else
+"201
+[; ;vcontrol.c: 201:     else
 [e :U 596 ]
-"195
-[; ;vcontrol.c: 195:         *v_target = v_val;
+"202
+[; ;vcontrol.c: 202:         *v_target = v_val;
 [e = *U _v_target _v_val ]
 [e :U 597 ]
-"196
-[; ;vcontrol.c: 196: }
+"203
+[; ;vcontrol.c: 203: }
 [e :UE 594 ]
 }
-"198
-[; ;vcontrol.c: 198: static void LoadDutyValue(uint16_t duty)
+"205
+[; ;vcontrol.c: 205: static void LoadDutyValue(uint16_t duty)
 [v _LoadDutyValue `(v ~T0 @X0 1 sf1`us ]
-"199
-[; ;vcontrol.c: 199: {
+"206
+[; ;vcontrol.c: 206: {
 {
 [e :U _LoadDutyValue ]
-"198
-[; ;vcontrol.c: 198: static void LoadDutyValue(uint16_t duty)
+"205
+[; ;vcontrol.c: 205: static void LoadDutyValue(uint16_t duty)
 [v _duty `us ~T0 @X0 1 r1 ]
-"199
-[; ;vcontrol.c: 199: {
+"206
+[; ;vcontrol.c: 206: {
 [f ]
-"200
-[; ;vcontrol.c: 200:     target_duty = duty;
+"207
+[; ;vcontrol.c: 207:     target_duty = duty;
 [e = _target_duty _duty ]
-"201
-[; ;vcontrol.c: 201: }
+"208
+[; ;vcontrol.c: 208: }
 [e :UE 598 ]
 }
-"203
-[; ;vcontrol.c: 203: void init_chopper()
+"210
+[; ;vcontrol.c: 210: void init_chopper()
 [v _init_chopper `(v ~T0 @X0 1 ef ]
-"204
-[; ;vcontrol.c: 204: {
+"211
+[; ;vcontrol.c: 211: {
 {
 [e :U _init_chopper ]
 [f ]
-"205
-[; ;vcontrol.c: 205:     if( init_required == 0 )
+"212
+[; ;vcontrol.c: 212:     if( init_required == 0 )
 [e $ ! == -> _init_required `i -> 0 `i 600  ]
-"206
-[; ;vcontrol.c: 206:         return;
+"213
+[; ;vcontrol.c: 213:         return;
 [e $UE 599  ]
 [e :U 600 ]
-"207
-[; ;vcontrol.c: 207:     init_required = 0;
-[e = _init_required -> -> 0 `i `a ]
-"208
-[; ;vcontrol.c: 208:     ADC_SelectChannel(V_BUSDC);
-[e ( _ADC_SelectChannel (1 . `E4230 0 ]
-"209
-[; ;vcontrol.c: 209:     _delay((unsigned long)((1)*(16000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
-"210
-[; ;vcontrol.c: 210:     ADC_StartConversion();
-[e ( _ADC_StartConversion ..  ]
-"211
-[; ;vcontrol.c: 211:     TMR2_StartTimer();
-[e ( _TMR2_StartTimer ..  ]
-"213
-[; ;vcontrol.c: 213:     TMR2_SetInterruptHandler(TMR2_DutyControlHandler_ISR);
-[e ( _TMR2_SetInterruptHandler (1 &U _TMR2_DutyControlHandler_ISR ]
 "214
-[; ;vcontrol.c: 214:     ADC_SetInterruptHandler(ADC_VoltageControlHandler_ISR);
-[e ( _ADC_SetInterruptHandler (1 &U _ADC_VoltageControlHandler_ISR ]
+[; ;vcontrol.c: 214:     init_required = 0;
+[e = _init_required -> -> 0 `i `a ]
 "215
-[; ;vcontrol.c: 215: }
+[; ;vcontrol.c: 215:     ADC_SelectChannel(V_BUSDC);
+[e ( _ADC_SelectChannel (1 . `E4241 0 ]
+"216
+[; ;vcontrol.c: 216:     _delay((unsigned long)((1)*(16000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 16000000 `l `d .4000.0 `ul ]
+"217
+[; ;vcontrol.c: 217:     ADC_StartConversion();
+[e ( _ADC_StartConversion ..  ]
+"218
+[; ;vcontrol.c: 218:     TMR2_StartTimer();
+[e ( _TMR2_StartTimer ..  ]
+"220
+[; ;vcontrol.c: 220:     TMR2_SetInterruptHandler(TMR2_DutyControlHandler_ISR);
+[e ( _TMR2_SetInterruptHandler (1 &U _TMR2_DutyControlHandler_ISR ]
+"221
+[; ;vcontrol.c: 221:     ADC_SetInterruptHandler(ADC_VoltageControlHandler_ISR);
+[e ( _ADC_SetInterruptHandler (1 &U _ADC_VoltageControlHandler_ISR ]
+"222
+[; ;vcontrol.c: 222: }
 [e :UE 599 ]
 }
-"217
-[; ;vcontrol.c: 217: void start_chopper()
+"224
+[; ;vcontrol.c: 224: void start_chopper()
 [v _start_chopper `(v ~T0 @X0 1 ef ]
-"218
-[; ;vcontrol.c: 218: {
+"225
+[; ;vcontrol.c: 225: {
 {
 [e :U _start_chopper ]
 [f ]
-"219
-[; ;vcontrol.c: 219:     if( chopper_active == 1 )
+"226
+[; ;vcontrol.c: 226:     if( chopper_active == 1 )
 [e $ ! == -> _chopper_active `i -> 1 `i 602  ]
-"220
-[; ;vcontrol.c: 220:         return;
+"227
+[; ;vcontrol.c: 227:         return;
 [e $UE 601  ]
 [e :U 602 ]
-"221
-[; ;vcontrol.c: 221:     TRISAbits.TRISA5 = 0;
-[e = . . _TRISAbits 0 5 -> -> 0 `i `uc ]
-"222
-[; ;vcontrol.c: 222:     TRISAbits.TRISA4 = 0;
-[e = . . _TRISAbits 0 4 -> -> 0 `i `uc ]
-"223
-[; ;vcontrol.c: 223:     pwm_duty = 0;
-[e = _pwm_duty -> -> 0 `i `us ]
-"224
-[; ;vcontrol.c: 224:     current_duty = 0;
-[e = _current_duty -> -> 0 `i `us ]
-"225
-[; ;vcontrol.c: 225:     target_duty = 0;
-[e = _target_duty -> -> 0 `i `us ]
-"227
-[; ;vcontrol.c: 227:     if( init_required == 1 )
-[e $ ! == -> _init_required `i -> 1 `i 603  ]
 "228
-[; ;vcontrol.c: 228:         init_chopper();
+[; ;vcontrol.c: 228:     TRISAbits.TRISA5 = 0;
+[e = . . _TRISAbits 0 5 -> -> 0 `i `uc ]
+"229
+[; ;vcontrol.c: 229:     TRISAbits.TRISA4 = 0;
+[e = . . _TRISAbits 0 4 -> -> 0 `i `uc ]
+"230
+[; ;vcontrol.c: 230:     pwm_duty = 0;
+[e = _pwm_duty -> -> 0 `i `us ]
+"231
+[; ;vcontrol.c: 231:     current_duty = 0;
+[e = _current_duty -> -> 0 `i `us ]
+"232
+[; ;vcontrol.c: 232:     target_duty = 0;
+[e = _target_duty -> -> 0 `i `us ]
+"234
+[; ;vcontrol.c: 234:     if( init_required == 1 )
+[e $ ! == -> _init_required `i -> 1 `i 603  ]
+"235
+[; ;vcontrol.c: 235:         init_chopper();
 [e ( _init_chopper ..  ]
 [e :U 603 ]
-"230
-[; ;vcontrol.c: 230:     chopper_active = 1;
+"237
+[; ;vcontrol.c: 237:     chopper_active = 1;
 [e = _chopper_active -> -> 1 `i `a ]
-"231
-[; ;vcontrol.c: 231: }
+"238
+[; ;vcontrol.c: 238: }
 [e :UE 601 ]
 }
-"233
-[; ;vcontrol.c: 233: void stop_chopper()
+"240
+[; ;vcontrol.c: 240: void stop_chopper()
 [v _stop_chopper `(v ~T0 @X0 1 ef ]
-"234
-[; ;vcontrol.c: 234: {
+"241
+[; ;vcontrol.c: 241: {
 {
 [e :U _stop_chopper ]
 [f ]
-"235
-[; ;vcontrol.c: 235:     if( chopper_active == 0 )
+"242
+[; ;vcontrol.c: 242:     if( chopper_active == 0 )
 [e $ ! == -> _chopper_active `i -> 0 `i 605  ]
-"236
-[; ;vcontrol.c: 236:         return;
+"243
+[; ;vcontrol.c: 243:         return;
 [e $UE 604  ]
 [e :U 605 ]
-"238
-[; ;vcontrol.c: 238:     TRISAbits.TRISA5 = 1;
+"245
+[; ;vcontrol.c: 245:     TRISAbits.TRISA5 = 1;
 [e = . . _TRISAbits 0 5 -> -> 1 `i `uc ]
-"239
-[; ;vcontrol.c: 239:     TRISAbits.TRISA4 = 1;
+"246
+[; ;vcontrol.c: 246:     TRISAbits.TRISA4 = 1;
 [e = . . _TRISAbits 0 4 -> -> 1 `i `uc ]
-"240
-[; ;vcontrol.c: 240:     target_duty = 0;
+"247
+[; ;vcontrol.c: 247:     target_duty = 0;
 [e = _target_duty -> -> 0 `i `us ]
-"241
-[; ;vcontrol.c: 241:     chopper_active = 0;
+"248
+[; ;vcontrol.c: 248:     chopper_active = 0;
 [e = _chopper_active -> -> 0 `i `a ]
-"243
-[; ;vcontrol.c: 243: }
+"250
+[; ;vcontrol.c: 250: }
 [e :UE 604 ]
 }
-"245
-[; ;vcontrol.c: 245: _Bool is_chopper_active()
+"252
+[; ;vcontrol.c: 252: _Bool is_chopper_active()
 [v _is_chopper_active `(a ~T0 @X0 1 ef ]
-"246
-[; ;vcontrol.c: 246: {
+"253
+[; ;vcontrol.c: 253: {
 {
 [e :U _is_chopper_active ]
 [f ]
-"247
-[; ;vcontrol.c: 247:     return chopper_active;
+"254
+[; ;vcontrol.c: 254:     return chopper_active;
 [e ) _chopper_active ]
 [e $UE 606  ]
-"248
-[; ;vcontrol.c: 248: }
+"255
+[; ;vcontrol.c: 255: }
 [e :UE 606 ]
 }
-"250
-[; ;vcontrol.c: 250: void set_vdc_min(uint16_t vmin)
+"257
+[; ;vcontrol.c: 257: void set_vdc_min(uint16_t vmin)
 [v _set_vdc_min `(v ~T0 @X0 1 ef1`us ]
-"251
-[; ;vcontrol.c: 251: {
+"258
+[; ;vcontrol.c: 258: {
 {
 [e :U _set_vdc_min ]
-"250
-[; ;vcontrol.c: 250: void set_vdc_min(uint16_t vmin)
+"257
+[; ;vcontrol.c: 257: void set_vdc_min(uint16_t vmin)
 [v _vmin `us ~T0 @X0 1 r1 ]
-"251
-[; ;vcontrol.c: 251: {
+"258
+[; ;vcontrol.c: 258: {
 [f ]
-"252
-[; ;vcontrol.c: 252:     set_vdc_threshold(vmin,&vdc_min);
+"259
+[; ;vcontrol.c: 259:     set_vdc_threshold(vmin,&vdc_min);
 [e ( _set_vdc_threshold (2 , _vmin &U _vdc_min ]
-"253
-[; ;vcontrol.c: 253: }
+"260
+[; ;vcontrol.c: 260: }
 [e :UE 607 ]
 }
-"255
-[; ;vcontrol.c: 255: void set_vdc_max(uint16_t vmax)
+"262
+[; ;vcontrol.c: 262: void set_vdc_max(uint16_t vmax)
 [v _set_vdc_max `(v ~T0 @X0 1 ef1`us ]
-"256
-[; ;vcontrol.c: 256: {
+"263
+[; ;vcontrol.c: 263: {
 {
 [e :U _set_vdc_max ]
-"255
-[; ;vcontrol.c: 255: void set_vdc_max(uint16_t vmax)
+"262
+[; ;vcontrol.c: 262: void set_vdc_max(uint16_t vmax)
 [v _vmax `us ~T0 @X0 1 r1 ]
-"256
-[; ;vcontrol.c: 256: {
+"263
+[; ;vcontrol.c: 263: {
 [f ]
-"257
-[; ;vcontrol.c: 257:     set_vdc_threshold(vmax,&vdc_max);
+"264
+[; ;vcontrol.c: 264:     set_vdc_threshold(vmax,&vdc_max);
 [e ( _set_vdc_threshold (2 , _vmax &U _vdc_max ]
-"258
-[; ;vcontrol.c: 258: }
+"265
+[; ;vcontrol.c: 265: }
 [e :UE 608 ]
 }
-"260
-[; ;vcontrol.c: 260: void set_vdc_critic(uint16_t vc)
+"267
+[; ;vcontrol.c: 267: void set_vdc_critic(uint16_t vc)
 [v _set_vdc_critic `(v ~T0 @X0 1 ef1`us ]
-"261
-[; ;vcontrol.c: 261: {
+"268
+[; ;vcontrol.c: 268: {
 {
 [e :U _set_vdc_critic ]
-"260
-[; ;vcontrol.c: 260: void set_vdc_critic(uint16_t vc)
+"267
+[; ;vcontrol.c: 267: void set_vdc_critic(uint16_t vc)
 [v _vc `us ~T0 @X0 1 r1 ]
-"261
-[; ;vcontrol.c: 261: {
+"268
+[; ;vcontrol.c: 268: {
 [f ]
-"262
-[; ;vcontrol.c: 262:     set_vdc_threshold(vc,&vdc_critic);
+"269
+[; ;vcontrol.c: 269:     set_vdc_threshold(vc,&vdc_critic);
 [e ( _set_vdc_threshold (2 , _vc &U _vdc_critic ]
-"263
-[; ;vcontrol.c: 263: }
+"270
+[; ;vcontrol.c: 270: }
 [e :UE 609 ]
 }
-"265
-[; ;vcontrol.c: 265: void set_vdc_speed(uint16_t msDelay)
+"272
+[; ;vcontrol.c: 272: void set_vdc_speed(uint16_t msDelay)
 [v _set_vdc_speed `(v ~T0 @X0 1 ef1`us ]
-"266
-[; ;vcontrol.c: 266: {
+"273
+[; ;vcontrol.c: 273: {
 {
 [e :U _set_vdc_speed ]
-"265
-[; ;vcontrol.c: 265: void set_vdc_speed(uint16_t msDelay)
+"272
+[; ;vcontrol.c: 272: void set_vdc_speed(uint16_t msDelay)
 [v _msDelay `us ~T0 @X0 1 r1 ]
-"266
-[; ;vcontrol.c: 266: {
+"273
+[; ;vcontrol.c: 273: {
 [f ]
-"267
-[; ;vcontrol.c: 267:     if( msDelay == 0xFFFF )
+"274
+[; ;vcontrol.c: 274:     if( msDelay == 0xFFFF )
 [e $ ! == -> _msDelay `ui -> 65535 `ui 611  ]
-"268
-[; ;vcontrol.c: 268:         return;
+"275
+[; ;vcontrol.c: 275:         return;
 [e $UE 610  ]
 [e :U 611 ]
-"269
-[; ;vcontrol.c: 269:     if( msDelay > 100 )
-[e $ ! > -> _msDelay `ui -> -> 100 `i `ui 612  ]
-"270
-[; ;vcontrol.c: 270:         duty_count_up_max = 100;
-[e = _duty_count_up_max -> -> 100 `i `us ]
-[e $U 613  ]
-"271
-[; ;vcontrol.c: 271:     else
+"276
+[; ;vcontrol.c: 276:     if( msDelay > 25500 )
+[e $ ! > -> _msDelay `ui -> -> 25500 `i `ui 612  ]
+"277
+[; ;vcontrol.c: 277:         duty_count_up_max = 255;
+[e = _duty_count_up_max -> -> 255 `i `us ]
 [e :U 612 ]
-"272
-[; ;vcontrol.c: 272:         duty_count_up_max = msDelay;
-[e = _duty_count_up_max _msDelay ]
-[e :U 613 ]
-"273
-[; ;vcontrol.c: 273: }
+"278
+[; ;vcontrol.c: 278:     duty_count_up_max = msDelay/100 - 1;
+[e = _duty_count_up_max -> - / -> _msDelay `ui -> -> 100 `i `ui -> -> 1 `i `ui `us ]
+"279
+[; ;vcontrol.c: 279: }
 [e :UE 610 ]
 }
-"275
-[; ;vcontrol.c: 275: void save_to_flash(void)
+"281
+[; ;vcontrol.c: 281: void save_to_flash(void)
 [v _save_to_flash `(v ~T0 @X0 1 ef ]
-"276
-[; ;vcontrol.c: 276: {
+"282
+[; ;vcontrol.c: 282: {
 {
 [e :U _save_to_flash ]
 [f ]
-"277
-[; ;vcontrol.c: 277:     uint16_t buff[32];
-[v _buff `us ~T0 @X0 -> 32 `i a ]
-"278
-[; ;vcontrol.c: 278:     if( chopper_active == 1 )
-[e $ ! == -> _chopper_active `i -> 1 `i 615  ]
-"279
-[; ;vcontrol.c: 279:         buff[0] = 0x0ABC;
-[e = *U + &U _buff * -> -> -> 0 `i `ui `ux -> -> # *U &U _buff `ui `ux -> -> 2748 `i `us ]
-[e $U 616  ]
-"280
-[; ;vcontrol.c: 280:     else
-[e :U 615 ]
-"281
-[; ;vcontrol.c: 281:         buff[0] = 0x0CBA;
-[e = *U + &U _buff * -> -> -> 0 `i `ui `ux -> -> # *U &U _buff `ui `ux -> -> 3258 `i `us ]
-[e :U 616 ]
-"282
-[; ;vcontrol.c: 282:     buff[1] = vdc_min;
-[e = *U + &U _buff * -> -> -> 1 `i `ui `ux -> -> # *U &U _buff `ui `ux _vdc_min ]
 "283
-[; ;vcontrol.c: 283:     buff[2] = vdc_max;
-[e = *U + &U _buff * -> -> -> 2 `i `ui `ux -> -> # *U &U _buff `ui `ux _vdc_max ]
+[; ;vcontrol.c: 283:     uint16_t buff[32];
+[v _buff `us ~T0 @X0 -> 32 `i a ]
 "284
-[; ;vcontrol.c: 284:     buff[3] = vdc_critic;
-[e = *U + &U _buff * -> -> -> 3 `i `ui `ux -> -> # *U &U _buff `ui `ux _vdc_critic ]
+[; ;vcontrol.c: 284:     if( chopper_active == 1 )
+[e $ ! == -> _chopper_active `i -> 1 `i 614  ]
 "285
-[; ;vcontrol.c: 285:     buff[4] = duty_count_up_max;
-[e = *U + &U _buff * -> -> -> 4 `i `ui `ux -> -> # *U &U _buff `ui `ux _duty_count_up_max ]
+[; ;vcontrol.c: 285:         buff[0] = 0x0ABC;
+[e = *U + &U _buff * -> -> -> 0 `i `ui `ux -> -> # *U &U _buff `ui `ux -> -> 2748 `i `us ]
+[e $U 615  ]
 "286
-[; ;vcontrol.c: 286:     FLASH_WriteBlock(0x1F00,buff);
-[e ( _FLASH_WriteBlock (2 , -> -> 7936 `i `us &U _buff ]
+[; ;vcontrol.c: 286:     else
+[e :U 614 ]
 "287
-[; ;vcontrol.c: 287: }
-[e :UE 614 ]
-}
+[; ;vcontrol.c: 287:         buff[0] = 0x0CBA;
+[e = *U + &U _buff * -> -> -> 0 `i `ui `ux -> -> # *U &U _buff `ui `ux -> -> 3258 `i `us ]
+[e :U 615 ]
+"288
+[; ;vcontrol.c: 288:     buff[1] = vdc_min;
+[e = *U + &U _buff * -> -> -> 1 `i `ui `ux -> -> # *U &U _buff `ui `ux _vdc_min ]
 "289
-[; ;vcontrol.c: 289: uint16_t get_vdc_min(void)
-[v _get_vdc_min `(us ~T0 @X0 1 ef ]
+[; ;vcontrol.c: 289:     buff[2] = vdc_max;
+[e = *U + &U _buff * -> -> -> 2 `i `ui `ux -> -> # *U &U _buff `ui `ux _vdc_max ]
 "290
-[; ;vcontrol.c: 290: {
+[; ;vcontrol.c: 290:     buff[3] = vdc_critic;
+[e = *U + &U _buff * -> -> -> 3 `i `ui `ux -> -> # *U &U _buff `ui `ux _vdc_critic ]
+"291
+[; ;vcontrol.c: 291:     buff[4] = duty_count_up_max;
+[e = *U + &U _buff * -> -> -> 4 `i `ui `ux -> -> # *U &U _buff `ui `ux _duty_count_up_max ]
+"292
+[; ;vcontrol.c: 292:     buff[5] = get_relay_reset_voltage();
+[e = *U + &U _buff * -> -> -> 5 `i `ui `ux -> -> # *U &U _buff `ui `ux ( _get_relay_reset_voltage ..  ]
+"293
+[; ;vcontrol.c: 293:     buff[6] = get_reset_duration();
+[e = *U + &U _buff * -> -> -> 6 `i `ui `ux -> -> # *U &U _buff `ui `ux ( _get_reset_duration ..  ]
+"294
+[; ;vcontrol.c: 294:     FLASH_WriteBlock(0x1F00,buff);
+[e ( _FLASH_WriteBlock (2 , -> -> 7936 `i `us &U _buff ]
+"295
+[; ;vcontrol.c: 295: }
+[e :UE 613 ]
+}
+"297
+[; ;vcontrol.c: 297: uint16_t get_vdc_min(void)
+[v _get_vdc_min `(us ~T0 @X0 1 ef ]
+"298
+[; ;vcontrol.c: 298: {
 {
 [e :U _get_vdc_min ]
 [f ]
-"291
-[; ;vcontrol.c: 291:     return vdc_min;
+"299
+[; ;vcontrol.c: 299:     return vdc_min;
 [e ) _vdc_min ]
-[e $UE 617  ]
-"292
-[; ;vcontrol.c: 292: }
-[e :UE 617 ]
+[e $UE 616  ]
+"300
+[; ;vcontrol.c: 300: }
+[e :UE 616 ]
 }
-"294
-[; ;vcontrol.c: 294: uint16_t get_vdc_max(void)
+"302
+[; ;vcontrol.c: 302: uint16_t get_vdc_max(void)
 [v _get_vdc_max `(us ~T0 @X0 1 ef ]
-"295
-[; ;vcontrol.c: 295: {
+"303
+[; ;vcontrol.c: 303: {
 {
 [e :U _get_vdc_max ]
 [f ]
-"296
-[; ;vcontrol.c: 296:     return vdc_max;
+"304
+[; ;vcontrol.c: 304:     return vdc_max;
 [e ) _vdc_max ]
-[e $UE 618  ]
-"297
-[; ;vcontrol.c: 297: }
-[e :UE 618 ]
+[e $UE 617  ]
+"305
+[; ;vcontrol.c: 305: }
+[e :UE 617 ]
 }
-"299
-[; ;vcontrol.c: 299: uint16_t get_vdc_critic(void)
+"307
+[; ;vcontrol.c: 307: uint16_t get_vdc_critic(void)
 [v _get_vdc_critic `(us ~T0 @X0 1 ef ]
-"300
-[; ;vcontrol.c: 300: {
+"308
+[; ;vcontrol.c: 308: {
 {
 [e :U _get_vdc_critic ]
 [f ]
-"301
-[; ;vcontrol.c: 301:     return vdc_critic;
+"309
+[; ;vcontrol.c: 309:     return vdc_critic;
 [e ) _vdc_critic ]
-[e $UE 619  ]
-"302
-[; ;vcontrol.c: 302: }
-[e :UE 619 ]
+[e $UE 618  ]
+"310
+[; ;vcontrol.c: 310: }
+[e :UE 618 ]
 }
-"304
-[; ;vcontrol.c: 304: uint16_t get_vdc_speed(void)
+"312
+[; ;vcontrol.c: 312: uint16_t get_vdc_speed(void)
 [v _get_vdc_speed `(us ~T0 @X0 1 ef ]
-"305
-[; ;vcontrol.c: 305: {
+"313
+[; ;vcontrol.c: 313: {
 {
 [e :U _get_vdc_speed ]
 [f ]
-"306
-[; ;vcontrol.c: 306:     return duty_count_up_max * 100;
-[e ) -> * -> _duty_count_up_max `ui -> -> 100 `i `ui `us ]
-[e $UE 620  ]
-"307
-[; ;vcontrol.c: 307: }
-[e :UE 620 ]
+"315
+[; ;vcontrol.c: 315:     return (duty_count_up_max + 1)*100;
+[e ) -> * + -> _duty_count_up_max `ui -> -> 1 `i `ui -> -> 100 `i `ui `us ]
+[e $UE 619  ]
+"316
+[; ;vcontrol.c: 316: }
+[e :UE 619 ]
 }
-"309
-[; ;vcontrol.c: 309: uint16_t get_vdc(void)
+"318
+[; ;vcontrol.c: 318: uint16_t get_vdc(void)
 [v _get_vdc `(us ~T0 @X0 1 ef ]
-"310
-[; ;vcontrol.c: 310: {
+"319
+[; ;vcontrol.c: 319: {
 {
 [e :U _get_vdc ]
 [f ]
-"311
-[; ;vcontrol.c: 311:     return vdc;
+"320
+[; ;vcontrol.c: 320:     return vdc;
 [e ) _vdc ]
-[e $UE 621  ]
-"312
-[; ;vcontrol.c: 312: }
-[e :UE 621 ]
+[e $UE 620  ]
+"321
+[; ;vcontrol.c: 321: }
+[e :UE 620 ]
 }
-"314
-[; ;vcontrol.c: 314: void ADC_VoltageControlHandler_ISR(void)
+"323
+[; ;vcontrol.c: 323: void ADC_VoltageControlHandler_ISR(void)
 [v _ADC_VoltageControlHandler_ISR `(v ~T0 @X0 1 ef ]
-"315
-[; ;vcontrol.c: 315: {
+"324
+[; ;vcontrol.c: 324: {
 {
 [e :U _ADC_VoltageControlHandler_ISR ]
 [f ]
-"316
-[; ;vcontrol.c: 316:     vdc_prev = vdc;
-[e = _vdc_prev _vdc ]
-"317
-[; ;vcontrol.c: 317:     vdc = v_table[ADC_GetConversionResult() & 0x03FF ];
-[e = _vdc -> *U + &U _v_table * -> & -> ( _ADC_GetConversionResult ..  `ui -> -> 1023 `i `ui `ux -> -> # *U &U _v_table `ui `ux `us ]
-"319
-[; ;vcontrol.c: 319:     if( chopper_active == 0 )
-[e $ ! == -> _chopper_active `i -> 0 `i 623  ]
-"320
-[; ;vcontrol.c: 320:         return;
-[e $UE 622  ]
-[e :U 623 ]
-"322
-[; ;vcontrol.c: 322:     diff_vdc = vdc - vdc_prev;
-[e = _diff_vdc -> - -> _vdc `ui -> _vdc_prev `ui `us ]
-"323
-[; ;vcontrol.c: 323:     if( vdc > vdc_prev )
-[e $ ! > -> _vdc `ui -> _vdc_prev `ui 624  ]
-"324
-[; ;vcontrol.c: 324:         diff_positive = 1;
-[e = _diff_positive -> -> 1 `i `a ]
-[e $U 625  ]
 "325
-[; ;vcontrol.c: 325:     else
-[e :U 624 ]
+[; ;vcontrol.c: 325:     vdc_prev = vdc;
+[e = _vdc_prev _vdc ]
 "326
-[; ;vcontrol.c: 326:         diff_positive = 0;
-[e = _diff_positive -> -> 0 `i `a ]
-[e :U 625 ]
+[; ;vcontrol.c: 326:     vdc = v_table[ADC_GetConversionResult() & 0x03FF ];
+[e = _vdc -> *U + &U _v_table * -> & -> ( _ADC_GetConversionResult ..  `ui -> -> 1023 `i `ui `ux -> -> # *U &U _v_table `ui `ux `us ]
 "328
-[; ;vcontrol.c: 328:     if( vdc > vdc_critic )
-[e $ ! > -> _vdc `ui -> _vdc_critic `ui 626  ]
+[; ;vcontrol.c: 328:     if( chopper_active == 0 )
+[e $ ! == -> _chopper_active `i -> 0 `i 622  ]
 "329
-[; ;vcontrol.c: 329:     {
-{
-"330
-[; ;vcontrol.c: 330:         PWM3_LoadDutyValue(399);
-[e ( _PWM3_LoadDutyValue (1 -> -> 399 `i `us ]
+[; ;vcontrol.c: 329:         return;
+[e $UE 621  ]
+[e :U 622 ]
 "331
-[; ;vcontrol.c: 331:         current_duty = 399;
-[e = _current_duty -> -> 399 `i `us ]
+[; ;vcontrol.c: 331:     diff_vdc = vdc - vdc_prev;
+[e = _diff_vdc -> - -> _vdc `ui -> _vdc_prev `ui `us ]
 "332
-[; ;vcontrol.c: 332:         target_duty = 399;
-[e = _target_duty -> -> 399 `i `us ]
+[; ;vcontrol.c: 332:     if( vdc > vdc_prev )
+[e $ ! > -> _vdc `ui -> _vdc_prev `ui 623  ]
 "333
-[; ;vcontrol.c: 333:         pwm_duty = 399;
-[e = _pwm_duty -> -> 399 `i `us ]
+[; ;vcontrol.c: 333:         diff_positive = 1;
+[e = _diff_positive -> -> 1 `i `a ]
+[e $U 624  ]
 "334
-[; ;vcontrol.c: 334:     }
-}
-[e $U 627  ]
+[; ;vcontrol.c: 334:     else
+[e :U 623 ]
 "335
-[; ;vcontrol.c: 335:     else
-[e :U 626 ]
-"336
-[; ;vcontrol.c: 336:     {
-{
+[; ;vcontrol.c: 335:         diff_positive = 0;
+[e = _diff_positive -> -> 0 `i `a ]
+[e :U 624 ]
 "337
-[; ;vcontrol.c: 337:         if( vdc >= vdc_max )
-[e $ ! >= -> _vdc `ui -> _vdc_max `ui 628  ]
+[; ;vcontrol.c: 337:     if( vdc > vdc_critic )
+[e $ ! > -> _vdc `ui -> _vdc_critic `ui 625  ]
 "338
-[; ;vcontrol.c: 338:         {
+[; ;vcontrol.c: 338:     {
 {
-"340
-[; ;vcontrol.c: 340:             do { LATAbits.LATA4 = 1; } while(0);
-[e :U 631 ]
+"339
+[; ;vcontrol.c: 339:         do { LATAbits.LATA4 = 1; } while(0);
+[e :U 628 ]
 {
 [e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
 }
-[e :U 630 ]
-"341
-[; ;vcontrol.c: 341:             do { LATAbits.LATA5 = 0; } while(0);
-[e :U 634 ]
+[e :U 627 ]
+"340
+[; ;vcontrol.c: 340:         do { LATAbits.LATA5 = 0; } while(0);
+[e :U 631 ]
 {
 [e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
 }
-[e :U 633 ]
+[e :U 630 ]
+"341
+[; ;vcontrol.c: 341:         PWM3_LoadDutyValue(759);
+[e ( _PWM3_LoadDutyValue (1 -> -> 759 `i `us ]
 "342
-[; ;vcontrol.c: 342:             pwm_duty = 399;
-[e = _pwm_duty -> -> 399 `i `us ]
+[; ;vcontrol.c: 342:         current_duty = 759;
+[e = _current_duty -> -> 759 `i `us ]
 "343
-[; ;vcontrol.c: 343:         }
-}
-[e $U 635  ]
+[; ;vcontrol.c: 343:         target_duty = 759;
+[e = _target_duty -> -> 759 `i `us ]
 "344
-[; ;vcontrol.c: 344:         else
-[e :U 628 ]
+[; ;vcontrol.c: 344:         pwm_duty = 759;
+[e = _pwm_duty -> -> 759 `i `us ]
 "345
-[; ;vcontrol.c: 345:         {
-{
+[; ;vcontrol.c: 345:     }
+}
+[e $U 632  ]
 "346
-[; ;vcontrol.c: 346:             if( vdc >= vdc_min )
-[e $ ! >= -> _vdc `ui -> _vdc_min `ui 636  ]
+[; ;vcontrol.c: 346:     else
+[e :U 625 ]
 "347
-[; ;vcontrol.c: 347:             {
+[; ;vcontrol.c: 347:     {
 {
 "348
-[; ;vcontrol.c: 348:                 do { LATAbits.LATA4 = 1; } while(0);
-[e :U 639 ]
+[; ;vcontrol.c: 348:         if( vdc >= vdc_max )
+[e $ ! >= -> _vdc `ui -> _vdc_max `ui 633  ]
+"349
+[; ;vcontrol.c: 349:         {
+{
+"351
+[; ;vcontrol.c: 351:             do { LATAbits.LATA4 = 1; } while(0);
+[e :U 636 ]
 {
 [e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
 }
+[e :U 635 ]
+"352
+[; ;vcontrol.c: 352:             do { LATAbits.LATA5 = 0; } while(0);
+[e :U 639 ]
+{
+[e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
+}
 [e :U 638 ]
-"349
-[; ;vcontrol.c: 349:                 do { LATAbits.LATA5 = 1; } while(0);
-[e :U 642 ]
+"353
+[; ;vcontrol.c: 353:             pwm_duty = 759;
+[e = _pwm_duty -> -> 759 `i `us ]
+"354
+[; ;vcontrol.c: 354:         }
+}
+[e $U 640  ]
+"355
+[; ;vcontrol.c: 355:         else
+[e :U 633 ]
+"356
+[; ;vcontrol.c: 356:         {
+{
+"357
+[; ;vcontrol.c: 357:             if( vdc >= vdc_min )
+[e $ ! >= -> _vdc `ui -> _vdc_min `ui 641  ]
+"358
+[; ;vcontrol.c: 358:             {
+{
+"359
+[; ;vcontrol.c: 359:                 do { LATAbits.LATA4 = 1; } while(0);
+[e :U 644 ]
+{
+[e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
+}
+[e :U 643 ]
+"360
+[; ;vcontrol.c: 360:                 do { LATAbits.LATA5 = 1; } while(0);
+[e :U 647 ]
 {
 [e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
 }
-[e :U 641 ]
-"350
-[; ;vcontrol.c: 350:                 _Bool force_inc = 1;
+[e :U 646 ]
+"361
+[; ;vcontrol.c: 361:                 _Bool force_inc = 1;
 [v _force_inc `a ~T0 @X0 1 a ]
 [e = _force_inc -> -> 1 `i `a ]
-"351
-[; ;vcontrol.c: 351:                 if( diff_positive == 1 )
-[e $ ! == -> _diff_positive `i -> 1 `i 643  ]
-"352
-[; ;vcontrol.c: 352:                 {
-{
-"353
-[; ;vcontrol.c: 353:                     uint32_t pwm = (uint32_t)399 * (uint32_t)(vdc - vdc_min);
-[v _pwm `ul ~T0 @X0 1 a ]
-[e = _pwm * -> -> 399 `i `ul -> - -> _vdc `ui -> _vdc_min `ui `ul ]
-"354
-[; ;vcontrol.c: 354:                     pwm /= (vdc_max - vdc_min);
-[e =/ _pwm -> - -> _vdc_max `ui -> _vdc_min `ui `ul ]
-"355
-[; ;vcontrol.c: 355:                     if( pwm > 399 )
-[e $ ! > _pwm -> -> -> 399 `i `l `ul 644  ]
-"356
-[; ;vcontrol.c: 356:                     {
-{
-"357
-[; ;vcontrol.c: 357:                         pwm_duty = 399;
-[e = _pwm_duty -> -> 399 `i `us ]
-"358
-[; ;vcontrol.c: 358:                         force_inc = 0;
-[e = _force_inc -> -> 0 `i `a ]
-"359
-[; ;vcontrol.c: 359:                     }
-}
-[e $U 645  ]
-"360
-[; ;vcontrol.c: 360:                     else
-[e :U 644 ]
-"361
-[; ;vcontrol.c: 361:                     {
-{
 "362
-[; ;vcontrol.c: 362:                         if( pwm_duty < pwm )
-[e $ ! < -> _pwm_duty `ul _pwm 646  ]
+[; ;vcontrol.c: 362:                 if( diff_positive == 1 )
+[e $ ! == -> _diff_positive `i -> 1 `i 648  ]
 "363
-[; ;vcontrol.c: 363:                         {
+[; ;vcontrol.c: 363:                 {
 {
 "364
-[; ;vcontrol.c: 364:                             pwm_duty = pwm;
-[e = _pwm_duty -> _pwm `us ]
+[; ;vcontrol.c: 364:                     uint32_t pwm = (uint32_t)759 * (uint32_t)(vdc - vdc_min);
+[v _pwm `ul ~T0 @X0 1 a ]
+[e = _pwm * -> -> 759 `i `ul -> - -> _vdc `ui -> _vdc_min `ui `ul ]
 "365
-[; ;vcontrol.c: 365:                             force_inc = 0;
-[e = _force_inc -> -> 0 `i `a ]
+[; ;vcontrol.c: 365:                     pwm /= (vdc_max - vdc_min);
+[e =/ _pwm -> - -> _vdc_max `ui -> _vdc_min `ui `ul ]
 "366
-[; ;vcontrol.c: 366:                         }
-}
-[e :U 646 ]
+[; ;vcontrol.c: 366:                     if( pwm > 759 )
+[e $ ! > _pwm -> -> -> 759 `i `l `ul 649  ]
 "367
-[; ;vcontrol.c: 367:                     }
-}
-[e :U 645 ]
-"368
-[; ;vcontrol.c: 368:                 }
-}
-[e :U 643 ]
-"369
-[; ;vcontrol.c: 369:                 if( force_inc == 1 )
-[e $ ! == -> _force_inc `i -> 1 `i 647  ]
-"370
-[; ;vcontrol.c: 370:                 {
+[; ;vcontrol.c: 367:                     {
 {
+"368
+[; ;vcontrol.c: 368:                         pwm_duty = 759;
+[e = _pwm_duty -> -> 759 `i `us ]
+"369
+[; ;vcontrol.c: 369:                         force_inc = 0;
+[e = _force_inc -> -> 0 `i `a ]
+"370
+[; ;vcontrol.c: 370:                     }
+}
+[e $U 650  ]
 "371
-[; ;vcontrol.c: 371:                     if( duty_count_up >= duty_count_up_max )
-[e $ ! >= -> _duty_count_up `ui -> _duty_count_up_max `ui 648  ]
+[; ;vcontrol.c: 371:                     else
+[e :U 649 ]
 "372
 [; ;vcontrol.c: 372:                     {
 {
 "373
-[; ;vcontrol.c: 373:                         duty_count_up = 0;
-[e = _duty_count_up -> -> 0 `i `us ]
+[; ;vcontrol.c: 373:                         if( pwm_duty < pwm )
+[e $ ! < -> _pwm_duty `ul _pwm 651  ]
 "374
-[; ;vcontrol.c: 374:                         pwm_duty += duty_pwm_inc;
-[e =+ _pwm_duty -> _duty_pwm_inc `us ]
-"375
-[; ;vcontrol.c: 375:                         if( pwm_duty > 399 )
-[e $ ! > -> _pwm_duty `ui -> -> 399 `i `ui 649  ]
-"376
-[; ;vcontrol.c: 376:                             pwm_duty = 399;
-[e = _pwm_duty -> -> 399 `i `us ]
-[e :U 649 ]
-"377
-[; ;vcontrol.c: 377:                     }
-}
-[e $U 650  ]
-"378
-[; ;vcontrol.c: 378:                     else
-[e :U 648 ]
-"379
-[; ;vcontrol.c: 379:                         duty_count_up++;
-[e ++ _duty_count_up -> -> 1 `i `us ]
-[e :U 650 ]
-"380
-[; ;vcontrol.c: 380:                 }
-}
-[e :U 647 ]
-"381
-[; ;vcontrol.c: 381:                 duty_count_down = 0;
-[e = _duty_count_down -> -> 0 `i `us ]
-"382
-[; ;vcontrol.c: 382:             }
-}
-[e $U 651  ]
-"383
-[; ;vcontrol.c: 383:             else
-[e :U 636 ]
-"384
-[; ;vcontrol.c: 384:             {
+[; ;vcontrol.c: 374:                         {
 {
+"375
+[; ;vcontrol.c: 375:                             pwm_duty = pwm;
+[e = _pwm_duty -> _pwm `us ]
+"376
+[; ;vcontrol.c: 376:                             force_inc = 0;
+[e = _force_inc -> -> 0 `i `a ]
+"377
+[; ;vcontrol.c: 377:                         }
+}
+[e :U 651 ]
+"378
+[; ;vcontrol.c: 378:                     }
+}
+[e :U 650 ]
+"379
+[; ;vcontrol.c: 379:                 }
+}
+[e :U 648 ]
+"380
+[; ;vcontrol.c: 380:                 if( force_inc == 1 )
+[e $ ! == -> _force_inc `i -> 1 `i 652  ]
+"381
+[; ;vcontrol.c: 381:                 {
+{
+"382
+[; ;vcontrol.c: 382:                     if( duty_count_up >= duty_count_up_max )
+[e $ ! >= -> _duty_count_up `ui -> _duty_count_up_max `ui 653  ]
+"383
+[; ;vcontrol.c: 383:                     {
+{
+"384
+[; ;vcontrol.c: 384:                         duty_count_up = 0;
+[e = _duty_count_up -> -> 0 `i `us ]
 "385
-[; ;vcontrol.c: 385:                 do { LATAbits.LATA4 = 0; } while(0);
+[; ;vcontrol.c: 385:                         pwm_duty += duty_pwm_inc;
+[e =+ _pwm_duty -> _duty_pwm_inc `us ]
+"386
+[; ;vcontrol.c: 386:                         if( pwm_duty > 759 )
+[e $ ! > -> _pwm_duty `ui -> -> 759 `i `ui 654  ]
+"387
+[; ;vcontrol.c: 387:                             pwm_duty = 759;
+[e = _pwm_duty -> -> 759 `i `us ]
 [e :U 654 ]
+"388
+[; ;vcontrol.c: 388:                     }
+}
+[e $U 655  ]
+"389
+[; ;vcontrol.c: 389:                     else
+[e :U 653 ]
+"390
+[; ;vcontrol.c: 390:                         duty_count_up++;
+[e ++ _duty_count_up -> -> 1 `i `us ]
+[e :U 655 ]
+"391
+[; ;vcontrol.c: 391:                 }
+}
+[e :U 652 ]
+"392
+[; ;vcontrol.c: 392:                 duty_count_down = 0;
+[e = _duty_count_down -> -> 0 `i `us ]
+"393
+[; ;vcontrol.c: 393:             }
+}
+[e $U 656  ]
+"394
+[; ;vcontrol.c: 394:             else
+[e :U 641 ]
+"395
+[; ;vcontrol.c: 395:             {
+{
+"396
+[; ;vcontrol.c: 396:                 do { LATAbits.LATA4 = 0; } while(0);
+[e :U 659 ]
 {
 [e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
 }
-[e :U 653 ]
-"386
-[; ;vcontrol.c: 386:                 do { LATAbits.LATA5 = 1; } while(0);
-[e :U 657 ]
+[e :U 658 ]
+"397
+[; ;vcontrol.c: 397:                 do { LATAbits.LATA5 = 1; } while(0);
+[e :U 662 ]
 {
 [e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
 }
-[e :U 656 ]
-"387
-[; ;vcontrol.c: 387:                 if( duty_count_down >= duty_count_down_max )
-[e $ ! >= -> _duty_count_down `ui -> _duty_count_down_max `ui 658  ]
-"388
-[; ;vcontrol.c: 388:                 {
-{
-"389
-[; ;vcontrol.c: 389:                     duty_count_down = 0;
-[e = _duty_count_down -> -> 0 `i `us ]
-"390
-[; ;vcontrol.c: 390:                     if( pwm_duty > duty_pwm_dec )
-[e $ ! > -> _pwm_duty `ui -> _duty_pwm_dec `ui 659  ]
-"391
-[; ;vcontrol.c: 391:                         pwm_duty -= duty_pwm_dec;
-[e =- _pwm_duty -> _duty_pwm_dec `us ]
-[e $U 660  ]
-"392
-[; ;vcontrol.c: 392:                     else
-[e :U 659 ]
-"393
-[; ;vcontrol.c: 393:                         pwm_duty = 0;
-[e = _pwm_duty -> -> 0 `i `us ]
-[e :U 660 ]
-"394
-[; ;vcontrol.c: 394:                 }
-}
-[e $U 661  ]
-"395
-[; ;vcontrol.c: 395:                 else
-[e :U 658 ]
-"396
-[; ;vcontrol.c: 396:                     duty_count_down++;
-[e ++ _duty_count_down -> -> 1 `i `us ]
 [e :U 661 ]
-"397
-[; ;vcontrol.c: 397:             }
-}
-[e :U 651 ]
 "398
-[; ;vcontrol.c: 398:         }
-}
-[e :U 635 ]
+[; ;vcontrol.c: 398:                 if( duty_count_down >= duty_count_down_max )
+[e $ ! >= -> _duty_count_down `ui -> _duty_count_down_max `ui 663  ]
 "399
-[; ;vcontrol.c: 399:     }
-}
-[e :U 627 ]
+[; ;vcontrol.c: 399:                 {
+{
+"400
+[; ;vcontrol.c: 400:                     duty_count_down = 0;
+[e = _duty_count_down -> -> 0 `i `us ]
+"401
+[; ;vcontrol.c: 401:                     if( pwm_duty > duty_pwm_dec )
+[e $ ! > -> _pwm_duty `ui -> _duty_pwm_dec `ui 664  ]
 "402
-[; ;vcontrol.c: 402:     LoadDutyValue( pwm_duty );
-[e ( _LoadDutyValue (1 _pwm_duty ]
+[; ;vcontrol.c: 402:                         pwm_duty -= duty_pwm_dec;
+[e =- _pwm_duty -> _duty_pwm_dec `us ]
+[e $U 665  ]
 "403
-[; ;vcontrol.c: 403: }
-[e :UE 622 ]
-}
+[; ;vcontrol.c: 403:                     else
+[e :U 664 ]
+"404
+[; ;vcontrol.c: 404:                         pwm_duty = 0;
+[e = _pwm_duty -> -> 0 `i `us ]
+[e :U 665 ]
 "405
-[; ;vcontrol.c: 405: static uint16_t duty_inc = 40;
-[v _duty_inc `us ~T0 @X0 1 s ]
-[i _duty_inc
--> -> 40 `i `us
-]
+[; ;vcontrol.c: 405:                 }
+}
+[e $U 666  ]
+"406
+[; ;vcontrol.c: 406:                 else
+[e :U 663 ]
 "407
-[; ;vcontrol.c: 407: void TMR2_DutyControlHandler_ISR(void)
-[v _TMR2_DutyControlHandler_ISR `(v ~T0 @X0 1 ef ]
+[; ;vcontrol.c: 407:                     duty_count_down++;
+[e ++ _duty_count_down -> -> 1 `i `us ]
+[e :U 666 ]
 "408
-[; ;vcontrol.c: 408: {
+[; ;vcontrol.c: 408:             }
+}
+[e :U 656 ]
+"409
+[; ;vcontrol.c: 409:         }
+}
+[e :U 640 ]
+"410
+[; ;vcontrol.c: 410:     }
+}
+[e :U 632 ]
+"413
+[; ;vcontrol.c: 413:     LoadDutyValue( pwm_duty );
+[e ( _LoadDutyValue (1 _pwm_duty ]
+"414
+[; ;vcontrol.c: 414: }
+[e :UE 621 ]
+}
+"418
+[; ;vcontrol.c: 418: static const uint16_t duty_inc = 8;
+[v _duty_inc `Cus ~T0 @X0 1 s ]
+[i _duty_inc
+-> -> 8 `i `us
+]
+"420
+[; ;vcontrol.c: 420: void TMR2_DutyControlHandler_ISR(void)
+[v _TMR2_DutyControlHandler_ISR `(v ~T0 @X0 1 ef ]
+"421
+[; ;vcontrol.c: 421: {
 {
 [e :U _TMR2_DutyControlHandler_ISR ]
 [f ]
-"409
-[; ;vcontrol.c: 409:     if( current_duty > 399 )
-[e $ ! > -> _current_duty `ui -> -> 399 `i `ui 663  ]
-"410
-[; ;vcontrol.c: 410:         do { LATCbits.LATC5 = ~LATCbits.LATC5; } while(0);
-[e :U 666 ]
-{
-[e = . . _LATCbits 0 5 -> ~ -> . . _LATCbits 0 5 `i `uc ]
-}
-[e :U 665 ]
-[e :U 663 ]
-"412
-[; ;vcontrol.c: 412:     if( current_duty > target_duty )
-[e $ ! > -> _current_duty `ui -> _target_duty `ui 667  ]
-"413
-[; ;vcontrol.c: 413:     {
-{
-"414
-[; ;vcontrol.c: 414:         if( current_duty - target_duty > duty_inc )
-[e $ ! > - -> _current_duty `ui -> _target_duty `ui -> _duty_inc `ui 668  ]
-"415
-[; ;vcontrol.c: 415:             current_duty -= duty_inc;
-[e =- _current_duty -> _duty_inc `us ]
-[e $U 669  ]
-"416
-[; ;vcontrol.c: 416:         else
-[e :U 668 ]
-"417
-[; ;vcontrol.c: 417:             current_duty = target_duty;
-[e = _current_duty _target_duty ]
-[e :U 669 ]
-"418
-[; ;vcontrol.c: 418:     }
-}
-[e :U 667 ]
-"419
-[; ;vcontrol.c: 419:     if( current_duty < target_duty )
-[e $ ! < -> _current_duty `ui -> _target_duty `ui 670  ]
-"420
-[; ;vcontrol.c: 420:     {
-{
-"421
-[; ;vcontrol.c: 421:         if( target_duty - current_duty > duty_inc )
-[e $ ! > - -> _target_duty `ui -> _current_duty `ui -> _duty_inc `ui 671  ]
+"422
+[; ;vcontrol.c: 422:     if( current_duty > target_duty )
+[e $ ! > -> _current_duty `ui -> _target_duty `ui 668  ]
 "423
-[; ;vcontrol.c: 423:             current_duty += duty_inc;
-[e =+ _current_duty -> _duty_inc `us ]
-[e $U 672  ]
+[; ;vcontrol.c: 423:     {
+{
 "424
-[; ;vcontrol.c: 424:         else
-[e :U 671 ]
+[; ;vcontrol.c: 424:         if( current_duty - target_duty > duty_inc )
+[e $ ! > - -> _current_duty `ui -> _target_duty `ui -> _duty_inc `ui 669  ]
 "425
-[; ;vcontrol.c: 425:             current_duty = target_duty;
-[e = _current_duty _target_duty ]
-[e :U 672 ]
+[; ;vcontrol.c: 425:             current_duty -= duty_inc;
+[e =- _current_duty -> _duty_inc `us ]
+[e $U 670  ]
 "426
-[; ;vcontrol.c: 426:     }
-}
-[e :U 670 ]
+[; ;vcontrol.c: 426:         else
+[e :U 669 ]
 "427
-[; ;vcontrol.c: 427:     PWM3_LoadDutyValue(current_duty);
-[e ( _PWM3_LoadDutyValue (1 _current_duty ]
+[; ;vcontrol.c: 427:             current_duty = target_duty;
+[e = _current_duty _target_duty ]
+[e :U 670 ]
 "428
-[; ;vcontrol.c: 428: }
-[e :UE 662 ]
+[; ;vcontrol.c: 428:     }
+}
+[e :U 668 ]
+"429
+[; ;vcontrol.c: 429:     if( current_duty < target_duty )
+[e $ ! < -> _current_duty `ui -> _target_duty `ui 671  ]
+"430
+[; ;vcontrol.c: 430:     {
+{
+"431
+[; ;vcontrol.c: 431:         if( target_duty - current_duty > duty_inc )
+[e $ ! > - -> _target_duty `ui -> _current_duty `ui -> _duty_inc `ui 672  ]
+"433
+[; ;vcontrol.c: 433:             current_duty += duty_inc;
+[e =+ _current_duty -> _duty_inc `us ]
+[e $U 673  ]
+"434
+[; ;vcontrol.c: 434:         else
+[e :U 672 ]
+"435
+[; ;vcontrol.c: 435:             current_duty = target_duty;
+[e = _current_duty _target_duty ]
+[e :U 673 ]
+"436
+[; ;vcontrol.c: 436:     }
+}
+[e :U 671 ]
+"437
+[; ;vcontrol.c: 437:     PWM3_LoadDutyValue(current_duty);
+[e ( _PWM3_LoadDutyValue (1 _current_duty ]
+"438
+[; ;vcontrol.c: 438: }
+[e :UE 667 ]
 }

@@ -13,4 +13,6 @@ mcc_generated_files/adc.h  \
 mcc_generated_files/eusart.h  \
 vcontrol.h  \
 UartParser.h  \
-SystemTimer.h 
+SystemTimer.h  \
+SolidStateRelay.h  \
+GlobalSystem.h 

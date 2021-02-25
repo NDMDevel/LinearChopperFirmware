@@ -31,6 +31,10 @@ String page_head = R"=====(
       <span class="param_row">Vmax:<input name="vmax" placeholder="maximun voltage [0-800V]" type="text"></span>
       <span class="param_row">Vcritic:<input name="vcritic" placeholder="critical voltage [0-800V]" type="text"></span>
       <span class="param_row">Delay Duty 0-100%<select id="speed_select" name="speed" size=1><option value=""></option></select></span>
+      <div style="background-color: #A0A0A0">
+        <span class="param_row">Relay reset voltage:<input name="relay_reset_voltage" placeholder="voltage [0-800V]" type="text" title="when VDC < RESET VOLTAGE => Relay opens"></span>
+        <span class="param_row">Reset duration:<select id="relay_duration_select" name="reset_duration" size=1 title="time interval that the relay remains opened before it closes again"><option value=""></option></select></span>
+      </div>
       <span><input type="checkbox" name="chopper_active" id="chopper_active" value="active"> Chopper Enabled
       <input type="submit" class="btn_update" value="Update"></span>
     </form>
@@ -40,6 +44,10 @@ String page_head = R"=====(
       <span class="param_row">Vmax:<input id="mcu_vmax" type="text" readonly disabled></span>
       <span class="param_row">Vcritic:<input id="mcu_vcritic" type="text" readonly disabled></span>
       <span class="param_row">Delay:<input id="mcu_speed" type="text" readonly disabled></span>
+      <div style="background-color: #00AC13;">
+        <span class="param_row">Relay reset voltage:<input id="mcu_relay_reset_voltage" type="text" readonly disabled></span>
+        <span class="param_row">Reset duration:<input id="mcu_relay_duration" type="text" readonly disabled></span>
+      </div>
       <span class="param_row">VDC:<input id="vdc" type="text" readonly disabled></span>
     </div>
 )=====";
@@ -47,7 +55,9 @@ String page_head = R"=====(
 String page_tail = R"=====(
   </body>
   <script>
-  init_timer();
+  //insert the options inside the delay combo box (select html tag)
+  init_speed();
+  init_relay_reset_duration();
   setInterval(function(){ ajax_req(); },1000);
   var get_params_timer = setInterval(function(){ ajax_get_params(); },1500);
   function ajax_req(req_id)
@@ -68,47 +78,82 @@ String page_tail = R"=====(
         clearInterval(get_params_timer);
         resp = this.responseText.split(",");
         console.log(this.responseText);
-        document.getElementById("mcu_vmin").value = resp[0];
-        document.getElementById("mcu_vmax").value = resp[1];
-        document.getElementById("mcu_vcritic").value = resp[2];
-        document.getElementById("mcu_speed").value = resp[3];
-        if( resp[4] == "active" )
+        document.getElementById("mcu_vmin").value = resp[0] + String(" V");
+        document.getElementById("mcu_vmax").value = resp[1] + String(" V");
+        document.getElementById("mcu_vcritic").value = resp[2] + String(" V");
+        if( resp[3] >= 1000 )
+          document.getElementById("mcu_speed").value = resp[3]/1000 + String(" s");
+        else
+          document.getElementById("mcu_speed").value = resp[3] + String(" ms");
+        document.getElementById("mcu_relay_reset_voltage").value = resp[4] + String(" V");
+        if( resp[5] >= 1000 )
+          document.getElementById("mcu_relay_duration").value = resp[5]/1000 + String(" s");
+        else
+          document.getElementById("mcu_relay_duration").value = resp[5] + String(" ms");
+        if( resp[6] == "active" )// resp[6] == "active"
         {
           resp = true;
-          document.getElementById("monitor_id").textContent = "Monitor: Chopper Enabled"
+          document.getElementById("monitor_id").textContent = "Monitor: Chopper Enabled";
         }
         else
         {
           resp = false;
-          document.getElementById("monitor_id").textContent = "Monitor: Chopper Disabled"
+          document.getElementById("monitor_id").textContent = "Monitor: Chopper Disabled";
         }
-        document.getElementById("chopper_active").checked = resp;}
+        document.getElementById("chopper_active").checked = resp;
+      }
     };
     xhttp.open("GET", "get_params", true);
     xhttp.send();
   }
-  function init_timer()
+  function init_speed()
   {
     parent = document.getElementById("speed_select");
-    i = 1;
-    inc = 1;
-    unit = " ms";
-    while( i <= 10000 )
+    var ms = 100;
+    var integer = 100;
+    var decimal = 0;
+    var unit = " ms";
+    while( ms <= 10000 )
     {
       opt = document.createElement("option");
-      opt.value = i;
-      opt.textContent = i/inc + unit;
-      parent.appendChild(opt);
-      if( i < 10 )
-        i += inc;
-      else if( i < 1000 )
-        i += 10;
+      opt.value = ms;
+      if( ms < 1000 )
+      {
+        opt.textContent = integer + unit;
+        integer += 100;
+      }
       else
       {
-        unit = " s";
-        inc = 1000;
-        i += 100;
+        if( integer > 10 )
+        {
+          integer = 1;
+          unit = " s";
+        }
+        if( decimal == 0 )
+          opt.textContent = integer + unit;
+        else
+          opt.textContent = integer + "." + decimal + unit;
+        decimal++;
+        if( decimal == 10 )
+        {
+          decimal = 0;
+          integer++;
+        }
       }
+      parent.appendChild(opt);
+      ms += 100;
+    }
+  }
+  function init_relay_reset_duration()
+  {
+    parent = document.getElementById("relay_duration_select");
+    var duration = [ 1000 , 2000 , 5000 , 10000 ]; //time in ms
+    for( i=0 ; i<duration.length ; i++ )
+    {
+      opt = document.createElement("option");
+      opt.value = duration[i];
+      opt.textContent = duration[i]/1000 + " s";
+      parent.appendChild(opt);
     }
   }
   </script>
@@ -117,7 +162,7 @@ String page_tail = R"=====(
   .param_row{
     display: flex;
     justify-content: space-between;
-    padding: 0.25em}
+    padding: 0.25em;}
   .btn_update{
     background-color:  #f44336; /* Green */
     border: none;
@@ -149,6 +194,7 @@ void setup()
 
   server.on("/",home_handler);
   server.on("/get_vdc",vdc_handler);
+//  server.on("/get_relay_counter",relay_counter_handler);
   server.on("/get_params",get_params_handler);
   server.on("/set_params/",set_params_handler);
   server.onNotFound(notfound);
@@ -165,6 +211,11 @@ void vdc_handler()
 {
   uart_parser.getVdc();
 }
+
+/*void relay_counter_handler()
+{
+  uart_parser.getRelayCounter();
+}*/
 
 void get_params_handler()
 {
@@ -205,7 +256,23 @@ void set_params_handler()
   if( strarg == "" )
     delay_speed = 0xFFFF;
   else
-    delay_speed = strarg.toInt();
+    delay_speed = strarg.toInt(); //send the time in ms
+
+  uint16_t relay_reset_voltage;
+  strarg = server.arg("relay_reset_voltage");
+  strarg.trim();
+  if( strarg == "" )
+    relay_reset_voltage = 0xFFFF;
+  else
+    relay_reset_voltage = strarg.toInt();
+  
+  uint16_t reset_duration;
+  strarg = server.arg("reset_duration");
+  strarg.trim();
+  if( strarg == "" )
+    reset_duration = 0xFFFF;
+  else
+    reset_duration = strarg.toInt(); //sends the time in ms
 
   uint8_t chopper_active;
   strarg = server.arg("chopper_active");
@@ -219,6 +286,8 @@ void set_params_handler()
                         vmax,
                         vcritic,
                         delay_speed,
+                        relay_reset_voltage,
+                        reset_duration,
                         chopper_active);
 }
 

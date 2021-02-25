@@ -7109,7 +7109,7 @@ void TMR4_Initialize(void)
 
 
 
-    PR4 = 0x63;
+    PR4 = 0xC7;
 
 
     TMR4 = 0x00;

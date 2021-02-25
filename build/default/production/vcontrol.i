@@ -133,19 +133,28 @@ void start_chopper();
 void stop_chopper();
 _Bool is_chopper_active();
 
+void init_relay_watchdog();
+void start_relay_watchdog();
+void stop_relay_watchdog();
+void relay_watchdog_task();
+_Bool is_relay_watchdog_active();
+
 void set_vdc_min(uint16_t vmin);
 void set_vdc_max(uint16_t vmax);
 void set_vdc_critic(uint16_t vc);
 void set_vdc_speed(uint16_t msDelay);
+void set_relay_reset_voltage(uint16_t relay_vthres);
+void set_reset_duration(uint16_t reset_dur_ms);
 void save_to_flash(void);
 
 uint16_t get_vdc_min(void);
 uint16_t get_vdc_max(void);
 uint16_t get_vdc_critic(void);
 uint16_t get_vdc_speed(void);
+uint16_t get_relay_reset_voltage(void);
+uint16_t get_reset_duration(void);
 uint16_t get_vdc(void);
 # 1 "vcontrol.c" 2
-
 
 # 1 "./mcc_generated_files/mcc.h" 1
 # 49 "./mcc_generated_files/mcc.h"
@@ -7363,13 +7372,30 @@ void SYSTEM_Initialize(void);
 void OSCILLATOR_Initialize(void);
 # 102 "./mcc_generated_files/mcc.h"
 void WDT_Initialize(void);
+# 2 "vcontrol.c" 2
+
+# 1 "./SolidStateRelay.h" 1
+# 22 "./SolidStateRelay.h"
+void init_relay_watchdog(void);
+void start_relay_watchdog(void);
+void stop_relay_watchdog(void);
+_Bool is_relay_watchdog_active(void);
+
+void set_relay_reset_voltage(uint16_t relay_vthres);
+void set_reset_duration(uint16_t reset_dur_ms);
+uint16_t get_relay_reset_voltage(void);
+uint16_t get_reset_duration(void);
+
+void relay_watchdog_task(void);
+
+void reset_activation_counter(void);
+uint32_t get_activation_counter(void);
+
+
+static void close_relay(void);
+static void open_relay(void);
 # 3 "vcontrol.c" 2
-
-
-
-
-
-
+# 16 "vcontrol.c"
 static uint16_t vdc_min;
 static uint16_t vdc_max;
 static uint16_t vdc_critic;
@@ -7383,12 +7409,12 @@ static _Bool diff_positive;
 static uint16_t target_duty = 0;
 static uint16_t current_duty = 0;
 
-static uint16_t duty_pwm_inc = 4;
+static const uint16_t duty_pwm_inc = 8;
 static uint16_t duty_count_up;
 static uint16_t duty_count_up_max = 5;
-static uint16_t duty_pwm_dec = 5;
+static uint16_t duty_pwm_dec = 4;
 static uint16_t duty_count_down;
-static uint16_t duty_count_down_max = 100;
+static uint16_t duty_count_down_max = 10;
 static _Bool chopper_active = 0;
 static _Bool init_required = 1;
 
@@ -7630,10 +7656,9 @@ void set_vdc_speed(uint16_t msDelay)
 {
     if( msDelay == 0xFFFF )
         return;
-    if( msDelay > 100 )
-        duty_count_up_max = 100;
-    else
-        duty_count_up_max = msDelay;
+    if( msDelay > 25500 )
+        duty_count_up_max = 255;
+    duty_count_up_max = msDelay/100 - 1;
 }
 
 void save_to_flash(void)
@@ -7647,6 +7672,8 @@ void save_to_flash(void)
     buff[2] = vdc_max;
     buff[3] = vdc_critic;
     buff[4] = duty_count_up_max;
+    buff[5] = get_relay_reset_voltage();
+    buff[6] = get_reset_duration();
     FLASH_WriteBlock(0x1F00,buff);
 }
 
@@ -7667,7 +7694,8 @@ uint16_t get_vdc_critic(void)
 
 uint16_t get_vdc_speed(void)
 {
-    return duty_count_up_max * 100;
+
+    return (duty_count_up_max + 1)*100;
 }
 
 uint16_t get_vdc(void)
@@ -7691,10 +7719,12 @@ void ADC_VoltageControlHandler_ISR(void)
 
     if( vdc > vdc_critic )
     {
-        PWM3_LoadDutyValue(399);
-        current_duty = 399;
-        target_duty = 399;
-        pwm_duty = 399;
+        do { LATAbits.LATA4 = 1; } while(0);
+        do { LATAbits.LATA5 = 0; } while(0);
+        PWM3_LoadDutyValue(759);
+        current_duty = 759;
+        target_duty = 759;
+        pwm_duty = 759;
     }
     else
     {
@@ -7703,7 +7733,7 @@ void ADC_VoltageControlHandler_ISR(void)
 
             do { LATAbits.LATA4 = 1; } while(0);
             do { LATAbits.LATA5 = 0; } while(0);
-            pwm_duty = 399;
+            pwm_duty = 759;
         }
         else
         {
@@ -7714,11 +7744,11 @@ void ADC_VoltageControlHandler_ISR(void)
                 _Bool force_inc = 1;
                 if( diff_positive == 1 )
                 {
-                    uint32_t pwm = (uint32_t)399 * (uint32_t)(vdc - vdc_min);
+                    uint32_t pwm = (uint32_t)759 * (uint32_t)(vdc - vdc_min);
                     pwm /= (vdc_max - vdc_min);
-                    if( pwm > 399 )
+                    if( pwm > 759 )
                     {
-                        pwm_duty = 399;
+                        pwm_duty = 759;
                         force_inc = 0;
                     }
                     else
@@ -7736,8 +7766,8 @@ void ADC_VoltageControlHandler_ISR(void)
                     {
                         duty_count_up = 0;
                         pwm_duty += duty_pwm_inc;
-                        if( pwm_duty > 399 )
-                            pwm_duty = 399;
+                        if( pwm_duty > 759 )
+                            pwm_duty = 759;
                     }
                     else
                         duty_count_up++;
@@ -7766,13 +7796,12 @@ void ADC_VoltageControlHandler_ISR(void)
     LoadDutyValue( pwm_duty );
 }
 
-static uint16_t duty_inc = 40;
+
+
+static const uint16_t duty_inc = 8;
 
 void TMR2_DutyControlHandler_ISR(void)
 {
-    if( current_duty > 399 )
-        do { LATCbits.LATC5 = ~LATCbits.LATC5; } while(0);
-
     if( current_duty > target_duty )
     {
         if( current_duty - target_duty > duty_inc )

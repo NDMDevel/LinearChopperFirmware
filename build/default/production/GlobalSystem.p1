@@ -1,0 +1,210 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"99 ./mcc_generated_files/memory.h
+[; ;./mcc_generated_files/memory.h: 99: uint16_t FLASH_ReadWord(uint16_t flashAddr);
+[v _FLASH_ReadWord `(us ~T0 @X0 0 ef1`us ]
+"34 ./vcontrol.h
+[; ;./vcontrol.h: 34: void set_vdc_min(uint16_t vmin);
+[v _set_vdc_min `(v ~T0 @X0 0 ef1`us ]
+"35
+[; ;./vcontrol.h: 35: void set_vdc_max(uint16_t vmax);
+[v _set_vdc_max `(v ~T0 @X0 0 ef1`us ]
+"36
+[; ;./vcontrol.h: 36: void set_vdc_critic(uint16_t vc);
+[v _set_vdc_critic `(v ~T0 @X0 0 ef1`us ]
+"37
+[; ;./vcontrol.h: 37: void set_vdc_speed(uint16_t msDelay);
+[v _set_vdc_speed `(v ~T0 @X0 0 ef1`us ]
+"27 ./SolidStateRelay.h
+[; ;./SolidStateRelay.h: 27: void set_relay_reset_voltage(uint16_t relay_vthres);
+[v _set_relay_reset_voltage `(v ~T0 @X0 0 ef1`us ]
+"28
+[; ;./SolidStateRelay.h: 28: void set_reset_duration(uint16_t reset_dur_ms);
+[v _set_reset_duration `(v ~T0 @X0 0 ef1`us ]
+"24 ./vcontrol.h
+[; ;./vcontrol.h: 24: void start_chopper();
+[v _start_chopper `(v ~T0 @X0 0 e? ]
+"13 GlobalSystem.c
+[; ;GlobalSystem.c: 13: void ApplicationInit(void)
+[v _ApplicationInit `(v ~T0 @X0 1 ef ]
+"14
+[; ;GlobalSystem.c: 14: {
+{
+[e :U _ApplicationInit ]
+[f ]
+"15
+[; ;GlobalSystem.c: 15:     _Bool invalid_param = 0;
+[v _invalid_param `a ~T0 @X0 1 a ]
+[e = _invalid_param -> -> 0 `i `a ]
+"16
+[; ;GlobalSystem.c: 16:     uint16_t chopper_state = FLASH_ReadWord(0x1F00);
+[v _chopper_state `us ~T0 @X0 1 a ]
+[e = _chopper_state ( _FLASH_ReadWord (1 -> -> 7936 `i `us ]
+"17
+[; ;GlobalSystem.c: 17:     uint16_t val = FLASH_ReadWord(0x1F00 +1);
+[v _val `us ~T0 @X0 1 a ]
+[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 1 `i `us ]
+"18
+[; ;GlobalSystem.c: 18:     if( val <= 800 )
+[e $ ! <= -> _val `ui -> -> 800 `i `ui 2  ]
+"19
+[; ;GlobalSystem.c: 19:         set_vdc_min(val);
+[e ( _set_vdc_min (1 _val ]
+[e $U 3  ]
+"20
+[; ;GlobalSystem.c: 20:     else
+[e :U 2 ]
+"21
+[; ;GlobalSystem.c: 21:         invalid_param = 1;
+[e = _invalid_param -> -> 1 `i `a ]
+[e :U 3 ]
+"23
+[; ;GlobalSystem.c: 23:     val = FLASH_ReadWord(0x1F00 +2);
+[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 2 `i `us ]
+"24
+[; ;GlobalSystem.c: 24:     if( val <= 800 )
+[e $ ! <= -> _val `ui -> -> 800 `i `ui 4  ]
+"25
+[; ;GlobalSystem.c: 25:         set_vdc_max(val);
+[e ( _set_vdc_max (1 _val ]
+[e $U 5  ]
+"26
+[; ;GlobalSystem.c: 26:     else
+[e :U 4 ]
+"27
+[; ;GlobalSystem.c: 27:         invalid_param = 1;
+[e = _invalid_param -> -> 1 `i `a ]
+[e :U 5 ]
+"29
+[; ;GlobalSystem.c: 29:     val = FLASH_ReadWord(0x1F00 +3);
+[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 3 `i `us ]
+"30
+[; ;GlobalSystem.c: 30:     if( val <= 800 )
+[e $ ! <= -> _val `ui -> -> 800 `i `ui 6  ]
+"31
+[; ;GlobalSystem.c: 31:         set_vdc_critic(val);
+[e ( _set_vdc_critic (1 _val ]
+[e $U 7  ]
+"32
+[; ;GlobalSystem.c: 32:     else
+[e :U 6 ]
+"33
+[; ;GlobalSystem.c: 33:         invalid_param = 1;
+[e = _invalid_param -> -> 1 `i `a ]
+[e :U 7 ]
+"35
+[; ;GlobalSystem.c: 35:     val = FLASH_ReadWord(0x1F00 +4);
+[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 4 `i `us ]
+"36
+[; ;GlobalSystem.c: 36:     if( val <= 25500 )
+[e $ ! <= -> _val `ui -> -> 25500 `i `ui 8  ]
+"37
+[; ;GlobalSystem.c: 37:         set_vdc_speed(val);
+[e ( _set_vdc_speed (1 _val ]
+[e $U 9  ]
+"38
+[; ;GlobalSystem.c: 38:     else
+[e :U 8 ]
+"39
+[; ;GlobalSystem.c: 39:         invalid_param = 1;
+[e = _invalid_param -> -> 1 `i `a ]
+[e :U 9 ]
+"41
+[; ;GlobalSystem.c: 41:     val = FLASH_ReadWord(0x1F00 +5);
+[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 5 `i `us ]
+"42
+[; ;GlobalSystem.c: 42:     if( val <= 800 )
+[e $ ! <= -> _val `ui -> -> 800 `i `ui 10  ]
+"43
+[; ;GlobalSystem.c: 43:         set_relay_reset_voltage(val);
+[e ( _set_relay_reset_voltage (1 _val ]
+[e $U 11  ]
+"44
+[; ;GlobalSystem.c: 44:     else
+[e :U 10 ]
+"45
+[; ;GlobalSystem.c: 45:         invalid_param = 1;
+[e = _invalid_param -> -> 1 `i `a ]
+[e :U 11 ]
+"47
+[; ;GlobalSystem.c: 47:     val = FLASH_ReadWord(0x1F00 +6);
+[e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 6 `i `us ]
+"48
+[; ;GlobalSystem.c: 48:     if( val <= 25500 )
+[e $ ! <= -> _val `ui -> -> 25500 `i `ui 12  ]
+"49
+[; ;GlobalSystem.c: 49:         set_reset_duration(val);
+[e ( _set_reset_duration (1 _val ]
+[e $U 13  ]
+"50
+[; ;GlobalSystem.c: 50:     else
+[e :U 12 ]
+"51
+[; ;GlobalSystem.c: 51:         invalid_param = 1;
+[e = _invalid_param -> -> 1 `i `a ]
+[e :U 13 ]
+"53
+[; ;GlobalSystem.c: 53:     if( invalid_param == 0 )
+[e $ ! == -> _invalid_param `i -> 0 `i 14  ]
+"54
+[; ;GlobalSystem.c: 54:     {
+{
+"57
+[; ;GlobalSystem.c: 57:         if( chopper_state == 0x0ABC || chopper_state == 0x0CBA )
+[e $ ! || == -> _chopper_state `ui -> -> 2748 `i `ui == -> _chopper_state `ui -> -> 3258 `i `ui 15  ]
+"58
+[; ;GlobalSystem.c: 58:         {
+{
+"59
+[; ;GlobalSystem.c: 59:             if( chopper_state == 0x0ABC )
+[e $ ! == -> _chopper_state `ui -> -> 2748 `i `ui 16  ]
+"60
+[; ;GlobalSystem.c: 60:                 start_chopper();
+[e ( _start_chopper ..  ]
+[e :U 16 ]
+"61
+[; ;GlobalSystem.c: 61:         }
+}
+[e $U 17  ]
+"62
+[; ;GlobalSystem.c: 62:         else
+[e :U 15 ]
+"63
+[; ;GlobalSystem.c: 63:             invalid_param = 1;
+[e = _invalid_param -> -> 1 `i `a ]
+[e :U 17 ]
+"64
+[; ;GlobalSystem.c: 64:     }
+}
+[e $U 18  ]
+"65
+[; ;GlobalSystem.c: 65:     else
+[e :U 14 ]
+"66
+[; ;GlobalSystem.c: 66:     {
+{
+"69
+[; ;GlobalSystem.c: 69:         set_vdc_min(0);
+[e ( _set_vdc_min (1 -> -> 0 `i `us ]
+"70
+[; ;GlobalSystem.c: 70:         set_vdc_max(0);
+[e ( _set_vdc_max (1 -> -> 0 `i `us ]
+"71
+[; ;GlobalSystem.c: 71:         set_vdc_critic(0);
+[e ( _set_vdc_critic (1 -> -> 0 `i `us ]
+"72
+[; ;GlobalSystem.c: 72:         set_vdc_speed(0);
+[e ( _set_vdc_speed (1 -> -> 0 `i `us ]
+"73
+[; ;GlobalSystem.c: 73:         set_relay_reset_voltage(0);
+[e ( _set_relay_reset_voltage (1 -> -> 0 `i `us ]
+"74
+[; ;GlobalSystem.c: 74:         set_reset_duration(0);
+[e ( _set_reset_duration (1 -> -> 0 `i `us ]
+"75
+[; ;GlobalSystem.c: 75:     }
+}
+[e :U 18 ]
+"76
+[; ;GlobalSystem.c: 76: }
+[e :UE 1 ]
+}

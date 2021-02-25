@@ -1,11 +1,18 @@
 #include "vcontrol.h"
-#include <stdbool.h>
 #include "mcc_generated_files/mcc.h"
+#include "SolidStateRelay.h"
+#include <stdbool.h>
 
-#define DUTY_RAW_MAX     399
+//#define DUTY_RAW_MAX     379    //379 -> 95%, 399 -> 100%
+#define DUTY_RAW_MAX     759    //759 -> 95%, 799 -> 100%
 
+/*
+ * ADC sampling rate: 1 KHz
+ * PWM duty update rate: 1 KHz
+ * PWM period: 200us
+ */
 
-
+//CHOPPER
 static uint16_t vdc_min;
 static uint16_t vdc_max;
 static uint16_t vdc_critic;  //this may trigger the crowbar
@@ -19,12 +26,12 @@ static bool diff_positive;
 static uint16_t target_duty = 0;
 static uint16_t current_duty = 0;
 
-static uint16_t duty_pwm_inc = 4;
+static const uint16_t duty_pwm_inc = 8;//before it was 4
 static uint16_t duty_count_up;
 static uint16_t duty_count_up_max = 5;
-static uint16_t duty_pwm_dec = 5;
+static uint16_t duty_pwm_dec = 4;//5
 static uint16_t duty_count_down;
-static uint16_t duty_count_down_max = 100;
+static uint16_t duty_count_down_max = 10;
 static bool chopper_active = false;
 static bool init_required = true;
 
@@ -266,10 +273,9 @@ void set_vdc_speed(uint16_t msDelay)
 {
     if( msDelay == 0xFFFF )
         return;
-    if( msDelay > 100 )
-        duty_count_up_max = 100;
-    else
-        duty_count_up_max = msDelay;
+    if( msDelay > 25500 )
+        duty_count_up_max = 255;
+    duty_count_up_max = msDelay/100 - 1;
 }
 
 void save_to_flash(void)
@@ -283,6 +289,8 @@ void save_to_flash(void)
     buff[2] = vdc_max;
     buff[3] = vdc_critic;
     buff[4] = duty_count_up_max;
+    buff[5] = get_relay_reset_voltage();
+    buff[6] = get_reset_duration();
     FLASH_WriteBlock(FLASH_START_ADDRESS,buff);
 }
 
@@ -303,7 +311,8 @@ uint16_t get_vdc_critic(void)
 
 uint16_t get_vdc_speed(void)
 {
-    return duty_count_up_max * 100;
+    //returns the speed in mili-seconds
+    return (duty_count_up_max + 1)*100;
 }
 
 uint16_t get_vdc(void)
@@ -327,6 +336,8 @@ void ADC_VoltageControlHandler_ISR(void)
 
     if( vdc > vdc_critic )
     {
+        LED_R_SetHigh();
+        LED_G_SetLow();
         PWM3_LoadDutyValue(DUTY_RAW_MAX);
         current_duty = DUTY_RAW_MAX;
         target_duty = DUTY_RAW_MAX;
@@ -402,13 +413,12 @@ void ADC_VoltageControlHandler_ISR(void)
     LoadDutyValue( pwm_duty );
 }
 
-static uint16_t duty_inc = 40;
+//40 -> 5% duty inc: 0->100% in  20ms
+//8  -> 1& duty inc: 0->100% in 100ms
+static const uint16_t duty_inc = 8;
 
 void TMR2_DutyControlHandler_ISR(void)
 {
-    if( current_duty > DUTY_RAW_MAX )
-        DGPIO_Toggle(); //just for debug
-        
     if( current_duty > target_duty )
     {
         if( current_duty - target_duty > duty_inc )

@@ -20,10 +20,11 @@
         <itemPath>mcc_generated_files/tmr1.h</itemPath>
       </logicalFolder>
       <itemPath>VComShell.h</itemPath>
-      <itemPath>GlobalParameters.h</itemPath>
       <itemPath>vcontrol.h</itemPath>
       <itemPath>UartParser.h</itemPath>
       <itemPath>SystemTimer.h</itemPath>
+      <itemPath>SolidStateRelay.h</itemPath>
+      <itemPath>GlobalSystem.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -49,10 +50,11 @@
       </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>VComShell.c</itemPath>
-      <itemPath>GlobalParameters.c</itemPath>
       <itemPath>vcontrol.c</itemPath>
       <itemPath>UartParser.c</itemPath>
       <itemPath>SystemTimer.c</itemPath>
+      <itemPath>SolidStateRelay.c</itemPath>
+      <itemPath>GlobalSystem.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -188,6 +190,7 @@
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
         <property key="debugoptions.useswbreakpoints" value="false"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
@@ -202,7 +205,7 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-1fff"/>
-        <property key="poweroptions.powerenable" value="false"/>
+        <property key="poweroptions.powerenable" value="true"/>
         <property key="programmertogo.imagename" value=""/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>

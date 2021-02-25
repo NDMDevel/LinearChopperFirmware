@@ -89,9 +89,11 @@ void uart_task(void)
         uint8_t xor = rx_buffer[0];
         for( i=1 ; i<rx_idx ; i++ )
             xor ^= rx_buffer[i];
-        if( xor != 0                                                    ||
-            (rx_buffer[0] != SET_PARAMS  && rx_buffer[0] != GET_PARAMS && rx_buffer[0] != GET_VDC) ||
-            (rx_idx != 11 && rx_idx != 2)                               )
+        if( xor != 0                        ||
+            (rx_buffer[0] != SET_PARAMS &&
+             rx_buffer[0] != GET_PARAMS &&
+             rx_buffer[0] != GET_VDC)       ||
+            (rx_idx != 15 && rx_idx != 2)   ) //rx_idx != 15
         {
             rx_idx = 0; //stay in this state
             lock_isr = false;
@@ -102,8 +104,13 @@ void uart_task(void)
     }
     if( st == PARSE_FRAME )
     {
-        if( rx_buffer[0] == SET_PARAMS && rx_idx == 11 )
+        if( rx_buffer[0] == SET_PARAMS )
         {
+            static uint8_t none = 2;
+            none++;
+        }
+        if( rx_buffer[0] == SET_PARAMS && rx_idx == 15 )
+        {                               //rx_idx == 15
             uint16_t val;
             val = rx_buffer[1];
             val = val<<8 | rx_buffer[2];
@@ -117,7 +124,15 @@ void uart_task(void)
             val = rx_buffer[7];
             val = val<<8 | rx_buffer[8];
             set_vdc_speed(val);
-            if( rx_buffer[9] == 0 )
+            
+            val = rx_buffer[9];
+            val = val<<8 | rx_buffer[10];
+            set_relay_reset_voltage(val);
+            val = rx_buffer[11];
+            val = val<<8 | rx_buffer[12];
+            set_reset_duration(val);
+            
+            if( rx_buffer[13] == 0 )//rx_buffer[13] == 0
                 stop_chopper();
             else
                 start_chopper();
@@ -142,13 +157,21 @@ void uart_task(void)
                 val = get_vdc_speed();
                 rx_buffer[7] = (val>>8) & 0xFF;
                 rx_buffer[8] = val & 0xFF;
-                rx_buffer[9] = is_chopper_active();
+                
+                val = get_relay_reset_voltage();
+                rx_buffer[9] = (val>>8) & 0xFF;
+                rx_buffer[10] = val & 0xFF;
+                val = get_reset_duration();
+                rx_buffer[11] = (val>>8) & 0xFF;
+                rx_buffer[12] = val & 0xFF;
+                
+                rx_buffer[13] = is_chopper_active();//rx_buffer[13]
                 uint8_t i;
                 uint8_t xor = rx_buffer[0];
-                for( i=1 ; i<10 ; i++ )
+                for( i=1 ; i<14 ; i++ )//i<14
                     xor ^= rx_buffer[i];
-                rx_buffer[10] = xor;
-                rx_idx = 11;
+                rx_buffer[14] = xor;    //rx_buffer[14] = xor
+                rx_idx = 15;            //rx_idx = 15
                 tx_idx = 0;
                 st = SEND_RESPONSE;
             }

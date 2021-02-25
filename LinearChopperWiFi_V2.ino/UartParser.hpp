@@ -30,28 +30,40 @@ class UartParser
       SET_PARAMS = 0xAA,
       GET_PARAMS = 0x55,
       GET_VDC    = 0xA5
+//      GET_RELAY_COUNTER = 0x5A
     };
     Command com;
-    uint16_t vdc;
     uint16_t vmin;
     uint16_t vmax;
     uint16_t vcritic;
     uint16_t delay_speed;
+    uint16_t relay_reset_voltage;
+    uint16_t reset_duration;
     uint8_t  chopper_active;
     uint16_t mcu_vdc;
     uint16_t mcu_vmin;
     uint16_t mcu_vmax;
     uint16_t mcu_vcritic;
     uint16_t mcu_speed;
+    uint16_t mcu_relay_reset_voltage;
+    uint16_t mcu_reset_duration;
     uint8_t  mcu_chopper_active;
+//    uint32_t mcu_relay_counter;
     ESP8266WebServer *server;
   public:
     void begin(ESP8266WebServer *server);
     void operator()();    //loop task
     bool isBusy(){ return busy; }
-    void setParams(uint16_t vmin,uint16_t vmax,uint16_t vcritic,uint16_t delay_speed,uint8_t chopper_active);
+    void setParams(uint16_t vmin,
+                   uint16_t vmax,
+                   uint16_t vcritic,
+                   uint16_t delay_speed,
+                   uint16_t relay_reset_voltage,
+                   uint16_t reset_duration,
+                   uint8_t chopper_active);
     void getParams();
     void getVdc();
+//    void getRelayCounter();
   protected:
     void resetTimer(uint32_t &local_timer);
     bool timerElapse(uint32_t local_timer,uint32_t ms);

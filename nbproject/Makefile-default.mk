@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=mcc_generated_files/pwm3.c mcc_generated_files/eusart.c mcc_generated_files/memory.c mcc_generated_files/tmr2.c mcc_generated_files/adc.c mcc_generated_files/device_config.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr4.c mcc_generated_files/tmr1.c main.c VComShell.c GlobalParameters.c vcontrol.c UartParser.c SystemTimer.c
+SOURCEFILES_QUOTED_IF_SPACED=mcc_generated_files/pwm3.c mcc_generated_files/eusart.c mcc_generated_files/memory.c mcc_generated_files/tmr2.c mcc_generated_files/adc.c mcc_generated_files/device_config.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr4.c mcc_generated_files/tmr1.c main.c VComShell.c vcontrol.c UartParser.c SystemTimer.c SolidStateRelay.c GlobalSystem.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/mcc_generated_files/pwm3.p1 ${OBJECTDIR}/mcc_generated_files/eusart.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/tmr2.p1 ${OBJECTDIR}/mcc_generated_files/adc.p1 ${OBJECTDIR}/mcc_generated_files/device_config.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr4.p1 ${OBJECTDIR}/mcc_generated_files/tmr1.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/VComShell.p1 ${OBJECTDIR}/GlobalParameters.p1 ${OBJECTDIR}/vcontrol.p1 ${OBJECTDIR}/UartParser.p1 ${OBJECTDIR}/SystemTimer.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/mcc_generated_files/pwm3.p1.d ${OBJECTDIR}/mcc_generated_files/eusart.p1.d ${OBJECTDIR}/mcc_generated_files/memory.p1.d ${OBJECTDIR}/mcc_generated_files/tmr2.p1.d ${OBJECTDIR}/mcc_generated_files/adc.p1.d ${OBJECTDIR}/mcc_generated_files/device_config.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/tmr4.p1.d ${OBJECTDIR}/mcc_generated_files/tmr1.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/VComShell.p1.d ${OBJECTDIR}/GlobalParameters.p1.d ${OBJECTDIR}/vcontrol.p1.d ${OBJECTDIR}/UartParser.p1.d ${OBJECTDIR}/SystemTimer.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/mcc_generated_files/pwm3.p1 ${OBJECTDIR}/mcc_generated_files/eusart.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/tmr2.p1 ${OBJECTDIR}/mcc_generated_files/adc.p1 ${OBJECTDIR}/mcc_generated_files/device_config.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr4.p1 ${OBJECTDIR}/mcc_generated_files/tmr1.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/VComShell.p1 ${OBJECTDIR}/vcontrol.p1 ${OBJECTDIR}/UartParser.p1 ${OBJECTDIR}/SystemTimer.p1 ${OBJECTDIR}/SolidStateRelay.p1 ${OBJECTDIR}/GlobalSystem.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/mcc_generated_files/pwm3.p1.d ${OBJECTDIR}/mcc_generated_files/eusart.p1.d ${OBJECTDIR}/mcc_generated_files/memory.p1.d ${OBJECTDIR}/mcc_generated_files/tmr2.p1.d ${OBJECTDIR}/mcc_generated_files/adc.p1.d ${OBJECTDIR}/mcc_generated_files/device_config.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/tmr4.p1.d ${OBJECTDIR}/mcc_generated_files/tmr1.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/VComShell.p1.d ${OBJECTDIR}/vcontrol.p1.d ${OBJECTDIR}/UartParser.p1.d ${OBJECTDIR}/SystemTimer.p1.d ${OBJECTDIR}/SolidStateRelay.p1.d ${OBJECTDIR}/GlobalSystem.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/mcc_generated_files/pwm3.p1 ${OBJECTDIR}/mcc_generated_files/eusart.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/tmr2.p1 ${OBJECTDIR}/mcc_generated_files/adc.p1 ${OBJECTDIR}/mcc_generated_files/device_config.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr4.p1 ${OBJECTDIR}/mcc_generated_files/tmr1.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/VComShell.p1 ${OBJECTDIR}/GlobalParameters.p1 ${OBJECTDIR}/vcontrol.p1 ${OBJECTDIR}/UartParser.p1 ${OBJECTDIR}/SystemTimer.p1
+OBJECTFILES=${OBJECTDIR}/mcc_generated_files/pwm3.p1 ${OBJECTDIR}/mcc_generated_files/eusart.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/tmr2.p1 ${OBJECTDIR}/mcc_generated_files/adc.p1 ${OBJECTDIR}/mcc_generated_files/device_config.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/tmr4.p1 ${OBJECTDIR}/mcc_generated_files/tmr1.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/VComShell.p1 ${OBJECTDIR}/vcontrol.p1 ${OBJECTDIR}/UartParser.p1 ${OBJECTDIR}/SystemTimer.p1 ${OBJECTDIR}/SolidStateRelay.p1 ${OBJECTDIR}/GlobalSystem.p1
 
 # Source Files
-SOURCEFILES=mcc_generated_files/pwm3.c mcc_generated_files/eusart.c mcc_generated_files/memory.c mcc_generated_files/tmr2.c mcc_generated_files/adc.c mcc_generated_files/device_config.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr4.c mcc_generated_files/tmr1.c main.c VComShell.c GlobalParameters.c vcontrol.c UartParser.c SystemTimer.c
+SOURCEFILES=mcc_generated_files/pwm3.c mcc_generated_files/eusart.c mcc_generated_files/memory.c mcc_generated_files/tmr2.c mcc_generated_files/adc.c mcc_generated_files/device_config.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/interrupt_manager.c mcc_generated_files/tmr4.c mcc_generated_files/tmr1.c main.c VComShell.c vcontrol.c UartParser.c SystemTimer.c SolidStateRelay.c GlobalSystem.c
 
 
 CFLAGS=
@@ -197,14 +197,6 @@ ${OBJECTDIR}/VComShell.p1: VComShell.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/VComShell.d ${OBJECTDIR}/VComShell.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/VComShell.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/GlobalParameters.p1: GlobalParameters.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/GlobalParameters.p1.d 
-	@${RM} ${OBJECTDIR}/GlobalParameters.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/GlobalParameters.p1 GlobalParameters.c 
-	@-${MV} ${OBJECTDIR}/GlobalParameters.d ${OBJECTDIR}/GlobalParameters.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/GlobalParameters.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
 ${OBJECTDIR}/vcontrol.p1: vcontrol.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/vcontrol.p1.d 
@@ -228,6 +220,22 @@ ${OBJECTDIR}/SystemTimer.p1: SystemTimer.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/SystemTimer.p1 SystemTimer.c 
 	@-${MV} ${OBJECTDIR}/SystemTimer.d ${OBJECTDIR}/SystemTimer.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/SystemTimer.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/SolidStateRelay.p1: SolidStateRelay.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/SolidStateRelay.p1.d 
+	@${RM} ${OBJECTDIR}/SolidStateRelay.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/SolidStateRelay.p1 SolidStateRelay.c 
+	@-${MV} ${OBJECTDIR}/SolidStateRelay.d ${OBJECTDIR}/SolidStateRelay.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/SolidStateRelay.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/GlobalSystem.p1: GlobalSystem.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/GlobalSystem.p1.d 
+	@${RM} ${OBJECTDIR}/GlobalSystem.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/GlobalSystem.p1 GlobalSystem.c 
+	@-${MV} ${OBJECTDIR}/GlobalSystem.d ${OBJECTDIR}/GlobalSystem.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/GlobalSystem.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
 ${OBJECTDIR}/mcc_generated_files/pwm3.p1: mcc_generated_files/pwm3.c  nbproject/Makefile-${CND_CONF}.mk
@@ -334,14 +342,6 @@ ${OBJECTDIR}/VComShell.p1: VComShell.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/VComShell.d ${OBJECTDIR}/VComShell.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/VComShell.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/GlobalParameters.p1: GlobalParameters.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/GlobalParameters.p1.d 
-	@${RM} ${OBJECTDIR}/GlobalParameters.p1 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/GlobalParameters.p1 GlobalParameters.c 
-	@-${MV} ${OBJECTDIR}/GlobalParameters.d ${OBJECTDIR}/GlobalParameters.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/GlobalParameters.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
 ${OBJECTDIR}/vcontrol.p1: vcontrol.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/vcontrol.p1.d 
@@ -365,6 +365,22 @@ ${OBJECTDIR}/SystemTimer.p1: SystemTimer.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/SystemTimer.p1 SystemTimer.c 
 	@-${MV} ${OBJECTDIR}/SystemTimer.d ${OBJECTDIR}/SystemTimer.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/SystemTimer.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/SolidStateRelay.p1: SolidStateRelay.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/SolidStateRelay.p1.d 
+	@${RM} ${OBJECTDIR}/SolidStateRelay.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/SolidStateRelay.p1 SolidStateRelay.c 
+	@-${MV} ${OBJECTDIR}/SolidStateRelay.d ${OBJECTDIR}/SolidStateRelay.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/SolidStateRelay.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/GlobalSystem.p1: GlobalSystem.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/GlobalSystem.p1.d 
+	@${RM} ${OBJECTDIR}/GlobalSystem.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -O3 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/GlobalSystem.p1 GlobalSystem.c 
+	@-${MV} ${OBJECTDIR}/GlobalSystem.d ${OBJECTDIR}/GlobalSystem.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/GlobalSystem.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

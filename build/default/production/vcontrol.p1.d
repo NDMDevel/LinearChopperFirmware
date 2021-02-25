@@ -11,4 +11,5 @@ mcc_generated_files/tmr2.h  \
 mcc_generated_files/pwm3.h  \
 mcc_generated_files/memory.h  \
 mcc_generated_files/adc.h  \
-mcc_generated_files/eusart.h 
+mcc_generated_files/eusart.h  \
+SolidStateRelay.h 

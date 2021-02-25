@@ -7183,20 +7183,67 @@ extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
 # 13 "VComShell.c" 2
 
-# 1 "./GlobalParameters.h" 1
+# 1 "./GlobalSystem.h" 1
 
 
 
+# 1 "./vcontrol.h" 1
+# 20 "./vcontrol.h"
+void ADC_VoltageControlHandler_ISR(void);
+void TMR2_DutyControlHandler_ISR(void);
+
+void init_chopper();
+void start_chopper();
+void stop_chopper();
+_Bool is_chopper_active();
+
+void init_relay_watchdog();
+void start_relay_watchdog();
+void stop_relay_watchdog();
+void relay_watchdog_task();
+_Bool is_relay_watchdog_active();
+
+void set_vdc_min(uint16_t vmin);
+void set_vdc_max(uint16_t vmax);
+void set_vdc_critic(uint16_t vc);
+void set_vdc_speed(uint16_t msDelay);
+void set_relay_reset_voltage(uint16_t relay_vthres);
+void set_reset_duration(uint16_t reset_dur_ms);
+void save_to_flash(void);
+
+uint16_t get_vdc_min(void);
+uint16_t get_vdc_max(void);
+uint16_t get_vdc_critic(void);
+uint16_t get_vdc_speed(void);
+uint16_t get_relay_reset_voltage(void);
+uint16_t get_reset_duration(void);
+uint16_t get_vdc(void);
+# 4 "./GlobalSystem.h" 2
+
+# 1 "./SolidStateRelay.h" 1
+# 22 "./SolidStateRelay.h"
+void init_relay_watchdog(void);
+void start_relay_watchdog(void);
+void stop_relay_watchdog(void);
+_Bool is_relay_watchdog_active(void);
+
+void set_relay_reset_voltage(uint16_t relay_vthres);
+void set_reset_duration(uint16_t reset_dur_ms);
+uint16_t get_relay_reset_voltage(void);
+uint16_t get_reset_duration(void);
+
+void relay_watchdog_task(void);
+
+void reset_activation_counter(void);
+uint32_t get_activation_counter(void);
 
 
-uint16_t getDeltaT(void);
-void setDeltaT(uint16_t delta_t);
+static void close_relay(void);
+static void open_relay(void);
+# 5 "./GlobalSystem.h" 2
 
-uint16_t getVoltageHigh(void);
-void setVoltageHigh(uint16_t voltage_h);
 
-uint16_t getVoltageLow(void);
-void setVoltageLow(uint16_t voltage_l);
+void ApplicationInit(void);
 # 14 "VComShell.c" 2
 
 

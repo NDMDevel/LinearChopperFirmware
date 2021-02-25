@@ -781,8 +781,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _TMR2_Initialize ]
 [f ]
 "69
-[; ;mcc_generated_files/tmr2.c: 69:     PR2 = 0xF9;
-[e = _PR2 -> -> 249 `i `uc ]
+[; ;mcc_generated_files/tmr2.c: 69:     PR2 = 0x3E;
+[e = _PR2 -> -> 62 `i `uc ]
 "72
 [; ;mcc_generated_files/tmr2.c: 72:     TMR2 = 0x00;
 [e = _TMR2 -> -> 0 `i `uc ]
@@ -796,8 +796,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;mcc_generated_files/tmr2.c: 81:     TMR2_SetInterruptHandler(TMR2_DefaultInterruptHandler);
 [e ( _TMR2_SetInterruptHandler (1 &U _TMR2_DefaultInterruptHandler ]
 "84
-[; ;mcc_generated_files/tmr2.c: 84:     T2CON = 0x06;
-[e = _T2CON -> -> 6 `i `uc ]
+[; ;mcc_generated_files/tmr2.c: 84:     T2CON = 0x07;
+[e = _T2CON -> -> 7 `i `uc ]
 "85
 [; ;mcc_generated_files/tmr2.c: 85: }
 [e :UE 591 ]

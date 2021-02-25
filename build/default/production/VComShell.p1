@@ -5,12 +5,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 [n E2 . SET_LOW_VOLTAGE SET_HIGH_VOLTAGE SET_DELTA_T GET_INFO GET_HELP  ]
 "63 VComShell.c
 [; ;VComShell.c: 63: }vcs_st = VCS_SHUTDOWN;
-[c E4329 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 .. ]
-[n E4329 . VCS_SHUTDOWN VCS_INIT VCS_SEND_PROMPT VCS_READ_COM VCS_PARSE_COM VCS_PARSE_ARG VCS_SEND_INFO VCS_SEND_INFO_1 VCS_SEND_INFO_2 VCS_SEND_INFO_3 VCS_SEND_INFO_4 VCS_SEND_INFO_5 VCS_SEND_INFO_6 VCS_SEND_INFO_7 VCS_SEND_INFO_8 VCS_SEND_INFO_9 VCS_SEND_ERROR VCS_SEND_OK VCS_SEND_HELP VCS_SEND_HELP_1 VCS_SEND_HELP_2 VCS_SEND_HELP_3 VCS_SEND_HELP_4 VCS_SEND_HELP_5 VCS_SEND_HELP_6 VCS_SEND_HELP_7 VCS_SEND_HELP_8 VCS_SEND_HELP_9 VCS_SEND_HELP_10 VCS_SEND_HELP_11  ]
+[c E4367 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 .. ]
+[n E4367 . VCS_SHUTDOWN VCS_INIT VCS_SEND_PROMPT VCS_READ_COM VCS_PARSE_COM VCS_PARSE_ARG VCS_SEND_INFO VCS_SEND_INFO_1 VCS_SEND_INFO_2 VCS_SEND_INFO_3 VCS_SEND_INFO_4 VCS_SEND_INFO_5 VCS_SEND_INFO_6 VCS_SEND_INFO_7 VCS_SEND_INFO_8 VCS_SEND_INFO_9 VCS_SEND_ERROR VCS_SEND_OK VCS_SEND_HELP VCS_SEND_HELP_1 VCS_SEND_HELP_2 VCS_SEND_HELP_3 VCS_SEND_HELP_4 VCS_SEND_HELP_5 VCS_SEND_HELP_6 VCS_SEND_HELP_7 VCS_SEND_HELP_8 VCS_SEND_HELP_9 VCS_SEND_HELP_10 VCS_SEND_HELP_11  ]
 "71
 [; ;VComShell.c: 71: }vcs_sub_st;
-[c E4361 0 1 2 .. ]
-[n E4361 . VCS_SUB_SHUTDOWN VCS_SUB_SEND_CHAR VCS_SUB_WAIT_TX_TO_END  ]
+[c E4399 0 1 2 .. ]
+[n E4399 . VCS_SUB_SHUTDOWN VCS_SUB_SEND_CHAR VCS_SUB_WAIT_TX_TO_END  ]
 "2967 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 2967: extern volatile unsigned char RC1REG __attribute__((address(0x199)));
 [v _RC1REG `Vuc ~T0 @X0 0 e@409 ]
@@ -64,27 +64,27 @@ Version 4.0 HI-TECH Software Intermediate Code
 "74
 [; ;VComShell.c: 74: static void send_string(const char *str,uint8_t len);
 [v _send_string `(v ~T0 @X0 0 sf2`*Cuc`uc ]
-"13 ./GlobalParameters.h
-[; ;./GlobalParameters.h: 13: void setVoltageLow(uint16_t voltage_l);
-[v _setVoltageLow `(v ~T0 @X0 0 ef1`us ]
-"10
-[; ;./GlobalParameters.h: 10: void setVoltageHigh(uint16_t voltage_h);
-[v _setVoltageHigh `(v ~T0 @X0 0 ef1`us ]
-"7
-[; ;./GlobalParameters.h: 7: void setDeltaT(uint16_t delta_t);
-[v _setDeltaT `(v ~T0 @X0 0 ef1`us ]
-"76 VComShell.c
+"200
+[; ;VComShell.c: 200:                 setVoltageLow(arg);
+[v _setVoltageLow `(i ~T0 @X0 0 e? ]
+"203
+[; ;VComShell.c: 203:                 setVoltageHigh(arg);
+[v _setVoltageHigh `(i ~T0 @X0 0 e? ]
+"206
+[; ;VComShell.c: 206:                 setDeltaT(arg);
+[v _setDeltaT `(i ~T0 @X0 0 e? ]
+"76
 [; ;VComShell.c: 76: static uint8_t num2string(char *str,uint8_t len,uint16_t num);
 [v _num2string `(uc ~T0 @X0 0 sf3`*uc`uc`us ]
-"9 ./GlobalParameters.h
-[; ;./GlobalParameters.h: 9: uint16_t getVoltageHigh(void);
-[v _getVoltageHigh `(us ~T0 @X0 0 ef ]
-"12
-[; ;./GlobalParameters.h: 12: uint16_t getVoltageLow(void);
-[v _getVoltageLow `(us ~T0 @X0 0 ef ]
-"6
-[; ;./GlobalParameters.h: 6: uint16_t getDeltaT(void);
-[v _getDeltaT `(us ~T0 @X0 0 ef ]
+"225
+[; ;VComShell.c: 225:         uint8_t n = num2string(num_buffer,6,getVoltageHigh());
+[v _getVoltageHigh `(i ~T0 @X0 0 e? ]
+"251
+[; ;VComShell.c: 251:         uint8_t n = num2string(num_buffer,6,getVoltageLow());
+[v _getVoltageLow `(i ~T0 @X0 0 e? ]
+"277
+[; ;VComShell.c: 277:         uint8_t n = num2string(num_buffer,6,getDeltaT());
+[v _getDeltaT `(i ~T0 @X0 0 e? ]
 "3401 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 3401:     struct {
 [s S188 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -891,13 +891,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _num_buffer `uc ~T0 @X0 -> 5 `i s ]
 "63
 [; ;VComShell.c: 63: }vcs_st = VCS_SHUTDOWN;
-[v _vcs_st `E4329 ~T0 @X0 1 s ]
+[v _vcs_st `E4367 ~T0 @X0 1 s ]
 [i _vcs_st
-. `E4329 0
+. `E4367 0
 ]
 "71
 [; ;VComShell.c: 71: }vcs_sub_st;
-[v _vcs_sub_st `E4361 ~T0 @X0 1 s ]
+[v _vcs_sub_st `E4399 ~T0 @X0 1 s ]
 "79
 [; ;VComShell.c: 79: void uart_vcs_isr(void)
 [v _uart_vcs_isr `(v ~T0 @X0 1 ef ]
@@ -970,13 +970,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "100
 [; ;VComShell.c: 100:     if( vcs_st == VCS_SHUTDOWN )
-[e $ ! == -> _vcs_st `ui -> . `E4329 0 `ui 598  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 0 `ui 598  ]
 "101
 [; ;VComShell.c: 101:     {
 {
 "102
 [; ;VComShell.c: 102:         vcs_st = VCS_INIT;
-[e = _vcs_st . `E4329 1 ]
+[e = _vcs_st . `E4367 1 ]
 "104
 [; ;VComShell.c: 104:     }
 }
@@ -998,7 +998,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _PIE1bits 0 5 -> -> 0 `i `uc ]
 "110
 [; ;VComShell.c: 110:     vcs_st = VCS_SHUTDOWN;
-[e = _vcs_st . `E4329 0 ]
+[e = _vcs_st . `E4367 0 ]
 "111
 [; ;VComShell.c: 111: }
 [e :UE 599 ]
@@ -1013,7 +1013,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "115
 [; ;VComShell.c: 115:     if( vcs_st == VCS_SHUTDOWN )
-[e $ ! == -> _vcs_st `ui -> . `E4329 0 `ui 601  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 0 `ui 601  ]
 "116
 [; ;VComShell.c: 116:         return;
 [e $UE 600  ]
@@ -1023,7 +1023,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _vcs_send_task ..  ]
 "118
 [; ;VComShell.c: 118:     if( vcs_st == VCS_INIT )
-[e $ ! == -> _vcs_st `ui -> . `E4329 1 `ui 602  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 1 `ui 602  ]
 "119
 [; ;VComShell.c: 119:     {
 {
@@ -1050,7 +1050,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = . . _PIE1bits 0 5 -> -> 1 `i `uc ]
 "131
 [; ;VComShell.c: 131:         vcs_st = VCS_READ_COM;
-[e = _vcs_st . `E4329 3 ]
+[e = _vcs_st . `E4367 3 ]
 "132
 [; ;VComShell.c: 132:         return;
 [e $UE 600  ]
@@ -1060,7 +1060,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 602 ]
 "134
 [; ;VComShell.c: 134:     if( vcs_st == VCS_SEND_PROMPT )
-[e $ ! == -> _vcs_st `ui -> . `E4329 2 `ui 603  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 2 `ui 603  ]
 "135
 [; ;VComShell.c: 135:     {
 {
@@ -1076,7 +1076,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 1C -> -> 4 `i `uc ]
 "140
 [; ;VComShell.c: 140:         vcs_st = VCS_READ_COM;
-[e = _vcs_st . `E4329 3 ]
+[e = _vcs_st . `E4367 3 ]
 "141
 [; ;VComShell.c: 141:         return;
 [e $UE 600  ]
@@ -1086,7 +1086,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 603 ]
 "143
 [; ;VComShell.c: 143:     if( vcs_st == VCS_READ_COM )
-[e $ ! == -> _vcs_st `ui -> . `E4329 3 `ui 605  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 3 `ui 605  ]
 "144
 [; ;VComShell.c: 144:     {
 {
@@ -1104,7 +1104,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "149
 [; ;VComShell.c: 149:                 vcs_st = VCS_SEND_ERROR;
-[e = _vcs_st . `E4329 16 ]
+[e = _vcs_st . `E4367 16 ]
 "150
 [; ;VComShell.c: 150:                 return;
 [e $UE 600  ]
@@ -1114,7 +1114,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 607 ]
 "152
 [; ;VComShell.c: 152:             vcs_st = VCS_PARSE_COM;
-[e = _vcs_st . `E4329 4 ]
+[e = _vcs_st . `E4367 4 ]
 "153
 [; ;VComShell.c: 153:         }
 }
@@ -1128,7 +1128,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 605 ]
 "156
 [; ;VComShell.c: 156:     if( vcs_st == VCS_PARSE_COM )
-[e $ ! == -> _vcs_st `ui -> . `E4329 4 `ui 608  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 4 `ui 608  ]
 "157
 [; ;VComShell.c: 157:     {
 {
@@ -1149,7 +1149,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 613 ]
 "163
 [; ;VComShell.c: 163:                 vcs_st = VCS_PARSE_ARG;
-[e = _vcs_st . `E4329 5 ]
+[e = _vcs_st . `E4367 5 ]
 "164
 [; ;VComShell.c: 164:                 break;
 [e $U 609  ]
@@ -1158,7 +1158,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 614 ]
 "166
 [; ;VComShell.c: 166:                 vcs_st = VCS_SEND_INFO;
-[e = _vcs_st . `E4329 6 ]
+[e = _vcs_st . `E4367 6 ]
 "167
 [; ;VComShell.c: 167:                 break;
 [e $U 609  ]
@@ -1167,7 +1167,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 615 ]
 "169
 [; ;VComShell.c: 169:                 vcs_st = VCS_SEND_ERROR;
-[e = _vcs_st . `E4329 16 ]
+[e = _vcs_st . `E4367 16 ]
 "170
 [; ;VComShell.c: 170:                 break;
 [e $U 609  ]
@@ -1191,7 +1191,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 608 ]
 "174
 [; ;VComShell.c: 174:     if( vcs_st == VCS_PARSE_ARG )
-[e $ ! == -> _vcs_st `ui -> . `E4329 5 `ui 616  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 5 `ui 616  ]
 "175
 [; ;VComShell.c: 175:     {
 {
@@ -1254,7 +1254,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "193
 [; ;VComShell.c: 193:                 vcs_st = VCS_SEND_ERROR;
-[e = _vcs_st . `E4329 16 ]
+[e = _vcs_st . `E4367 16 ]
 "194
 [; ;VComShell.c: 194:                 return;
 [e $UE 600  ]
@@ -1281,7 +1281,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 625 ]
 "200
 [; ;VComShell.c: 200:                 setVoltageLow(arg);
-[e ( _setVoltageLow (1 _arg ]
+[e ( _setVoltageLow -> _arg `ui ]
 "201
 [; ;VComShell.c: 201:                 break;
 [e $U 623  ]
@@ -1290,7 +1290,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 626 ]
 "203
 [; ;VComShell.c: 203:                 setVoltageHigh(arg);
-[e ( _setVoltageHigh (1 _arg ]
+[e ( _setVoltageHigh -> _arg `ui ]
 "204
 [; ;VComShell.c: 204:                 break;
 [e $U 623  ]
@@ -1299,7 +1299,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 627 ]
 "206
 [; ;VComShell.c: 206:                 setDeltaT(arg);
-[e ( _setDeltaT (1 _arg ]
+[e ( _setDeltaT -> _arg `ui ]
 "207
 [; ;VComShell.c: 207:                 break;
 [e $U 623  ]
@@ -1315,7 +1315,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 623 ]
 "209
 [; ;VComShell.c: 209:         vcs_st = VCS_SEND_OK;
-[e = _vcs_st . `E4329 17 ]
+[e = _vcs_st . `E4367 17 ]
 "210
 [; ;VComShell.c: 210:         return;
 [e $UE 600  ]
@@ -1325,7 +1325,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 616 ]
 "212
 [; ;VComShell.c: 212:     if( vcs_st == VCS_SEND_INFO )
-[e $ ! == -> _vcs_st `ui -> . `E4329 6 `ui 628  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 6 `ui 628  ]
 "213
 [; ;VComShell.c: 213:     {
 {
@@ -1341,7 +1341,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 2C -> -> 5 `i `uc ]
 "218
 [; ;VComShell.c: 218:         vcs_st = VCS_SEND_INFO_1;
-[e = _vcs_st . `E4329 7 ]
+[e = _vcs_st . `E4367 7 ]
 "219
 [; ;VComShell.c: 219:         return;
 [e $UE 600  ]
@@ -1351,7 +1351,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 628 ]
 "221
 [; ;VComShell.c: 221:     if( vcs_st == VCS_SEND_INFO_1 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 7 `ui 630  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 7 `ui 630  ]
 "222
 [; ;VComShell.c: 222:     {
 {
@@ -1365,13 +1365,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "225
 [; ;VComShell.c: 225:         uint8_t n = num2string(num_buffer,6,getVoltageHigh());
 [v _n `uc ~T0 @X0 1 a ]
-[e = _n ( _num2string (3 , , &U _num_buffer -> -> 6 `i `uc ( _getVoltageHigh ..  ]
+[e = _n ( _num2string (3 , , &U _num_buffer -> -> 6 `i `uc -> ( _getVoltageHigh ..  `us ]
 "226
 [; ;VComShell.c: 226:         send_string(num_buffer,n);
 [e ( _send_string (2 , -> &U _num_buffer `*Cuc _n ]
 "227
 [; ;VComShell.c: 227:         vcs_st = VCS_SEND_INFO_2;
-[e = _vcs_st . `E4329 8 ]
+[e = _vcs_st . `E4367 8 ]
 "228
 [; ;VComShell.c: 228:         return;
 [e $UE 600  ]
@@ -1381,7 +1381,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 630 ]
 "230
 [; ;VComShell.c: 230:     if( vcs_st == VCS_SEND_INFO_2 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 8 `ui 632  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 8 `ui 632  ]
 "231
 [; ;VComShell.c: 231:     {
 {
@@ -1397,7 +1397,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 3C -> -> 2 `i `uc ]
 "235
 [; ;VComShell.c: 235:         vcs_st = VCS_SEND_INFO_3;
-[e = _vcs_st . `E4329 9 ]
+[e = _vcs_st . `E4367 9 ]
 "236
 [; ;VComShell.c: 236:         return;
 [e $UE 600  ]
@@ -1407,7 +1407,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 632 ]
 "238
 [; ;VComShell.c: 238:     if( vcs_st == VCS_SEND_INFO_3 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 9 `ui 634  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 9 `ui 634  ]
 "239
 [; ;VComShell.c: 239:     {
 {
@@ -1423,7 +1423,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 4C -> -> 5 `i `uc ]
 "244
 [; ;VComShell.c: 244:         vcs_st = VCS_SEND_INFO_4;
-[e = _vcs_st . `E4329 10 ]
+[e = _vcs_st . `E4367 10 ]
 "245
 [; ;VComShell.c: 245:         return;
 [e $UE 600  ]
@@ -1433,7 +1433,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 634 ]
 "247
 [; ;VComShell.c: 247:     if( vcs_st == VCS_SEND_INFO_4 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 10 `ui 636  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 10 `ui 636  ]
 "248
 [; ;VComShell.c: 248:     {
 {
@@ -1447,13 +1447,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "251
 [; ;VComShell.c: 251:         uint8_t n = num2string(num_buffer,6,getVoltageLow());
 [v _n `uc ~T0 @X0 1 a ]
-[e = _n ( _num2string (3 , , &U _num_buffer -> -> 6 `i `uc ( _getVoltageLow ..  ]
+[e = _n ( _num2string (3 , , &U _num_buffer -> -> 6 `i `uc -> ( _getVoltageLow ..  `us ]
 "252
 [; ;VComShell.c: 252:         send_string(num_buffer,n);
 [e ( _send_string (2 , -> &U _num_buffer `*Cuc _n ]
 "253
 [; ;VComShell.c: 253:         vcs_st = VCS_SEND_INFO_5;
-[e = _vcs_st . `E4329 11 ]
+[e = _vcs_st . `E4367 11 ]
 "254
 [; ;VComShell.c: 254:         return;
 [e $UE 600  ]
@@ -1463,7 +1463,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 636 ]
 "256
 [; ;VComShell.c: 256:     if( vcs_st == VCS_SEND_INFO_5 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 11 `ui 638  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 11 `ui 638  ]
 "257
 [; ;VComShell.c: 257:     {
 {
@@ -1479,7 +1479,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 5C -> -> 2 `i `uc ]
 "261
 [; ;VComShell.c: 261:         vcs_st = VCS_SEND_INFO_6;
-[e = _vcs_st . `E4329 12 ]
+[e = _vcs_st . `E4367 12 ]
 "262
 [; ;VComShell.c: 262:         return;
 [e $UE 600  ]
@@ -1489,7 +1489,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 638 ]
 "264
 [; ;VComShell.c: 264:     if( vcs_st == VCS_SEND_INFO_6 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 12 `ui 640  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 12 `ui 640  ]
 "265
 [; ;VComShell.c: 265:     {
 {
@@ -1505,7 +1505,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 6C -> -> 5 `i `uc ]
 "270
 [; ;VComShell.c: 270:         vcs_st = VCS_SEND_INFO_7;
-[e = _vcs_st . `E4329 13 ]
+[e = _vcs_st . `E4367 13 ]
 "271
 [; ;VComShell.c: 271:         return;
 [e $UE 600  ]
@@ -1515,7 +1515,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 640 ]
 "273
 [; ;VComShell.c: 273:     if( vcs_st == VCS_SEND_INFO_7 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 13 `ui 642  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 13 `ui 642  ]
 "274
 [; ;VComShell.c: 274:     {
 {
@@ -1529,13 +1529,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "277
 [; ;VComShell.c: 277:         uint8_t n = num2string(num_buffer,6,getDeltaT());
 [v _n `uc ~T0 @X0 1 a ]
-[e = _n ( _num2string (3 , , &U _num_buffer -> -> 6 `i `uc ( _getDeltaT ..  ]
+[e = _n ( _num2string (3 , , &U _num_buffer -> -> 6 `i `uc -> ( _getDeltaT ..  `us ]
 "278
 [; ;VComShell.c: 278:         send_string(num_buffer,n);
 [e ( _send_string (2 , -> &U _num_buffer `*Cuc _n ]
 "279
 [; ;VComShell.c: 279:         vcs_st = VCS_SEND_INFO_8;
-[e = _vcs_st . `E4329 14 ]
+[e = _vcs_st . `E4367 14 ]
 "280
 [; ;VComShell.c: 280:         return;
 [e $UE 600  ]
@@ -1545,7 +1545,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 642 ]
 "282
 [; ;VComShell.c: 282:     if( vcs_st == VCS_SEND_INFO_8 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 14 `ui 644  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 14 `ui 644  ]
 "283
 [; ;VComShell.c: 283:     {
 {
@@ -1561,7 +1561,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 7C -> -> 2 `i `uc ]
 "287
 [; ;VComShell.c: 287:         vcs_st = VCS_SEND_INFO_9;
-[e = _vcs_st . `E4329 15 ]
+[e = _vcs_st . `E4367 15 ]
 "288
 [; ;VComShell.c: 288:         return;
 [e $UE 600  ]
@@ -1571,7 +1571,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 644 ]
 "290
 [; ;VComShell.c: 290:     if( vcs_st == VCS_SEND_INFO_9 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 15 `ui 646  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 15 `ui 646  ]
 "291
 [; ;VComShell.c: 291:     {
 {
@@ -1584,7 +1584,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 647 ]
 "294
 [; ;VComShell.c: 294:         vcs_st = VCS_INIT;
-[e = _vcs_st . `E4329 1 ]
+[e = _vcs_st . `E4367 1 ]
 "295
 [; ;VComShell.c: 295:         return;
 [e $UE 600  ]
@@ -1594,7 +1594,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 646 ]
 "297
 [; ;VComShell.c: 297:     if( vcs_st == VCS_SEND_ERROR )
-[e $ ! == -> _vcs_st `ui -> . `E4329 16 `ui 648  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 16 `ui 648  ]
 "298
 [; ;VComShell.c: 298:     {
 {
@@ -1610,7 +1610,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 8C -> -> 24 `i `uc ]
 "302
 [; ;VComShell.c: 302:         vcs_st = VCS_INIT;
-[e = _vcs_st . `E4329 1 ]
+[e = _vcs_st . `E4367 1 ]
 "303
 [; ;VComShell.c: 303:         return;
 [e $UE 600  ]
@@ -1620,7 +1620,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 648 ]
 "305
 [; ;VComShell.c: 305:     if( vcs_st == VCS_SEND_OK )
-[e $ ! == -> _vcs_st `ui -> . `E4329 17 `ui 650  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 17 `ui 650  ]
 "306
 [; ;VComShell.c: 306:     {
 {
@@ -1636,7 +1636,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 9C -> -> 4 `i `uc ]
 "310
 [; ;VComShell.c: 310:         vcs_st = VCS_INIT;
-[e = _vcs_st . `E4329 1 ]
+[e = _vcs_st . `E4367 1 ]
 "311
 [; ;VComShell.c: 311:         return;
 [e $UE 600  ]
@@ -1646,7 +1646,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 650 ]
 "313
 [; ;VComShell.c: 313:     if( vcs_st == VCS_SEND_HELP )
-[e $ ! == -> _vcs_st `ui -> . `E4329 18 `ui 652  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 18 `ui 652  ]
 "314
 [; ;VComShell.c: 314:     {
 {
@@ -1662,7 +1662,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 10C -> -> 22 `i `uc ]
 "318
 [; ;VComShell.c: 318:         vcs_st = VCS_SEND_HELP_1;
-[e = _vcs_st . `E4329 19 ]
+[e = _vcs_st . `E4367 19 ]
 "319
 [; ;VComShell.c: 319:         return;
 [e $UE 600  ]
@@ -1672,7 +1672,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 652 ]
 "321
 [; ;VComShell.c: 321:     if( vcs_st == VCS_SEND_HELP_1 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 19 `ui 654  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 19 `ui 654  ]
 "322
 [; ;VComShell.c: 322:     {
 {
@@ -1688,7 +1688,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 11C -> -> 17 `i `uc ]
 "326
 [; ;VComShell.c: 326:         vcs_st = VCS_SEND_HELP_2;
-[e = _vcs_st . `E4329 20 ]
+[e = _vcs_st . `E4367 20 ]
 "327
 [; ;VComShell.c: 327:         return;
 [e $UE 600  ]
@@ -1698,7 +1698,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 654 ]
 "329
 [; ;VComShell.c: 329:     if( vcs_st == VCS_SEND_HELP_2 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 20 `ui 656  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 20 `ui 656  ]
 "330
 [; ;VComShell.c: 330:     {
 {
@@ -1714,7 +1714,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 12C -> -> 15 `i `uc ]
 "334
 [; ;VComShell.c: 334:         vcs_st = VCS_SEND_HELP_3;
-[e = _vcs_st . `E4329 21 ]
+[e = _vcs_st . `E4367 21 ]
 "335
 [; ;VComShell.c: 335:         return;
 [e $UE 600  ]
@@ -1724,7 +1724,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 656 ]
 "337
 [; ;VComShell.c: 337:     if( vcs_st == VCS_SEND_HELP_3 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 21 `ui 658  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 21 `ui 658  ]
 "338
 [; ;VComShell.c: 338:     {
 {
@@ -1740,7 +1740,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 13C -> -> 14 `i `uc ]
 "342
 [; ;VComShell.c: 342:         vcs_st = VCS_SEND_HELP_4;
-[e = _vcs_st . `E4329 22 ]
+[e = _vcs_st . `E4367 22 ]
 "343
 [; ;VComShell.c: 343:         return;
 [e $UE 600  ]
@@ -1750,7 +1750,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 658 ]
 "345
 [; ;VComShell.c: 345:     if( vcs_st == VCS_SEND_HELP_4 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 22 `ui 660  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 22 `ui 660  ]
 "346
 [; ;VComShell.c: 346:     {
 {
@@ -1766,7 +1766,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 14C -> -> 33 `i `uc ]
 "350
 [; ;VComShell.c: 350:         vcs_st = VCS_SEND_HELP_5;
-[e = _vcs_st . `E4329 23 ]
+[e = _vcs_st . `E4367 23 ]
 "351
 [; ;VComShell.c: 351:         return;
 [e $UE 600  ]
@@ -1776,7 +1776,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 660 ]
 "353
 [; ;VComShell.c: 353:     if( vcs_st == VCS_SEND_HELP_5 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 23 `ui 662  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 23 `ui 662  ]
 "354
 [; ;VComShell.c: 354:     {
 {
@@ -1792,7 +1792,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 15C -> -> 21 `i `uc ]
 "358
 [; ;VComShell.c: 358:         vcs_st = VCS_SEND_HELP_6;
-[e = _vcs_st . `E4329 24 ]
+[e = _vcs_st . `E4367 24 ]
 "359
 [; ;VComShell.c: 359:         return;
 [e $UE 600  ]
@@ -1802,7 +1802,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 662 ]
 "361
 [; ;VComShell.c: 361:     if( vcs_st == VCS_SEND_HELP_6 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 24 `ui 664  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 24 `ui 664  ]
 "362
 [; ;VComShell.c: 362:     {
 {
@@ -1818,7 +1818,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 16C -> -> 22 `i `uc ]
 "366
 [; ;VComShell.c: 366:         vcs_st = VCS_SEND_HELP_7;
-[e = _vcs_st . `E4329 25 ]
+[e = _vcs_st . `E4367 25 ]
 "367
 [; ;VComShell.c: 367:         return;
 [e $UE 600  ]
@@ -1828,7 +1828,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 664 ]
 "369
 [; ;VComShell.c: 369:     if( vcs_st == VCS_SEND_HELP_7 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 25 `ui 666  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 25 `ui 666  ]
 "370
 [; ;VComShell.c: 370:     {
 {
@@ -1844,7 +1844,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 17C -> -> 23 `i `uc ]
 "374
 [; ;VComShell.c: 374:         vcs_st = VCS_SEND_HELP_8;
-[e = _vcs_st . `E4329 26 ]
+[e = _vcs_st . `E4367 26 ]
 "375
 [; ;VComShell.c: 375:         return;
 [e $UE 600  ]
@@ -1854,7 +1854,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 666 ]
 "377
 [; ;VComShell.c: 377:     if( vcs_st == VCS_SEND_HELP_8 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 26 `ui 668  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 26 `ui 668  ]
 "378
 [; ;VComShell.c: 378:     {
 {
@@ -1870,7 +1870,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 18C -> -> 21 `i `uc ]
 "382
 [; ;VComShell.c: 382:         vcs_st = VCS_SEND_HELP_9;
-[e = _vcs_st . `E4329 27 ]
+[e = _vcs_st . `E4367 27 ]
 "383
 [; ;VComShell.c: 383:         return;
 [e $UE 600  ]
@@ -1880,7 +1880,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 668 ]
 "385
 [; ;VComShell.c: 385:     if( vcs_st == VCS_SEND_HELP_9 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 27 `ui 670  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 27 `ui 670  ]
 "386
 [; ;VComShell.c: 386:     {
 {
@@ -1896,7 +1896,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 19C -> -> 24 `i `uc ]
 "390
 [; ;VComShell.c: 390:         vcs_st = VCS_SEND_HELP_10;
-[e = _vcs_st . `E4329 28 ]
+[e = _vcs_st . `E4367 28 ]
 "391
 [; ;VComShell.c: 391:         return;
 [e $UE 600  ]
@@ -1906,7 +1906,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 670 ]
 "393
 [; ;VComShell.c: 393:     if( vcs_st == VCS_SEND_HELP_10 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 28 `ui 672  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 28 `ui 672  ]
 "394
 [; ;VComShell.c: 394:     {
 {
@@ -1922,7 +1922,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e ( _send_string (2 , :s 20C -> -> 24 `i `uc ]
 "398
 [; ;VComShell.c: 398:         vcs_st = VCS_SEND_HELP_11;
-[e = _vcs_st . `E4329 29 ]
+[e = _vcs_st . `E4367 29 ]
 "399
 [; ;VComShell.c: 399:         return;
 [e $UE 600  ]
@@ -1932,7 +1932,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 672 ]
 "401
 [; ;VComShell.c: 401:     if( vcs_st == VCS_SEND_HELP_11 )
-[e $ ! == -> _vcs_st `ui -> . `E4329 29 `ui 674  ]
+[e $ ! == -> _vcs_st `ui -> . `E4367 29 `ui 674  ]
 "402
 [; ;VComShell.c: 402:     {
 {
@@ -1945,7 +1945,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U 675 ]
 "405
 [; ;VComShell.c: 405:         vcs_st = VCS_INIT;
-[e = _vcs_st . `E4329 1 ]
+[e = _vcs_st . `E4367 1 ]
 "406
 [; ;VComShell.c: 406:         return;
 [e $UE 600  ]
@@ -2009,7 +2009,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _tx_len _len ]
 "427
 [; ;VComShell.c: 427:     vcs_sub_st = VCS_SUB_SEND_CHAR;
-[e = _vcs_sub_st . `E4361 1 ]
+[e = _vcs_sub_st . `E4399 1 ]
 "428
 [; ;VComShell.c: 428:     tx_idx = 0;
 [e = _tx_idx -> -> 0 `i `uc ]
@@ -2027,14 +2027,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "433
 [; ;VComShell.c: 433:     if( vcs_sub_st == VCS_SUB_SHUTDOWN )
-[e $ ! == -> _vcs_sub_st `ui -> . `E4361 0 `ui 681  ]
+[e $ ! == -> _vcs_sub_st `ui -> . `E4399 0 `ui 681  ]
 "434
 [; ;VComShell.c: 434:         return;
 [e $UE 680  ]
 [e :U 681 ]
 "435
 [; ;VComShell.c: 435:     if( vcs_sub_st == VCS_SUB_SEND_CHAR )
-[e $ ! == -> _vcs_sub_st `ui -> . `E4361 1 `ui 682  ]
+[e $ ! == -> _vcs_sub_st `ui -> . `E4399 1 `ui 682  ]
 "436
 [; ;VComShell.c: 436:     {
 {
@@ -2052,7 +2052,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "441
 [; ;VComShell.c: 441:                 vcs_sub_st = VCS_SUB_SHUTDOWN;
-[e = _vcs_sub_st . `E4361 0 ]
+[e = _vcs_sub_st . `E4399 0 ]
 "442
 [; ;VComShell.c: 442:                 tx_string = ((void*)0);
 [e = _tx_string -> -> -> 0 `i `*v `*Cuc ]

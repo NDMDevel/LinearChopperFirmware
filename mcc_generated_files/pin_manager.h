@@ -170,25 +170,25 @@
 #define V_BUSDC_SetAnalogMode()      do { ANSELCbits.ANSC3 = 1; } while(0)
 #define V_BUSDC_SetDigitalMode()     do { ANSELCbits.ANSC3 = 0; } while(0)
 
-// get/set DGPIO aliases
-#define DGPIO_TRIS                 TRISCbits.TRISC5
-#define DGPIO_LAT                  LATCbits.LATC5
-#define DGPIO_PORT                 PORTCbits.RC5
-#define DGPIO_WPU                  WPUCbits.WPUC5
-#define DGPIO_OD                   ODCONCbits.ODC5
-#define DGPIO_ANS                  ANSELCbits.ANSC5
-#define DGPIO_SetHigh()            do { LATCbits.LATC5 = 1; } while(0)
-#define DGPIO_SetLow()             do { LATCbits.LATC5 = 0; } while(0)
-#define DGPIO_Toggle()             do { LATCbits.LATC5 = ~LATCbits.LATC5; } while(0)
-#define DGPIO_GetValue()           PORTCbits.RC5
-#define DGPIO_SetDigitalInput()    do { TRISCbits.TRISC5 = 1; } while(0)
-#define DGPIO_SetDigitalOutput()   do { TRISCbits.TRISC5 = 0; } while(0)
-#define DGPIO_SetPullup()          do { WPUCbits.WPUC5 = 1; } while(0)
-#define DGPIO_ResetPullup()        do { WPUCbits.WPUC5 = 0; } while(0)
-#define DGPIO_SetPushPull()        do { ODCONCbits.ODC5 = 0; } while(0)
-#define DGPIO_SetOpenDrain()       do { ODCONCbits.ODC5 = 1; } while(0)
-#define DGPIO_SetAnalogMode()      do { ANSELCbits.ANSC5 = 1; } while(0)
-#define DGPIO_SetDigitalMode()     do { ANSELCbits.ANSC5 = 0; } while(0)
+// get/set RELAY_GPIO aliases
+#define RELAY_GPIO_TRIS                 TRISCbits.TRISC5
+#define RELAY_GPIO_LAT                  LATCbits.LATC5
+#define RELAY_GPIO_PORT                 PORTCbits.RC5
+#define RELAY_GPIO_WPU                  WPUCbits.WPUC5
+#define RELAY_GPIO_OD                   ODCONCbits.ODC5
+#define RELAY_GPIO_ANS                  ANSELCbits.ANSC5
+#define RELAY_GPIO_SetHigh()            do { LATCbits.LATC5 = 1; } while(0)
+#define RELAY_GPIO_SetLow()             do { LATCbits.LATC5 = 0; } while(0)
+#define RELAY_GPIO_Toggle()             do { LATCbits.LATC5 = ~LATCbits.LATC5; } while(0)
+#define RELAY_GPIO_GetValue()           PORTCbits.RC5
+#define RELAY_GPIO_SetDigitalInput()    do { TRISCbits.TRISC5 = 1; } while(0)
+#define RELAY_GPIO_SetDigitalOutput()   do { TRISCbits.TRISC5 = 0; } while(0)
+#define RELAY_GPIO_SetPullup()          do { WPUCbits.WPUC5 = 1; } while(0)
+#define RELAY_GPIO_ResetPullup()        do { WPUCbits.WPUC5 = 0; } while(0)
+#define RELAY_GPIO_SetPushPull()        do { ODCONCbits.ODC5 = 0; } while(0)
+#define RELAY_GPIO_SetOpenDrain()       do { ODCONCbits.ODC5 = 1; } while(0)
+#define RELAY_GPIO_SetAnalogMode()      do { ANSELCbits.ANSC5 = 1; } while(0)
+#define RELAY_GPIO_SetDigitalMode()     do { ANSELCbits.ANSC5 = 0; } while(0)
 
 /**
    @Param

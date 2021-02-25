@@ -7336,7 +7336,7 @@ void WDT_Initialize(void);
 # 1 "./SystemTimer.h" 1
 # 13 "./SystemTimer.h"
 extern uint8_t system_counter;
-# 23 "./SystemTimer.h"
+# 29 "./SystemTimer.h"
 void TMR1_SystemTimer_ISR(void);
 # 3 "UartParser.c" 2
 
@@ -7350,16 +7350,26 @@ void start_chopper();
 void stop_chopper();
 _Bool is_chopper_active();
 
+void init_relay_watchdog();
+void start_relay_watchdog();
+void stop_relay_watchdog();
+void relay_watchdog_task();
+_Bool is_relay_watchdog_active();
+
 void set_vdc_min(uint16_t vmin);
 void set_vdc_max(uint16_t vmax);
 void set_vdc_critic(uint16_t vc);
 void set_vdc_speed(uint16_t msDelay);
+void set_relay_reset_voltage(uint16_t relay_vthres);
+void set_reset_duration(uint16_t reset_dur_ms);
 void save_to_flash(void);
 
 uint16_t get_vdc_min(void);
 uint16_t get_vdc_max(void);
 uint16_t get_vdc_critic(void);
 uint16_t get_vdc_speed(void);
+uint16_t get_relay_reset_voltage(void);
+uint16_t get_reset_duration(void);
 uint16_t get_vdc(void);
 # 4 "UartParser.c" 2
 
@@ -7451,8 +7461,10 @@ void uart_task(void)
         for( i=1 ; i<rx_idx ; i++ )
             xor ^= rx_buffer[i];
         if( xor != 0 ||
-            (rx_buffer[0] != SET_PARAMS && rx_buffer[0] != GET_PARAMS && rx_buffer[0] != GET_VDC) ||
-            (rx_idx != 11 && rx_idx != 2) )
+            (rx_buffer[0] != SET_PARAMS &&
+             rx_buffer[0] != GET_PARAMS &&
+             rx_buffer[0] != GET_VDC) ||
+            (rx_idx != 15 && rx_idx != 2) )
         {
             rx_idx = 0;
             lock_isr = 0;
@@ -7463,7 +7475,12 @@ void uart_task(void)
     }
     if( st == PARSE_FRAME )
     {
-        if( rx_buffer[0] == SET_PARAMS && rx_idx == 11 )
+        if( rx_buffer[0] == SET_PARAMS )
+        {
+            static uint8_t none = 2;
+            none++;
+        }
+        if( rx_buffer[0] == SET_PARAMS && rx_idx == 15 )
         {
             uint16_t val;
             val = rx_buffer[1];
@@ -7478,7 +7495,15 @@ void uart_task(void)
             val = rx_buffer[7];
             val = val<<8 | rx_buffer[8];
             set_vdc_speed(val);
-            if( rx_buffer[9] == 0 )
+
+            val = rx_buffer[9];
+            val = val<<8 | rx_buffer[10];
+            set_relay_reset_voltage(val);
+            val = rx_buffer[11];
+            val = val<<8 | rx_buffer[12];
+            set_reset_duration(val);
+
+            if( rx_buffer[13] == 0 )
                 stop_chopper();
             else
                 start_chopper();
@@ -7503,13 +7528,21 @@ void uart_task(void)
                 val = get_vdc_speed();
                 rx_buffer[7] = (val>>8) & 0xFF;
                 rx_buffer[8] = val & 0xFF;
-                rx_buffer[9] = is_chopper_active();
+
+                val = get_relay_reset_voltage();
+                rx_buffer[9] = (val>>8) & 0xFF;
+                rx_buffer[10] = val & 0xFF;
+                val = get_reset_duration();
+                rx_buffer[11] = (val>>8) & 0xFF;
+                rx_buffer[12] = val & 0xFF;
+
+                rx_buffer[13] = is_chopper_active();
                 uint8_t i;
                 uint8_t xor = rx_buffer[0];
-                for( i=1 ; i<10 ; i++ )
+                for( i=1 ; i<14 ; i++ )
                     xor ^= rx_buffer[i];
-                rx_buffer[10] = xor;
-                rx_idx = 11;
+                rx_buffer[14] = xor;
+                rx_idx = 15;
                 tx_idx = 0;
                 st = SEND_RESPONSE;
             }

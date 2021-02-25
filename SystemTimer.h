@@ -12,6 +12,7 @@
 
 extern uint8_t system_counter;
 
+//this timer increments system_counter with an interval of 100ms
 #define	TIMER_RESET(T)	T = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1))
 #define TIMER_ELAPSE(T,TE) 	((uint8_t)(system_counter + T) >= ((uint8_t)TE))
 
@@ -19,6 +20,11 @@ extern uint8_t system_counter;
 #define t300ms 3
 #define t400ms 4
 #define t500ms 5
+
+#define t1s 10
+#define t2s 20
+#define t5s 50
+#define t10s 100
 
 void TMR1_SystemTimer_ISR(void);
 
