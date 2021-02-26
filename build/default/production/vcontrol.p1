@@ -51,7 +51,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "24 ./SolidStateRelay.h
 [; ;./SolidStateRelay.h: 24: void stop_relay_watchdog(void);
 [v _stop_relay_watchdog `(v ~T0 @X0 0 ef ]
-"29
+"45 ./vcontrol.h
+[; ;./vcontrol.h: 45: uint16_t get_vdc_speed(void);
+[v _get_vdc_speed `(us ~T0 @X0 0 ef ]
+"29 ./SolidStateRelay.h
 [; ;./SolidStateRelay.h: 29: uint16_t get_relay_reset_voltage(void);
 [v _get_relay_reset_voltage `(us ~T0 @X0 0 ef ]
 "30
@@ -2225,8 +2228,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;vcontrol.c: 295:     buff[3] = vdc_critic;
 [e = *U + &U _buff * -> -> -> 3 `i `ui `ux -> -> # *U &U _buff `ui `ux _vdc_critic ]
 "296
-[; ;vcontrol.c: 296:     buff[4] = duty_count_up_max;
-[e = *U + &U _buff * -> -> -> 4 `i `ui `ux -> -> # *U &U _buff `ui `ux _duty_count_up_max ]
+[; ;vcontrol.c: 296:     buff[4] = get_vdc_speed();
+[e = *U + &U _buff * -> -> -> 4 `i `ui `ux -> -> # *U &U _buff `ui `ux ( _get_vdc_speed ..  ]
 "297
 [; ;vcontrol.c: 297:     buff[5] = get_relay_reset_voltage();
 [e = *U + &U _buff * -> -> -> 5 `i `ui `ux -> -> # *U &U _buff `ui `ux ( _get_relay_reset_voltage ..  ]

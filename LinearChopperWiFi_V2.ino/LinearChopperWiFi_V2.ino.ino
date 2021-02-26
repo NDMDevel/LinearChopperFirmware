@@ -25,7 +25,7 @@ String page_head = R"=====(
     </head>
   <body>
     <p style="font-weight:bold">Linear PWM Chopper</p>
-    <form action="http://)=====" + ip.toString() + R"=====(/set_params\" method="post" style="margin-top:1em;padding: 0 0.3em;background-color: #C0C0C0">
+    <form onsubmit="return submit_check()" action="http://)=====" + ip.toString() + R"=====(/set_params\" method="post" style="margin-top:1em;padding: 0 0.3em;background-color: #C0C0C0">
       <p style="font-weight:bold">Input Params:</p>
       <span class="param_row">Vmin:<input name="vmin" placeholder="minimun voltage [0-800V]" type="text"></span>
       <span class="param_row">Vmax:<input name="vmax" placeholder="maximun voltage [0-800V]" type="text"></span>
@@ -59,8 +59,15 @@ String page_tail = R"=====(
 //insert the options inside the delay combo box (select html tag)
 init_speed();
 init_relay_reset_duration();
+
 setInterval(function(){ ajax_req(); },1000);
 var get_params_timer = setInterval(function(){ ajax_get_params(); },1500);
+
+function submit_check()
+{
+  console.log("verifying input params: [not implemented, does nothing]");
+  return true;
+}
 function ajax_req(req_id)
 {
   var xhttp = new XMLHttpRequest();

@@ -244,7 +244,7 @@ void ApplicationInit(void)
         invalid_param = 1;
 
     val = FLASH_ReadWord(0x1F00 +6);
-    if( val <= 25500 )
+    if( val <= 10000 )
         set_reset_duration(val);
     else
         invalid_param = 1;

@@ -3,9 +3,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "77 ./mcc_generated_files/mcc.h
 [; ;./mcc_generated_files/mcc.h: 77: void SYSTEM_Initialize(void);
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
-"7 ./GlobalSystem.h
-[; ;./GlobalSystem.h: 7: void ApplicationInit(void);
-[v _ApplicationInit `(v ~T0 @X0 0 ef ]
 "357 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 357:     struct {
 [s S31 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -21,6 +18,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "374
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 374: extern volatile INTCONbits_t INTCONbits __attribute__((address(0x00B)));
 [v _INTCONbits `VS30 ~T0 @X0 0 e@11 ]
+"7 ./GlobalSystem.h
+[; ;./GlobalSystem.h: 7: void ApplicationInit(void);
+[v _ApplicationInit `(v ~T0 @X0 0 ef ]
 "23 ./vcontrol.h
 [; ;./vcontrol.h: 23: void init_chopper();
 [v _init_chopper `(v ~T0 @X0 0 e? ]
@@ -753,49 +753,49 @@ Version 4.0 HI-TECH Software Intermediate Code
 "57
 [; ;main.c: 57:     SYSTEM_Initialize();
 [e ( _SYSTEM_Initialize ..  ]
-"73
-[; ;main.c: 73:     ApplicationInit();
-[e ( _ApplicationInit ..  ]
-"76
-[; ;main.c: 76:     (INTCONbits.GIE = 1);
+"60
+[; ;main.c: 60:     (INTCONbits.GIE = 1);
 [e = . . _INTCONbits 0 7 -> -> 1 `i `uc ]
-"78
-[; ;main.c: 78:     (INTCONbits.PEIE = 1);
+"62
+[; ;main.c: 62:     (INTCONbits.PEIE = 1);
 [e = . . _INTCONbits 0 6 -> -> 1 `i `uc ]
-"80
-[; ;main.c: 80:     init_chopper();
+"64
+[; ;main.c: 64:     ApplicationInit();
+[e ( _ApplicationInit ..  ]
+"66
+[; ;main.c: 66:     init_chopper();
 [e ( _init_chopper ..  ]
-"81
-[; ;main.c: 81:     init_relay_watchdog();
+"67
+[; ;main.c: 67:     init_relay_watchdog();
 [e ( _init_relay_watchdog ..  ]
-"83
-[; ;main.c: 83:     uart_start();
+"69
+[; ;main.c: 69:     uart_start();
 [e ( _uart_start ..  ]
-"84
-[; ;main.c: 84:     while (1)
+"70
+[; ;main.c: 70:     while (1)
 [e :U 596 ]
-"85
-[; ;main.c: 85:     {
+"71
+[; ;main.c: 71:     {
 {
-"86
-[; ;main.c: 86:         uart_task();
+"72
+[; ;main.c: 72:         uart_task();
 [e ( _uart_task ..  ]
-"87
-[; ;main.c: 87:         relay_watchdog_task();
+"73
+[; ;main.c: 73:         relay_watchdog_task();
 [e ( _relay_watchdog_task ..  ]
-"88
-[; ;main.c: 88:         relay_watchdog_record_activations_task();
+"74
+[; ;main.c: 74:         relay_watchdog_record_activations_task();
 [e ( _relay_watchdog_record_activations_task ..  ]
-"89
-[; ;main.c: 89:         __asm("clrwdt");
+"75
+[; ;main.c: 75:         __asm("clrwdt");
 [; <" clrwdt ;# ">
-"90
-[; ;main.c: 90:     }
+"76
+[; ;main.c: 76:     }
 }
 [e :U 595 ]
 [e $U 596  ]
 [e :U 597 ]
-"91
-[; ;main.c: 91: }
+"77
+[; ;main.c: 77: }
 [e :UE 594 ]
 }

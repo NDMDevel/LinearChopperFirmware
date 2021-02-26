@@ -55,27 +55,13 @@ void main(void)
 {
     // initialize the device
     SYSTEM_Initialize();
-
-//    uint16_t buff[WRITE_FLASH_BLOCKSIZE];
-//    buff[0] = 0x3FFF;
-//    buff[1] = 0x3FFF;
-//    buff[2] = 0x3FFF;
-//    buff[3] = 0x3FFF;
-//    buff[4] = 0x3FFF;
-//    buff[5] = 0x3FFF;
-//    buff[6] = 0x3FFF;
-//    buff[7] = 0;
-//    buff[8] = 0;
-//    FLASH_WriteBlock(FLASH_START_ADDRESS,buff);
-//    while(1)
-//        CLRWDT();
-    
-    ApplicationInit();
-    
+        
     // Enable the Global Interrupts
     INTERRUPT_GlobalInterruptEnable();
     // Enable the Peripheral Interrupts
     INTERRUPT_PeripheralInterruptEnable();
+
+    ApplicationInit();
 
     init_chopper();
     init_relay_watchdog();

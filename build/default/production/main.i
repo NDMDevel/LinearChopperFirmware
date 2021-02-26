@@ -7372,7 +7372,7 @@ void uart_task(void);
 extern uint8_t system_counter;
 extern uint8_t system_seconds;
 extern uint8_t system_minutes;
-# 39 "./SystemTimer.h"
+# 40 "./SystemTimer.h"
 void TMR1_SystemTimer_ISR(void);
 # 47 "main.c" 2
 
@@ -7418,13 +7418,13 @@ void main(void)
 {
 
     SYSTEM_Initialize();
-# 73 "main.c"
-    ApplicationInit();
 
 
     (INTCONbits.GIE = 1);
 
     (INTCONbits.PEIE = 1);
+
+    ApplicationInit();
 
     init_chopper();
     init_relay_watchdog();

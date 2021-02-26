@@ -135,8 +135,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;GlobalSystem.c: 47:     val = FLASH_ReadWord(0x1F00 +6);
 [e = _val ( _FLASH_ReadWord (1 -> + -> 7936 `i -> 6 `i `us ]
 "48
-[; ;GlobalSystem.c: 48:     if( val <= 25500 )
-[e $ ! <= -> _val `ui -> -> 25500 `i `ui 12  ]
+[; ;GlobalSystem.c: 48:     if( val <= 10000 )
+[e $ ! <= -> _val `ui -> -> 10000 `i `ui 12  ]
 "49
 [; ;GlobalSystem.c: 49:         set_reset_duration(val);
 [e ( _set_reset_duration (1 _val ]

@@ -178,7 +178,7 @@ uint16_t get_vdc(void);
 extern uint8_t system_counter;
 extern uint8_t system_seconds;
 extern uint8_t system_minutes;
-# 39 "./SystemTimer.h"
+# 40 "./SystemTimer.h"
 void TMR1_SystemTimer_ISR(void);
 # 3 "SolidStateRelay.c" 2
 
@@ -7185,7 +7185,8 @@ enum RelayWatchdog
     INIT,
     WAIT_VOLTAGE_RISE,
     WAIT_VOLTAGE_FALL,
-    WAIT_RESET_DURATION
+    WAIT_RESET_DURATION,
+    WAIT_BEFORE_REPEAT
 };
 
 static enum RelayActivationStatus
@@ -7200,7 +7201,7 @@ static uint16_t relay_reset_voltage;
 static uint16_t reset_duration;
 static uint16_t prev_vdc;
 static uint8_t local_timer;
-static uint16_t reset_duration_ms;
+static uint16_t reset_duration_ms = 0xFFFF;
 static uint32_t activation_counter = 0;
 
 void init_relay_watchdog()
@@ -7229,6 +7230,15 @@ _Bool is_relay_watchdog_active()
     return st != SHUTDOWN;
 }
 
+static void restart_relay_watchdog(void)
+{
+    if( st != SHUTDOWN )
+    {
+        st = INIT;
+        st_act = RA_INIT;
+    }
+}
+
 void set_relay_reset_voltage(uint16_t relay_vthres)
 {
     if( relay_vthres == 0xFFFF )
@@ -7237,6 +7247,8 @@ void set_relay_reset_voltage(uint16_t relay_vthres)
         relay_reset_voltage = 800;
     else
         relay_reset_voltage = relay_vthres;
+
+    restart_relay_watchdog();
 }
 
 void set_reset_duration(uint16_t reset_dur_ms)
@@ -7251,6 +7263,8 @@ void set_reset_duration(uint16_t reset_dur_ms)
 
 
     reset_duration_ms = reset_duration/100;
+
+    restart_relay_watchdog();
 }
 
 uint16_t get_relay_reset_voltage(void)
@@ -7295,6 +7309,10 @@ void relay_watchdog_task()
     if( st == INIT )
     {
 
+        if( reset_duration_ms == 0xFFFF )
+        {
+            set_reset_duration(1000);
+        }
         close_relay();
         st = WAIT_VOLTAGE_RISE;
         return;
@@ -7332,6 +7350,15 @@ void relay_watchdog_task()
 
         close_relay();
 
+        local_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
+        st = WAIT_BEFORE_REPEAT;
+        return;
+    }
+    if( st == WAIT_BEFORE_REPEAT )
+    {
+
+        if( !((uint8_t)(system_counter + local_timer) >= ((uint8_t)50)) )
+            return;
         st = WAIT_VOLTAGE_RISE;
         return;
     }

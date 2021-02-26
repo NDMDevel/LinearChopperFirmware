@@ -293,7 +293,7 @@ void save_to_flash(void)
     buff[1] = vdc_min;
     buff[2] = vdc_max;
     buff[3] = vdc_critic;
-    buff[4] = duty_count_up_max;
+    buff[4] = get_vdc_speed();
     buff[5] = get_relay_reset_voltage();
     buff[6] = get_reset_duration();
 

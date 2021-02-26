@@ -11,7 +11,8 @@ enum RelayWatchdog
     INIT,
     WAIT_VOLTAGE_RISE,
     WAIT_VOLTAGE_FALL,
-    WAIT_RESET_DURATION
+    WAIT_RESET_DURATION,
+    WAIT_BEFORE_REPEAT
 };
 
 static enum RelayActivationStatus
@@ -26,7 +27,7 @@ static uint16_t relay_reset_voltage;
 static uint16_t reset_duration;
 static uint16_t prev_vdc;
 static uint8_t local_timer;
-static uint16_t reset_duration_ms;
+static uint16_t reset_duration_ms = 0xFFFF;
 static uint32_t activation_counter = 0; 
 
 void init_relay_watchdog()
@@ -55,6 +56,15 @@ bool is_relay_watchdog_active()
     return st != SHUTDOWN;
 }
 
+static void restart_relay_watchdog(void)
+{
+    if( st != SHUTDOWN )
+    {
+        st = INIT;
+        st_act = RA_INIT;
+    }
+}
+
 void set_relay_reset_voltage(uint16_t relay_vthres)
 {
     if( relay_vthres == 0xFFFF )
@@ -63,6 +73,8 @@ void set_relay_reset_voltage(uint16_t relay_vthres)
         relay_reset_voltage = 800;
     else
         relay_reset_voltage = relay_vthres;
+
+    restart_relay_watchdog();
 }
 
 void set_reset_duration(uint16_t reset_dur_ms)
@@ -77,6 +89,8 @@ void set_reset_duration(uint16_t reset_dur_ms)
     //reset_duration_ms can be directly used with TIMER_ELAPSE, since
     //the system timer increments with intervals of 100ms
     reset_duration_ms = reset_duration/100;
+    
+    restart_relay_watchdog();
 }
 
 uint16_t get_relay_reset_voltage(void)
@@ -120,6 +134,12 @@ void relay_watchdog_task()
         return;
     if( st == INIT )
     {
+        //if no valid reset duration loaded, a default value of 1s is taken
+        if( reset_duration_ms == 0xFFFF )
+        {
+            set_reset_duration(1000);
+            save_to_flash();
+        }
         //close the relay and start the state machine
         close_relay();
         st = WAIT_VOLTAGE_RISE;
@@ -157,7 +177,16 @@ void relay_watchdog_task()
         
         //now the relay must be close again:
         close_relay();
-        //now goes to wait again for the woltage to rise and repeat the process:
+        //now goes to wait for N (5) seconds befor start again
+        TIMER_RESET(local_timer);
+        st = WAIT_BEFORE_REPEAT;
+        return;
+    }
+    if( st == WAIT_BEFORE_REPEAT )
+    {
+        //wait here for 5 secs, then restart the state machine
+        if( !TIMER_ELAPSE(local_timer,t5s) )
+            return;
         st = WAIT_VOLTAGE_RISE;
         return;
     }

@@ -26,11 +26,12 @@ extern uint8_t system_minutes;
 #define	TIMER_RESET_MIN(T)	T = ((uint8_t)((uint8_t)~system_minutes)+((uint8_t)1))
 #define TIMER_ELAPSE_MIN(T,TE) 	((uint8_t)(system_minutes + T) >= ((uint8_t)TE))
 
+
+//this macros must be used only with TIMER_RESET/TIMER_ELAPSE 100ms period
 #define t200ms 2
 #define t300ms 3
 #define t400ms 4
 #define t500ms 5
-
 #define t1s 10
 #define t2s 20
 #define t5s 50
