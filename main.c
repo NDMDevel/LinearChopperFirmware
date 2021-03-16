@@ -41,6 +41,7 @@
     SOFTWARE.
 */
 
+#include <xc.h>
 #include "mcc_generated_files/mcc.h"
 #include "vcontrol.h"
 #include "UartParser.h"

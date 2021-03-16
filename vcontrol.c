@@ -1,6 +1,7 @@
 #include "vcontrol.h"
 #include "mcc_generated_files/mcc.h"
 #include "SolidStateRelay.h"
+#include "SystemTimer.h"
 #include <stdbool.h>
 
 //#define DUTY_RAW_MAX     379    //379 -> 95%, 399 -> 100%
@@ -34,6 +35,11 @@ static uint16_t duty_count_down;
 static uint16_t duty_count_down_max = 10;
 static bool chopper_active = false;
 static bool init_required = true;
+static uint16_t pwm_duty_wtb;
+
+//WTB
+uint16_t wtb_stopped_voltage = 20;  //if VDC <= 20 V, then the WT is considered stopped
+static uint8_t wtb_local_timer;
 
 static const int16_t v_table[1024] = {
 	  0 ,   1 ,   2 ,   2 ,   3 ,   4 ,   5 ,
@@ -192,6 +198,8 @@ static enum
 
 }st = SHUTDOWN;
 
+
+
 static void set_vdc_threshold(uint16_t v_val,uint16_t *v_target)
 {
     if( v_val == 0xFFFF )
@@ -330,6 +338,19 @@ uint16_t get_vdc(void)
     return vdc;
 }
 
+//WTB: Wind Turbine Breaker
+static enum
+{
+    //WTB_SHUTDOWN,
+    WTB_INIT,
+    WTB_INC_DUTY,
+    WTB_WAIT_STOPPED_STATE,
+    WTB_WAIT_VOLTAGE_TO_INCREASE,
+    WTB_WAIT_TIMEOUT
+
+}st_wtb = WTB_WAIT_VOLTAGE_TO_INCREASE;
+
+
 void ADC_VoltageControlHandler_ISR(void)
 {
     vdc_prev    = vdc;
@@ -338,89 +359,158 @@ void ADC_VoltageControlHandler_ISR(void)
     if( chopper_active == false )
         return;
     
-    diff_vdc    = vdc - vdc_prev;
-    if( vdc > vdc_prev )
-        diff_positive = true;
-    else
-        diff_positive = false;
-
-    if( vdc > vdc_critic )
+//    if( st_wtb != WTB_SHUTDOWN )
     {
-        LED_R_SetHigh();
-        LED_G_SetLow();
-        PWM3_LoadDutyValue(DUTY_RAW_MAX);
-        current_duty = DUTY_RAW_MAX;
-        target_duty = DUTY_RAW_MAX;
-        pwm_duty = DUTY_RAW_MAX;
-    }
-    else
-    {
-        if( vdc >= vdc_max )
+        if( st_wtb == WTB_INIT )
         {
-            //Red on, Green off
+            if( vdc < get_relay_reset_voltage() )
+            {
+                pwm_duty_wtb = pwm_duty;
+                st_wtb = WTB_INC_DUTY;
+                LED_G_SetLow();
+                LED_R_SetHigh();
+            }
+            else
+                goto normal_chopper;
+        }
+        if( st_wtb == WTB_INC_DUTY )
+        {
+            if( pwm_duty_wtb < DUTY_RAW_MAX )
+            {
+                pwm_duty_wtb++;
+                LoadDutyValue( pwm_duty_wtb );
+            }
+            else
+                st_wtb = WTB_WAIT_STOPPED_STATE;
+            return;
+        }
+        if( st_wtb == WTB_WAIT_STOPPED_STATE )
+        {
+            //if voltage still too high, returns
+            if( vdc > wtb_stopped_voltage )
+                return;
+            //now voltage drops below wtb_stopped_voltage, now
+            //it's time to release the break and wait for VDC to
+            //increase beyond get_relay_reset_voltage().
+            //[in the mean time, the chopper is fully operational, and will
+            //be its normal logic who will release the break
+            //(since right now VDC should be less than VDC_MIN, if not, the
+            //break will not be released)]
+            st_wtb = WTB_WAIT_VOLTAGE_TO_INCREASE;
+            pwm_duty = pwm_duty_wtb;
+            goto normal_chopper;
+        }
+        if( st_wtb == WTB_WAIT_VOLTAGE_TO_INCREASE )
+        {
+            //wait for the voltage to overcome the threshold
+            if( vdc >= get_relay_reset_voltage() )
+            {
+                //now we can reset this WTB state machine,
+                //but before, we will wait for 5 seconds and thus avoid
+                //a new cycle of WT break right away...
+                TIMER_RESET(wtb_local_timer);
+                st_wtb = WTB_WAIT_TIMEOUT;
+            }
+            goto normal_chopper;
+        }
+        if( st_wtb == WTB_WAIT_TIMEOUT )
+        {
+            //if 5s passed from last activation, then the state machine
+            //can be restarted
+            if( TIMER_ELAPSE(wtb_local_timer,t5s) )
+                st_wtb = WTB_INIT;
+            goto normal_chopper;
+        }
+    }
+
+    normal_chopper:
+    if( st == ACTIVE )
+    {
+        diff_vdc    = vdc - vdc_prev;
+        if( vdc > vdc_prev )
+            diff_positive = true;
+        else
+            diff_positive = false;
+
+        if( vdc > vdc_critic )
+        {
             LED_R_SetHigh();
             LED_G_SetLow();
+            PWM3_LoadDutyValue(DUTY_RAW_MAX);
+            current_duty = DUTY_RAW_MAX;
+            target_duty = DUTY_RAW_MAX;
             pwm_duty = DUTY_RAW_MAX;
         }
         else
         {
-            if( vdc >= vdc_min )
+            if( vdc >= vdc_max )
             {
+                //Red on, Green off
                 LED_R_SetHigh();
-                LED_G_SetHigh();
-                bool force_inc = true;
-                if( diff_positive == true )
-                {
-                    uint32_t pwm = (uint32_t)DUTY_RAW_MAX * (uint32_t)(vdc - vdc_min);
-                    pwm /= (vdc_max - vdc_min);
-                    if( pwm > DUTY_RAW_MAX )
-                    {
-                        pwm_duty = DUTY_RAW_MAX;
-                        force_inc = false;
-                    }
-                    else
-                    {
-                        if( pwm_duty < pwm )
-                        {
-                            pwm_duty = pwm;
-                            force_inc = false;
-                        }
-                    }
-                }
-                if( force_inc == true )
-                {
-                    if( duty_count_up >= duty_count_up_max )
-                    {
-                        duty_count_up = 0;
-                        pwm_duty += duty_pwm_inc;
-                        if( pwm_duty > DUTY_RAW_MAX )
-                            pwm_duty = DUTY_RAW_MAX;
-                    }
-                    else
-                        duty_count_up++;
-                }
-                duty_count_down = 0;
+                LED_G_SetLow();
+                pwm_duty = DUTY_RAW_MAX;
             }
             else
             {
-                LED_R_SetLow();
-                LED_G_SetHigh();
-                if( duty_count_down >= duty_count_down_max )
+                if( vdc >= vdc_min )
                 {
+                    LED_R_SetHigh();
+                    LED_G_SetHigh();
+                    bool force_inc = true;
+                    if( diff_positive == true )
+                    {
+                        uint32_t pwm = (uint32_t)DUTY_RAW_MAX * (uint32_t)(vdc - vdc_min);
+                        pwm /= (vdc_max - vdc_min);
+                        if( pwm > DUTY_RAW_MAX )
+                        {
+                            pwm_duty = DUTY_RAW_MAX;
+                            force_inc = false;
+                        }
+                        else
+                        {
+                            if( pwm_duty < pwm )
+                            {
+                                pwm_duty = pwm;
+                                force_inc = false;
+                            }
+                        }
+                    }
+                    if( force_inc == true )
+                    {
+                        if( duty_count_up >= duty_count_up_max )
+                        {
+                            duty_count_up = 0;
+                            pwm_duty += duty_pwm_inc;
+                            if( pwm_duty > DUTY_RAW_MAX )
+                                pwm_duty = DUTY_RAW_MAX;
+                        }
+                        else
+                            duty_count_up++;
+                    }
                     duty_count_down = 0;
-                    if( pwm_duty > duty_pwm_dec )
-                        pwm_duty -= duty_pwm_dec;
-                    else
-                        pwm_duty = 0;
                 }
                 else
-                    duty_count_down++;
+                {
+                    LED_R_SetLow();
+                    LED_G_SetHigh();
+                    if( duty_count_down >= duty_count_down_max )
+                    {
+                        duty_count_down = 0;
+                        if( pwm_duty > duty_pwm_dec )
+                            pwm_duty -= duty_pwm_dec;
+                        else
+                            pwm_duty = 0;
+                    }
+                    else
+                        duty_count_down++;
+                }
             }
         }
+    //    if( pwm_duty > DUTY_RAW_MAX )
+    //        pwm_duty = DUTY_RAW_MAX;
+        LoadDutyValue( pwm_duty );
+        return;
     }
-//    if( pwm_duty > DUTY_RAW_MAX )
-//        pwm_duty = DUTY_RAW_MAX;
-    LoadDutyValue( pwm_duty );
 }
 
 //40 -> 5% duty inc: 0->100% in  20ms

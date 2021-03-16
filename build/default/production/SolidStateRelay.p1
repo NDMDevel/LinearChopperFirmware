@@ -21,7 +21,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1969
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 1969: extern volatile LATCbits_t LATCbits __attribute__((address(0x10E)));
 [v _LATCbits `VS106 ~T0 @X0 0 e@270 ]
-"48 ./vcontrol.h
+"40 ./vcontrol.h
+[; ;./vcontrol.h: 40: void save_to_flash(void);
+[v _save_to_flash `(v ~T0 @X0 0 ef ]
+"48
 [; ;./vcontrol.h: 48: uint16_t get_vdc(void);
 [v _get_vdc `(us ~T0 @X0 0 ef ]
 "13 ./SystemTimer.h
@@ -30,9 +33,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "15
 [; ;./SystemTimer.h: 15: extern uint8_t system_minutes;
 [v _system_minutes `uc ~T0 @X0 0 e ]
-"40 ./vcontrol.h
-[; ;./vcontrol.h: 40: void save_to_flash(void);
-[v _save_to_flash `(v ~T0 @X0 0 ef ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1705.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -1113,204 +1113,207 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;SolidStateRelay.c: 140:             set_reset_duration(1000);
 [e ( _set_reset_duration (1 -> -> 1000 `i `us ]
 "141
-[; ;SolidStateRelay.c: 141:         }
+[; ;SolidStateRelay.c: 141:             save_to_flash();
+[e ( _save_to_flash ..  ]
+"142
+[; ;SolidStateRelay.c: 142:         }
 }
 [e :U 622 ]
-"142
-[; ;SolidStateRelay.c: 142:         close_relay();
-[e ( _close_relay ..  ]
-"143
-[; ;SolidStateRelay.c: 143:         st = WAIT_VOLTAGE_RISE;
-[e = _st . `E4198 2 ]
 "144
-[; ;SolidStateRelay.c: 144:         return;
-[e $UE 619  ]
+[; ;SolidStateRelay.c: 144:         close_relay();
+[e ( _close_relay ..  ]
 "145
-[; ;SolidStateRelay.c: 145:     }
+[; ;SolidStateRelay.c: 145:         st = WAIT_VOLTAGE_RISE;
+[e = _st . `E4198 2 ]
+"146
+[; ;SolidStateRelay.c: 146:         return;
+[e $UE 619  ]
+"147
+[; ;SolidStateRelay.c: 147:     }
 }
 [e :U 621 ]
-"146
-[; ;SolidStateRelay.c: 146:     if( st == WAIT_VOLTAGE_RISE )
+"148
+[; ;SolidStateRelay.c: 148:     if( st == WAIT_VOLTAGE_RISE )
 [e $ ! == -> _st `ui -> . `E4198 2 `ui 623  ]
-"147
-[; ;SolidStateRelay.c: 147:     {
-{
 "149
-[; ;SolidStateRelay.c: 149:         if( get_vdc() <= relay_reset_voltage )
+[; ;SolidStateRelay.c: 149:     {
+{
+"151
+[; ;SolidStateRelay.c: 151:         if( get_vdc() <= relay_reset_voltage )
 [e $ ! <= -> ( _get_vdc ..  `ui -> _relay_reset_voltage `ui 624  ]
-"150
-[; ;SolidStateRelay.c: 150:             return;
+"152
+[; ;SolidStateRelay.c: 152:             return;
 [e $UE 619  ]
 [e :U 624 ]
-"154
-[; ;SolidStateRelay.c: 154:         st = WAIT_VOLTAGE_FALL;
-[e = _st . `E4198 3 ]
-"155
-[; ;SolidStateRelay.c: 155:         return;
-[e $UE 619  ]
 "156
-[; ;SolidStateRelay.c: 156:     }
+[; ;SolidStateRelay.c: 156:         st = WAIT_VOLTAGE_FALL;
+[e = _st . `E4198 3 ]
+"157
+[; ;SolidStateRelay.c: 157:         return;
+[e $UE 619  ]
+"158
+[; ;SolidStateRelay.c: 158:     }
 }
 [e :U 623 ]
-"157
-[; ;SolidStateRelay.c: 157:     if( st == WAIT_VOLTAGE_FALL )
+"159
+[; ;SolidStateRelay.c: 159:     if( st == WAIT_VOLTAGE_FALL )
 [e $ ! == -> _st `ui -> . `E4198 3 `ui 625  ]
-"158
-[; ;SolidStateRelay.c: 158:     {
-{
 "160
-[; ;SolidStateRelay.c: 160:         if( get_vdc() >= relay_reset_voltage )
+[; ;SolidStateRelay.c: 160:     {
+{
+"162
+[; ;SolidStateRelay.c: 162:         if( get_vdc() >= relay_reset_voltage )
 [e $ ! >= -> ( _get_vdc ..  `ui -> _relay_reset_voltage `ui 626  ]
-"161
-[; ;SolidStateRelay.c: 161:             return;
+"163
+[; ;SolidStateRelay.c: 163:             return;
 [e $UE 619  ]
 [e :U 626 ]
-"164
-[; ;SolidStateRelay.c: 164:         open_relay();
-[e ( _open_relay ..  ]
-"165
-[; ;SolidStateRelay.c: 165:         activation_counter++;
-[e ++ _activation_counter -> -> -> 1 `i `l `ul ]
 "166
-[; ;SolidStateRelay.c: 166:         local_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
-[e = _local_timer -> + -> -> ~ -> _system_counter `i `uc `i -> -> -> 1 `i `uc `i `uc ]
+[; ;SolidStateRelay.c: 166:         open_relay();
+[e ( _open_relay ..  ]
 "167
-[; ;SolidStateRelay.c: 167:         st = WAIT_RESET_DURATION;
-[e = _st . `E4198 4 ]
+[; ;SolidStateRelay.c: 167:         activation_counter++;
+[e ++ _activation_counter -> -> -> 1 `i `l `ul ]
 "168
-[; ;SolidStateRelay.c: 168:         return;
-[e $UE 619  ]
+[; ;SolidStateRelay.c: 168:         local_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
+[e = _local_timer -> + -> -> ~ -> _system_counter `i `uc `i -> -> -> 1 `i `uc `i `uc ]
 "169
-[; ;SolidStateRelay.c: 169:     }
+[; ;SolidStateRelay.c: 169:         st = WAIT_RESET_DURATION;
+[e = _st . `E4198 4 ]
+"170
+[; ;SolidStateRelay.c: 170:         return;
+[e $UE 619  ]
+"171
+[; ;SolidStateRelay.c: 171:     }
 }
 [e :U 625 ]
-"170
-[; ;SolidStateRelay.c: 170:     if( st == WAIT_RESET_DURATION )
+"172
+[; ;SolidStateRelay.c: 172:     if( st == WAIT_RESET_DURATION )
 [e $ ! == -> _st `ui -> . `E4198 4 `ui 627  ]
-"171
-[; ;SolidStateRelay.c: 171:     {
-{
 "173
-[; ;SolidStateRelay.c: 173:         if( !((uint8_t)(system_counter + local_timer) >= ((uint8_t)reset_duration_ms)) )
+[; ;SolidStateRelay.c: 173:     {
+{
+"175
+[; ;SolidStateRelay.c: 175:         if( !((uint8_t)(system_counter + local_timer) >= ((uint8_t)reset_duration_ms)) )
 [e $ ! ! >= -> -> + -> _system_counter `i -> _local_timer `i `uc `i -> -> _reset_duration_ms `uc `i 628  ]
-"174
-[; ;SolidStateRelay.c: 174:             return;
+"176
+[; ;SolidStateRelay.c: 176:             return;
 [e $UE 619  ]
 [e :U 628 ]
-"177
-[; ;SolidStateRelay.c: 177:         close_relay();
-[e ( _close_relay ..  ]
 "179
-[; ;SolidStateRelay.c: 179:         local_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
-[e = _local_timer -> + -> -> ~ -> _system_counter `i `uc `i -> -> -> 1 `i `uc `i `uc ]
-"180
-[; ;SolidStateRelay.c: 180:         st = WAIT_BEFORE_REPEAT;
-[e = _st . `E4198 5 ]
+[; ;SolidStateRelay.c: 179:         close_relay();
+[e ( _close_relay ..  ]
 "181
-[; ;SolidStateRelay.c: 181:         return;
-[e $UE 619  ]
+[; ;SolidStateRelay.c: 181:         local_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
+[e = _local_timer -> + -> -> ~ -> _system_counter `i `uc `i -> -> -> 1 `i `uc `i `uc ]
 "182
-[; ;SolidStateRelay.c: 182:     }
+[; ;SolidStateRelay.c: 182:         st = WAIT_BEFORE_REPEAT;
+[e = _st . `E4198 5 ]
+"183
+[; ;SolidStateRelay.c: 183:         return;
+[e $UE 619  ]
+"184
+[; ;SolidStateRelay.c: 184:     }
 }
 [e :U 627 ]
-"183
-[; ;SolidStateRelay.c: 183:     if( st == WAIT_BEFORE_REPEAT )
+"185
+[; ;SolidStateRelay.c: 185:     if( st == WAIT_BEFORE_REPEAT )
 [e $ ! == -> _st `ui -> . `E4198 5 `ui 629  ]
-"184
-[; ;SolidStateRelay.c: 184:     {
-{
 "186
-[; ;SolidStateRelay.c: 186:         if( !((uint8_t)(system_counter + local_timer) >= ((uint8_t)50)) )
+[; ;SolidStateRelay.c: 186:     {
+{
+"188
+[; ;SolidStateRelay.c: 188:         if( !((uint8_t)(system_counter + local_timer) >= ((uint8_t)50)) )
 [e $ ! ! >= -> -> + -> _system_counter `i -> _local_timer `i `uc `i -> -> -> 50 `i `uc `i 630  ]
-"187
-[; ;SolidStateRelay.c: 187:             return;
+"189
+[; ;SolidStateRelay.c: 189:             return;
 [e $UE 619  ]
 [e :U 630 ]
-"188
-[; ;SolidStateRelay.c: 188:         st = WAIT_VOLTAGE_RISE;
-[e = _st . `E4198 2 ]
-"189
-[; ;SolidStateRelay.c: 189:         return;
-[e $UE 619  ]
 "190
-[; ;SolidStateRelay.c: 190:     }
+[; ;SolidStateRelay.c: 190:         st = WAIT_VOLTAGE_RISE;
+[e = _st . `E4198 2 ]
+"191
+[; ;SolidStateRelay.c: 191:         return;
+[e $UE 619  ]
+"192
+[; ;SolidStateRelay.c: 192:     }
 }
 [e :U 629 ]
-"191
-[; ;SolidStateRelay.c: 191: }
+"193
+[; ;SolidStateRelay.c: 193: }
 [e :UE 619 ]
 }
-"193
-[; ;SolidStateRelay.c: 193: static uint8_t ra_local_timer;
-[v _ra_local_timer `uc ~T0 @X0 1 s ]
 "195
-[; ;SolidStateRelay.c: 195: void relay_watchdog_record_activations_task(void)
+[; ;SolidStateRelay.c: 195: static uint8_t ra_local_timer;
+[v _ra_local_timer `uc ~T0 @X0 1 s ]
+"197
+[; ;SolidStateRelay.c: 197: void relay_watchdog_record_activations_task(void)
 [v _relay_watchdog_record_activations_task `(v ~T0 @X0 1 ef ]
-"196
-[; ;SolidStateRelay.c: 196: {
+"198
+[; ;SolidStateRelay.c: 198: {
 {
 [e :U _relay_watchdog_record_activations_task ]
 [f ]
-"197
-[; ;SolidStateRelay.c: 197:     if( st_act == RA_SHUTDOWN )
+"199
+[; ;SolidStateRelay.c: 199:     if( st_act == RA_SHUTDOWN )
 [e $ ! == -> _st_act `ui -> . `E4205 0 `ui 632  ]
-"198
-[; ;SolidStateRelay.c: 198:         return;
+"200
+[; ;SolidStateRelay.c: 200:         return;
 [e $UE 631  ]
 [e :U 632 ]
-"199
-[; ;SolidStateRelay.c: 199:     if( st_act == RA_INIT )
+"201
+[; ;SolidStateRelay.c: 201:     if( st_act == RA_INIT )
 [e $ ! == -> _st_act `ui -> . `E4205 1 `ui 633  ]
-"200
-[; ;SolidStateRelay.c: 200:     {
-{
 "202
-[; ;SolidStateRelay.c: 202:         ra_local_timer = ((uint8_t)((uint8_t)~system_minutes)+((uint8_t)1));
-[e = _ra_local_timer -> + -> -> ~ -> _system_minutes `i `uc `i -> -> -> 1 `i `uc `i `uc ]
-"203
-[; ;SolidStateRelay.c: 203:         st_act = RA_WAIT_INTERVAL;
-[e = _st_act . `E4205 2 ]
+[; ;SolidStateRelay.c: 202:     {
+{
 "204
-[; ;SolidStateRelay.c: 204:         return;
-[e $UE 631  ]
+[; ;SolidStateRelay.c: 204:         ra_local_timer = ((uint8_t)((uint8_t)~system_minutes)+((uint8_t)1));
+[e = _ra_local_timer -> + -> -> ~ -> _system_minutes `i `uc `i -> -> -> 1 `i `uc `i `uc ]
 "205
-[; ;SolidStateRelay.c: 205:     }
+[; ;SolidStateRelay.c: 205:         st_act = RA_WAIT_INTERVAL;
+[e = _st_act . `E4205 2 ]
+"206
+[; ;SolidStateRelay.c: 206:         return;
+[e $UE 631  ]
+"207
+[; ;SolidStateRelay.c: 207:     }
 }
 [e :U 633 ]
-"206
-[; ;SolidStateRelay.c: 206:     if( st_act == RA_WAIT_INTERVAL )
+"208
+[; ;SolidStateRelay.c: 208:     if( st_act == RA_WAIT_INTERVAL )
 [e $ ! == -> _st_act `ui -> . `E4205 2 `ui 634  ]
-"207
-[; ;SolidStateRelay.c: 207:     {
-{
 "209
-[; ;SolidStateRelay.c: 209:         if( !((uint8_t)(system_minutes + ra_local_timer) >= ((uint8_t)60)) )
+[; ;SolidStateRelay.c: 209:     {
+{
+"211
+[; ;SolidStateRelay.c: 211:         if( !((uint8_t)(system_minutes + ra_local_timer) >= ((uint8_t)60)) )
 [e $ ! ! >= -> -> + -> _system_minutes `i -> _ra_local_timer `i `uc `i -> -> -> 60 `i `uc `i 635  ]
-"210
-[; ;SolidStateRelay.c: 210:             return;
+"212
+[; ;SolidStateRelay.c: 212:             return;
 [e $UE 631  ]
 [e :U 635 ]
-"213
-[; ;SolidStateRelay.c: 213:         ra_local_timer = ((uint8_t)((uint8_t)~system_minutes)+((uint8_t)1));
+"215
+[; ;SolidStateRelay.c: 215:         ra_local_timer = ((uint8_t)((uint8_t)~system_minutes)+((uint8_t)1));
 [e = _ra_local_timer -> + -> -> ~ -> _system_minutes `i `uc `i -> -> -> 1 `i `uc `i `uc ]
-"219
-[; ;SolidStateRelay.c: 219:         if( activation_counter == 0x3FFF3FFF )
+"221
+[; ;SolidStateRelay.c: 221:         if( activation_counter == 0x3FFF3FFF )
 [e $ ! == _activation_counter -> -> 1073692671 `l `ul 636  ]
-"220
-[; ;SolidStateRelay.c: 220:             activation_counter++;
+"222
+[; ;SolidStateRelay.c: 222:             activation_counter++;
 [e ++ _activation_counter -> -> -> 1 `i `l `ul ]
 [e :U 636 ]
-"221
-[; ;SolidStateRelay.c: 221:         save_to_flash();
-[e ( _save_to_flash ..  ]
-"222
-[; ;SolidStateRelay.c: 222:         return;
-[e $UE 631  ]
 "223
-[; ;SolidStateRelay.c: 223:     }
+[; ;SolidStateRelay.c: 223:         save_to_flash();
+[e ( _save_to_flash ..  ]
+"224
+[; ;SolidStateRelay.c: 224:         return;
+[e $UE 631  ]
+"225
+[; ;SolidStateRelay.c: 225:     }
 }
 [e :U 634 ]
-"224
-[; ;SolidStateRelay.c: 224: }
+"226
+[; ;SolidStateRelay.c: 226: }
 [e :UE 631 ]
 }

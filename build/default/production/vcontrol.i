@@ -7397,7 +7397,16 @@ void set_relay_activation_counter(uint32_t act_count);
 static void close_relay(void);
 static void open_relay(void);
 # 3 "vcontrol.c" 2
-# 16 "vcontrol.c"
+
+# 1 "./SystemTimer.h" 1
+# 13 "./SystemTimer.h"
+extern uint8_t system_counter;
+extern uint8_t system_seconds;
+extern uint8_t system_minutes;
+# 40 "./SystemTimer.h"
+void TMR1_SystemTimer_ISR(void);
+# 4 "vcontrol.c" 2
+# 17 "vcontrol.c"
 static uint16_t vdc_min;
 static uint16_t vdc_max;
 static uint16_t vdc_critic;
@@ -7419,6 +7428,11 @@ static uint16_t duty_count_down;
 static uint16_t duty_count_down_max = 10;
 static _Bool chopper_active = 0;
 static _Bool init_required = 1;
+static uint16_t pwm_duty_wtb;
+
+
+uint16_t wtb_stopped_voltage = 20;
+static uint8_t wtb_local_timer;
 
 static const int16_t v_table[1024] = {
    0 , 1 , 2 , 2 , 3 , 4 , 5 ,
@@ -7577,6 +7591,8 @@ static enum
 
 }st = SHUTDOWN;
 
+
+
 static void set_vdc_threshold(uint16_t v_val,uint16_t *v_target)
 {
     if( v_val == 0xFFFF )
@@ -7715,6 +7731,19 @@ uint16_t get_vdc(void)
     return vdc;
 }
 
+
+static enum
+{
+
+    WTB_INIT,
+    WTB_INC_DUTY,
+    WTB_WAIT_STOPPED_STATE,
+    WTB_WAIT_VOLTAGE_TO_INCREASE,
+    WTB_WAIT_TIMEOUT
+
+}st_wtb = WTB_WAIT_VOLTAGE_TO_INCREASE;
+
+
 void ADC_VoltageControlHandler_ISR(void)
 {
     vdc_prev = vdc;
@@ -7723,89 +7752,158 @@ void ADC_VoltageControlHandler_ISR(void)
     if( chopper_active == 0 )
         return;
 
-    diff_vdc = vdc - vdc_prev;
-    if( vdc > vdc_prev )
-        diff_positive = 1;
-    else
-        diff_positive = 0;
 
-    if( vdc > vdc_critic )
     {
-        do { LATAbits.LATA4 = 1; } while(0);
-        do { LATAbits.LATA5 = 0; } while(0);
-        PWM3_LoadDutyValue(759);
-        current_duty = 759;
-        target_duty = 759;
-        pwm_duty = 759;
-    }
-    else
-    {
-        if( vdc >= vdc_max )
+        if( st_wtb == WTB_INIT )
+        {
+            if( vdc < get_relay_reset_voltage() )
+            {
+                pwm_duty_wtb = pwm_duty;
+                st_wtb = WTB_INC_DUTY;
+                do { LATAbits.LATA5 = 0; } while(0);
+                do { LATAbits.LATA4 = 1; } while(0);
+            }
+            else
+                goto normal_chopper;
+        }
+        if( st_wtb == WTB_INC_DUTY )
+        {
+            if( pwm_duty_wtb < 759 )
+            {
+                pwm_duty_wtb++;
+                LoadDutyValue( pwm_duty_wtb );
+            }
+            else
+                st_wtb = WTB_WAIT_STOPPED_STATE;
+            return;
+        }
+        if( st_wtb == WTB_WAIT_STOPPED_STATE )
         {
 
+            if( vdc > wtb_stopped_voltage )
+                return;
+
+
+
+
+
+
+
+            st_wtb = WTB_WAIT_VOLTAGE_TO_INCREASE;
+            pwm_duty = pwm_duty_wtb;
+            goto normal_chopper;
+        }
+        if( st_wtb == WTB_WAIT_VOLTAGE_TO_INCREASE )
+        {
+
+            if( vdc >= get_relay_reset_voltage() )
+            {
+
+
+
+                wtb_local_timer = ((uint8_t)((uint8_t)~system_counter)+((uint8_t)1));
+                st_wtb = WTB_WAIT_TIMEOUT;
+            }
+            goto normal_chopper;
+        }
+        if( st_wtb == WTB_WAIT_TIMEOUT )
+        {
+
+
+            if( ((uint8_t)(system_counter + wtb_local_timer) >= ((uint8_t)50)) )
+                st_wtb = WTB_INIT;
+            goto normal_chopper;
+        }
+    }
+
+    normal_chopper:
+    if( st == ACTIVE )
+    {
+        diff_vdc = vdc - vdc_prev;
+        if( vdc > vdc_prev )
+            diff_positive = 1;
+        else
+            diff_positive = 0;
+
+        if( vdc > vdc_critic )
+        {
             do { LATAbits.LATA4 = 1; } while(0);
             do { LATAbits.LATA5 = 0; } while(0);
+            PWM3_LoadDutyValue(759);
+            current_duty = 759;
+            target_duty = 759;
             pwm_duty = 759;
         }
         else
         {
-            if( vdc >= vdc_min )
+            if( vdc >= vdc_max )
             {
+
                 do { LATAbits.LATA4 = 1; } while(0);
-                do { LATAbits.LATA5 = 1; } while(0);
-                _Bool force_inc = 1;
-                if( diff_positive == 1 )
-                {
-                    uint32_t pwm = (uint32_t)759 * (uint32_t)(vdc - vdc_min);
-                    pwm /= (vdc_max - vdc_min);
-                    if( pwm > 759 )
-                    {
-                        pwm_duty = 759;
-                        force_inc = 0;
-                    }
-                    else
-                    {
-                        if( pwm_duty < pwm )
-                        {
-                            pwm_duty = pwm;
-                            force_inc = 0;
-                        }
-                    }
-                }
-                if( force_inc == 1 )
-                {
-                    if( duty_count_up >= duty_count_up_max )
-                    {
-                        duty_count_up = 0;
-                        pwm_duty += duty_pwm_inc;
-                        if( pwm_duty > 759 )
-                            pwm_duty = 759;
-                    }
-                    else
-                        duty_count_up++;
-                }
-                duty_count_down = 0;
+                do { LATAbits.LATA5 = 0; } while(0);
+                pwm_duty = 759;
             }
             else
             {
-                do { LATAbits.LATA4 = 0; } while(0);
-                do { LATAbits.LATA5 = 1; } while(0);
-                if( duty_count_down >= duty_count_down_max )
+                if( vdc >= vdc_min )
                 {
+                    do { LATAbits.LATA4 = 1; } while(0);
+                    do { LATAbits.LATA5 = 1; } while(0);
+                    _Bool force_inc = 1;
+                    if( diff_positive == 1 )
+                    {
+                        uint32_t pwm = (uint32_t)759 * (uint32_t)(vdc - vdc_min);
+                        pwm /= (vdc_max - vdc_min);
+                        if( pwm > 759 )
+                        {
+                            pwm_duty = 759;
+                            force_inc = 0;
+                        }
+                        else
+                        {
+                            if( pwm_duty < pwm )
+                            {
+                                pwm_duty = pwm;
+                                force_inc = 0;
+                            }
+                        }
+                    }
+                    if( force_inc == 1 )
+                    {
+                        if( duty_count_up >= duty_count_up_max )
+                        {
+                            duty_count_up = 0;
+                            pwm_duty += duty_pwm_inc;
+                            if( pwm_duty > 759 )
+                                pwm_duty = 759;
+                        }
+                        else
+                            duty_count_up++;
+                    }
                     duty_count_down = 0;
-                    if( pwm_duty > duty_pwm_dec )
-                        pwm_duty -= duty_pwm_dec;
-                    else
-                        pwm_duty = 0;
                 }
                 else
-                    duty_count_down++;
+                {
+                    do { LATAbits.LATA4 = 0; } while(0);
+                    do { LATAbits.LATA5 = 1; } while(0);
+                    if( duty_count_down >= duty_count_down_max )
+                    {
+                        duty_count_down = 0;
+                        if( pwm_duty > duty_pwm_dec )
+                            pwm_duty -= duty_pwm_dec;
+                        else
+                            pwm_duty = 0;
+                    }
+                    else
+                        duty_count_down++;
+                }
             }
         }
+
+
+        LoadDutyValue( pwm_duty );
+        return;
     }
-
-
-    LoadDutyValue( pwm_duty );
 }
 
 

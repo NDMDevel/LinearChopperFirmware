@@ -8,8 +8,6 @@
 # 2 "<built-in>" 2
 # 1 "main.c" 2
 # 44 "main.c"
-# 1 "./mcc_generated_files/mcc.h" 1
-# 49 "./mcc_generated_files/mcc.h"
 # 1 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -6999,8 +6997,10 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 27 "C:\\Program Files (x86)\\Microchip\\xc8\\v2.05\\pic\\include\\xc.h" 2 3
-# 49 "./mcc_generated_files/mcc.h" 2
+# 44 "main.c" 2
 
+# 1 "./mcc_generated_files/mcc.h" 1
+# 50 "./mcc_generated_files/mcc.h"
 # 1 "./mcc_generated_files/device_config.h" 1
 # 50 "./mcc_generated_files/mcc.h" 2
 
@@ -7324,7 +7324,7 @@ void SYSTEM_Initialize(void);
 void OSCILLATOR_Initialize(void);
 # 102 "./mcc_generated_files/mcc.h"
 void WDT_Initialize(void);
-# 44 "main.c" 2
+# 45 "main.c" 2
 
 # 1 "./vcontrol.h" 1
 # 20 "./vcontrol.h"
@@ -7357,7 +7357,7 @@ uint16_t get_vdc_speed(void);
 uint16_t get_relay_reset_voltage(void);
 uint16_t get_reset_duration(void);
 uint16_t get_vdc(void);
-# 45 "main.c" 2
+# 46 "main.c" 2
 
 # 1 "./UartParser.h" 1
 # 11 "./UartParser.h"
@@ -7365,7 +7365,7 @@ void EUSART_CommandHandler_ISR(void);
 void uart_start(void);
 void uart_stop(void);
 void uart_task(void);
-# 46 "main.c" 2
+# 47 "main.c" 2
 
 # 1 "./SystemTimer.h" 1
 # 13 "./SystemTimer.h"
@@ -7374,7 +7374,7 @@ extern uint8_t system_seconds;
 extern uint8_t system_minutes;
 # 40 "./SystemTimer.h"
 void TMR1_SystemTimer_ISR(void);
-# 47 "main.c" 2
+# 48 "main.c" 2
 
 # 1 "./SolidStateRelay.h" 1
 # 22 "./SolidStateRelay.h"
@@ -7398,7 +7398,7 @@ void set_relay_activation_counter(uint32_t act_count);
 
 static void close_relay(void);
 static void open_relay(void);
-# 48 "main.c" 2
+# 49 "main.c" 2
 
 # 1 "./GlobalSystem.h" 1
 
@@ -7408,7 +7408,7 @@ static void open_relay(void);
 
 
 void ApplicationInit(void);
-# 49 "main.c" 2
+# 50 "main.c" 2
 
 
 

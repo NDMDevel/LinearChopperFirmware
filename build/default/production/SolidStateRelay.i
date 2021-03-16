@@ -7312,7 +7312,9 @@ void relay_watchdog_task()
         if( reset_duration_ms == 0xFFFF )
         {
             set_reset_duration(1000);
+            save_to_flash();
         }
+
         close_relay();
         st = WAIT_VOLTAGE_RISE;
         return;
