@@ -4,6 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/main.c</file>
+            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/vcontrol.c</file>
+            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/SystemTimer.h</file>
+            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/vcontrol.h</file>
+            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/SolidStateRelay.c</file>
+            <file>file:/C:/Users/Damian/MPLABXProjects/LinearChopper.X/SystemTimer.c</file>
         </group>
     </open-files>
 </project-private>

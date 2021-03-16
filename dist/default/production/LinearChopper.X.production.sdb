@@ -713,8 +713,6 @@ WAIT_BEFORE_REPEAT 5
 [v _wtb_local_timer wtb_local_timer `uc  1 s 1 wtb_local_timer ]
 "44
 [v _v_table v_table `DC[1024]s  1 s 2048 v_table ]
-"199
-[v _st st `E4352  1 s 1 st ]
 "351
 [v _st_wtb st_wtb `E4383  1 s 1 st_wtb ]
 "55 C:\Users\Damian\MPLABXProjects\LinearChopper.X\main.c

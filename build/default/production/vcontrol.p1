@@ -877,10 +877,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;vcontrol.c: 38: static uint16_t pwm_duty_wtb;
 [v _pwm_duty_wtb `us ~T0 @X0 1 s ]
 "41
-[; ;vcontrol.c: 41: uint16_t wtb_stopped_voltage = 20;
+[; ;vcontrol.c: 41: uint16_t wtb_stopped_voltage = 40;
 [v _wtb_stopped_voltage `us ~T0 @X0 1 e ]
 [i _wtb_stopped_voltage
--> -> 20 `i `us
+-> -> 40 `i `us
 ]
 "42
 [; ;vcontrol.c: 42: static uint8_t wtb_local_timer;
@@ -2546,9 +2546,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "426
 [; ;vcontrol.c: 426:     normal_chopper:
 [e :U 632 ]
-"427
-[; ;vcontrol.c: 427:     if( st == ACTIVE )
-[e $ ! == -> _st `ui -> . `E4352 1 `ui 642  ]
 "428
 [; ;vcontrol.c: 428:     {
 {
@@ -2557,38 +2554,38 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _diff_vdc -> - -> _vdc `ui -> _vdc_prev `ui `us ]
 "430
 [; ;vcontrol.c: 430:         if( vdc > vdc_prev )
-[e $ ! > -> _vdc `ui -> _vdc_prev `ui 643  ]
+[e $ ! > -> _vdc `ui -> _vdc_prev `ui 642  ]
 "431
 [; ;vcontrol.c: 431:             diff_positive = 1;
 [e = _diff_positive -> -> 1 `i `a ]
-[e $U 644  ]
+[e $U 643  ]
 "432
 [; ;vcontrol.c: 432:         else
-[e :U 643 ]
+[e :U 642 ]
 "433
 [; ;vcontrol.c: 433:             diff_positive = 0;
 [e = _diff_positive -> -> 0 `i `a ]
-[e :U 644 ]
+[e :U 643 ]
 "435
 [; ;vcontrol.c: 435:         if( vdc > vdc_critic )
-[e $ ! > -> _vdc `ui -> _vdc_critic `ui 645  ]
+[e $ ! > -> _vdc `ui -> _vdc_critic `ui 644  ]
 "436
 [; ;vcontrol.c: 436:         {
 {
 "437
 [; ;vcontrol.c: 437:             do { LATAbits.LATA4 = 1; } while(0);
-[e :U 648 ]
+[e :U 647 ]
 {
 [e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
 }
-[e :U 647 ]
+[e :U 646 ]
 "438
 [; ;vcontrol.c: 438:             do { LATAbits.LATA5 = 0; } while(0);
-[e :U 651 ]
+[e :U 650 ]
 {
 [e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
 }
-[e :U 650 ]
+[e :U 649 ]
 "439
 [; ;vcontrol.c: 439:             PWM3_LoadDutyValue(759);
 [e ( _PWM3_LoadDutyValue (1 -> -> 759 `i `us ]
@@ -2604,73 +2601,73 @@ Version 4.0 HI-TECH Software Intermediate Code
 "443
 [; ;vcontrol.c: 443:         }
 }
-[e $U 652  ]
+[e $U 651  ]
 "444
 [; ;vcontrol.c: 444:         else
-[e :U 645 ]
+[e :U 644 ]
 "445
 [; ;vcontrol.c: 445:         {
 {
 "446
 [; ;vcontrol.c: 446:             if( vdc >= vdc_max )
-[e $ ! >= -> _vdc `ui -> _vdc_max `ui 653  ]
+[e $ ! >= -> _vdc `ui -> _vdc_max `ui 652  ]
 "447
 [; ;vcontrol.c: 447:             {
 {
 "449
 [; ;vcontrol.c: 449:                 do { LATAbits.LATA4 = 1; } while(0);
-[e :U 656 ]
+[e :U 655 ]
 {
 [e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
 }
-[e :U 655 ]
+[e :U 654 ]
 "450
 [; ;vcontrol.c: 450:                 do { LATAbits.LATA5 = 0; } while(0);
-[e :U 659 ]
+[e :U 658 ]
 {
 [e = . . _LATAbits 0 5 -> -> 0 `i `uc ]
 }
-[e :U 658 ]
+[e :U 657 ]
 "451
 [; ;vcontrol.c: 451:                 pwm_duty = 759;
 [e = _pwm_duty -> -> 759 `i `us ]
 "452
 [; ;vcontrol.c: 452:             }
 }
-[e $U 660  ]
+[e $U 659  ]
 "453
 [; ;vcontrol.c: 453:             else
-[e :U 653 ]
+[e :U 652 ]
 "454
 [; ;vcontrol.c: 454:             {
 {
 "455
 [; ;vcontrol.c: 455:                 if( vdc >= vdc_min )
-[e $ ! >= -> _vdc `ui -> _vdc_min `ui 661  ]
+[e $ ! >= -> _vdc `ui -> _vdc_min `ui 660  ]
 "456
 [; ;vcontrol.c: 456:                 {
 {
 "457
 [; ;vcontrol.c: 457:                     do { LATAbits.LATA4 = 1; } while(0);
-[e :U 664 ]
+[e :U 663 ]
 {
 [e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
 }
-[e :U 663 ]
+[e :U 662 ]
 "458
 [; ;vcontrol.c: 458:                     do { LATAbits.LATA5 = 1; } while(0);
-[e :U 667 ]
+[e :U 666 ]
 {
 [e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
 }
-[e :U 666 ]
+[e :U 665 ]
 "459
 [; ;vcontrol.c: 459:                     _Bool force_inc = 1;
 [v _force_inc `a ~T0 @X0 1 a ]
 [e = _force_inc -> -> 1 `i `a ]
 "460
 [; ;vcontrol.c: 460:                     if( diff_positive == 1 )
-[e $ ! == -> _diff_positive `i -> 1 `i 668  ]
+[e $ ! == -> _diff_positive `i -> 1 `i 667  ]
 "461
 [; ;vcontrol.c: 461:                     {
 {
@@ -2683,7 +2680,7 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =/ _pwm -> - -> _vdc_max `ui -> _vdc_min `ui `ul ]
 "464
 [; ;vcontrol.c: 464:                         if( pwm > 759 )
-[e $ ! > _pwm -> -> -> 759 `i `l `ul 669  ]
+[e $ ! > _pwm -> -> -> 759 `i `l `ul 668  ]
 "465
 [; ;vcontrol.c: 465:                         {
 {
@@ -2696,16 +2693,16 @@ Version 4.0 HI-TECH Software Intermediate Code
 "468
 [; ;vcontrol.c: 468:                         }
 }
-[e $U 670  ]
+[e $U 669  ]
 "469
 [; ;vcontrol.c: 469:                         else
-[e :U 669 ]
+[e :U 668 ]
 "470
 [; ;vcontrol.c: 470:                         {
 {
 "471
 [; ;vcontrol.c: 471:                             if( pwm_duty < pwm )
-[e $ ! < -> _pwm_duty `ul _pwm 671  ]
+[e $ ! < -> _pwm_duty `ul _pwm 670  ]
 "472
 [; ;vcontrol.c: 472:                             {
 {
@@ -2718,24 +2715,24 @@ Version 4.0 HI-TECH Software Intermediate Code
 "475
 [; ;vcontrol.c: 475:                             }
 }
-[e :U 671 ]
+[e :U 670 ]
 "476
 [; ;vcontrol.c: 476:                         }
 }
-[e :U 670 ]
+[e :U 669 ]
 "477
 [; ;vcontrol.c: 477:                     }
 }
-[e :U 668 ]
+[e :U 667 ]
 "478
 [; ;vcontrol.c: 478:                     if( force_inc == 1 )
-[e $ ! == -> _force_inc `i -> 1 `i 672  ]
+[e $ ! == -> _force_inc `i -> 1 `i 671  ]
 "479
 [; ;vcontrol.c: 479:                     {
 {
 "480
 [; ;vcontrol.c: 480:                         if( duty_count_up >= duty_count_up_max )
-[e $ ! >= -> _duty_count_up `ui -> _duty_count_up_max `ui 673  ]
+[e $ ! >= -> _duty_count_up `ui -> _duty_count_up_max `ui 672  ]
 "481
 [; ;vcontrol.c: 481:                         {
 {
@@ -2747,56 +2744,56 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e =+ _pwm_duty -> _duty_pwm_inc `us ]
 "484
 [; ;vcontrol.c: 484:                             if( pwm_duty > 759 )
-[e $ ! > -> _pwm_duty `ui -> -> 759 `i `ui 674  ]
+[e $ ! > -> _pwm_duty `ui -> -> 759 `i `ui 673  ]
 "485
 [; ;vcontrol.c: 485:                                 pwm_duty = 759;
 [e = _pwm_duty -> -> 759 `i `us ]
-[e :U 674 ]
+[e :U 673 ]
 "486
 [; ;vcontrol.c: 486:                         }
 }
-[e $U 675  ]
+[e $U 674  ]
 "487
 [; ;vcontrol.c: 487:                         else
-[e :U 673 ]
+[e :U 672 ]
 "488
 [; ;vcontrol.c: 488:                             duty_count_up++;
 [e ++ _duty_count_up -> -> 1 `i `us ]
-[e :U 675 ]
+[e :U 674 ]
 "489
 [; ;vcontrol.c: 489:                     }
 }
-[e :U 672 ]
+[e :U 671 ]
 "490
 [; ;vcontrol.c: 490:                     duty_count_down = 0;
 [e = _duty_count_down -> -> 0 `i `us ]
 "491
 [; ;vcontrol.c: 491:                 }
 }
-[e $U 676  ]
+[e $U 675  ]
 "492
 [; ;vcontrol.c: 492:                 else
-[e :U 661 ]
+[e :U 660 ]
 "493
 [; ;vcontrol.c: 493:                 {
 {
 "494
 [; ;vcontrol.c: 494:                     do { LATAbits.LATA4 = 0; } while(0);
-[e :U 679 ]
+[e :U 678 ]
 {
 [e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
 }
-[e :U 678 ]
+[e :U 677 ]
 "495
 [; ;vcontrol.c: 495:                     do { LATAbits.LATA5 = 1; } while(0);
-[e :U 682 ]
+[e :U 681 ]
 {
 [e = . . _LATAbits 0 5 -> -> 1 `i `uc ]
 }
-[e :U 681 ]
+[e :U 680 ]
 "496
 [; ;vcontrol.c: 496:                     if( duty_count_down >= duty_count_down_max )
-[e $ ! >= -> _duty_count_down `ui -> _duty_count_down_max `ui 683  ]
+[e $ ! >= -> _duty_count_down `ui -> _duty_count_down_max `ui 682  ]
 "497
 [; ;vcontrol.c: 497:                     {
 {
@@ -2805,41 +2802,41 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e = _duty_count_down -> -> 0 `i `us ]
 "499
 [; ;vcontrol.c: 499:                         if( pwm_duty > duty_pwm_dec )
-[e $ ! > -> _pwm_duty `ui -> _duty_pwm_dec `ui 684  ]
+[e $ ! > -> _pwm_duty `ui -> _duty_pwm_dec `ui 683  ]
 "500
 [; ;vcontrol.c: 500:                             pwm_duty -= duty_pwm_dec;
 [e =- _pwm_duty -> _duty_pwm_dec `us ]
-[e $U 685  ]
+[e $U 684  ]
 "501
 [; ;vcontrol.c: 501:                         else
-[e :U 684 ]
+[e :U 683 ]
 "502
 [; ;vcontrol.c: 502:                             pwm_duty = 0;
 [e = _pwm_duty -> -> 0 `i `us ]
-[e :U 685 ]
+[e :U 684 ]
 "503
 [; ;vcontrol.c: 503:                     }
 }
-[e $U 686  ]
+[e $U 685  ]
 "504
 [; ;vcontrol.c: 504:                     else
-[e :U 683 ]
+[e :U 682 ]
 "505
 [; ;vcontrol.c: 505:                         duty_count_down++;
 [e ++ _duty_count_down -> -> 1 `i `us ]
-[e :U 686 ]
+[e :U 685 ]
 "506
 [; ;vcontrol.c: 506:                 }
 }
-[e :U 676 ]
+[e :U 675 ]
 "507
 [; ;vcontrol.c: 507:             }
 }
-[e :U 660 ]
+[e :U 659 ]
 "508
 [; ;vcontrol.c: 508:         }
 }
-[e :U 652 ]
+[e :U 651 ]
 "511
 [; ;vcontrol.c: 511:         LoadDutyValue( pwm_duty );
 [e ( _LoadDutyValue (1 _pwm_duty ]
@@ -2849,7 +2846,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "513
 [; ;vcontrol.c: 513:     }
 }
-[e :U 642 ]
 "514
 [; ;vcontrol.c: 514: }
 [e :UE 621 ]
@@ -2870,56 +2866,56 @@ Version 4.0 HI-TECH Software Intermediate Code
 [f ]
 "522
 [; ;vcontrol.c: 522:     if( current_duty > target_duty )
-[e $ ! > -> _current_duty `ui -> _target_duty `ui 688  ]
+[e $ ! > -> _current_duty `ui -> _target_duty `ui 687  ]
 "523
 [; ;vcontrol.c: 523:     {
 {
 "524
 [; ;vcontrol.c: 524:         if( current_duty - target_duty > duty_inc )
-[e $ ! > - -> _current_duty `ui -> _target_duty `ui -> _duty_inc `ui 689  ]
+[e $ ! > - -> _current_duty `ui -> _target_duty `ui -> _duty_inc `ui 688  ]
 "525
 [; ;vcontrol.c: 525:             current_duty -= duty_inc;
 [e =- _current_duty -> _duty_inc `us ]
-[e $U 690  ]
+[e $U 689  ]
 "526
 [; ;vcontrol.c: 526:         else
-[e :U 689 ]
+[e :U 688 ]
 "527
 [; ;vcontrol.c: 527:             current_duty = target_duty;
 [e = _current_duty _target_duty ]
-[e :U 690 ]
+[e :U 689 ]
 "528
 [; ;vcontrol.c: 528:     }
 }
-[e :U 688 ]
+[e :U 687 ]
 "529
 [; ;vcontrol.c: 529:     if( current_duty < target_duty )
-[e $ ! < -> _current_duty `ui -> _target_duty `ui 691  ]
+[e $ ! < -> _current_duty `ui -> _target_duty `ui 690  ]
 "530
 [; ;vcontrol.c: 530:     {
 {
 "531
 [; ;vcontrol.c: 531:         if( target_duty - current_duty > duty_inc )
-[e $ ! > - -> _target_duty `ui -> _current_duty `ui -> _duty_inc `ui 692  ]
+[e $ ! > - -> _target_duty `ui -> _current_duty `ui -> _duty_inc `ui 691  ]
 "533
 [; ;vcontrol.c: 533:             current_duty += duty_inc;
 [e =+ _current_duty -> _duty_inc `us ]
-[e $U 693  ]
+[e $U 692  ]
 "534
 [; ;vcontrol.c: 534:         else
-[e :U 692 ]
+[e :U 691 ]
 "535
 [; ;vcontrol.c: 535:             current_duty = target_duty;
 [e = _current_duty _target_duty ]
-[e :U 693 ]
+[e :U 692 ]
 "536
 [; ;vcontrol.c: 536:     }
 }
-[e :U 691 ]
+[e :U 690 ]
 "537
 [; ;vcontrol.c: 537:     PWM3_LoadDutyValue(current_duty);
 [e ( _PWM3_LoadDutyValue (1 _current_duty ]
 "538
 [; ;vcontrol.c: 538: }
-[e :UE 687 ]
+[e :UE 686 ]
 }

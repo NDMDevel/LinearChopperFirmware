@@ -7431,7 +7431,7 @@ static _Bool init_required = 1;
 static uint16_t pwm_duty_wtb;
 
 
-uint16_t wtb_stopped_voltage = 20;
+uint16_t wtb_stopped_voltage = 40;
 static uint8_t wtb_local_timer;
 
 static const int16_t v_table[1024] = {
@@ -7817,7 +7817,7 @@ void ADC_VoltageControlHandler_ISR(void)
     }
 
     normal_chopper:
-    if( st == ACTIVE )
+
     {
         diff_vdc = vdc - vdc_prev;
         if( vdc > vdc_prev )

@@ -38,7 +38,7 @@ static bool init_required = true;
 static uint16_t pwm_duty_wtb;
 
 //WTB
-uint16_t wtb_stopped_voltage = 20;  //if VDC <= 20 V, then the WT is considered stopped
+uint16_t wtb_stopped_voltage = 40; //if VDC <= 40 V, then the WT is considered stopped
 static uint8_t wtb_local_timer;
 
 static const int16_t v_table[1024] = {
@@ -359,7 +359,7 @@ void ADC_VoltageControlHandler_ISR(void)
     if( chopper_active == false )
         return;
     
-//    if( st_wtb != WTB_SHUTDOWN )
+    //Wind Turbine Breaker
     {
         if( st_wtb == WTB_INIT )
         {
@@ -424,7 +424,7 @@ void ADC_VoltageControlHandler_ISR(void)
     }
 
     normal_chopper:
-    if( st == ACTIVE )
+    //Chopper
     {
         diff_vdc    = vdc - vdc_prev;
         if( vdc > vdc_prev )
